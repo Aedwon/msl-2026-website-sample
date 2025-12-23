@@ -27,7 +27,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                             The official student leader body of Mobile Legends: Bang Bang in the Philippines.
                         </p>
                         <div className="flex items-center gap-4 mb-6">
-                            <img src="/moonton-logo.png" alt="Moonton" className="h-6 w-auto opacity-70 hover:opacity-100 transition-opacity" />
+                            <img src="/moonton-logo.png" alt="Moonton" className="h-8 w-auto bg-white p-1 rounded opacity-90 hover:opacity-100 transition-opacity" />
                             <img src="/mlbb-logo.png" alt="Mobile Legends: Bang Bang" className="h-8 w-auto opacity-70 hover:opacity-100 transition-opacity" />
                         </div>
                         <div className="flex gap-4">
