@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  ChevronRight, 
-  ChevronLeft, 
-  Gamepad2, 
-  Users, 
-  Trophy, 
-  School, 
-  ArrowRight, 
+import {
+  ChevronRight,
+  ChevronLeft,
+  Gamepad2,
+  Users,
+  Trophy,
+  School,
+  ArrowRight,
   Calendar,
   MapPin,
   Facebook,
@@ -21,8 +21,8 @@ import {
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import ProgramsPage from './components/Programs'; 
-import Careers from './components/Careers'; 
+import ProgramsPage from './components/Programs';
+import Careers from './components/Careers';
 import News from './components/News'; // Import News Page
 import Campus from './components/Campus'; // Import Campus Page
 import Partnerships from './components/Partnerships'; // Import Partnerships Page
@@ -84,7 +84,7 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
 
   const renderContent = () => {
-    switch(currentPage) {
+    switch (currentPage) {
       case 'about':
         return <About onNavigate={setCurrentPage} />;
       case 'programs':
@@ -130,14 +130,14 @@ const App = () => {
                   <p className="text-gray-400 text-lg leading-relaxed mb-8">
                     We are the official student leader body of Mobile Legends: Bang Bang in the Philippines. Guided by Moonton, we create inclusive campus initiatives that unite players, boost school pride, and prove that gaming passion goes hand-in-hand with academic success.
                   </p>
-                  <button 
-                    onClick={() => { setCurrentPage('about'); window.scrollTo(0,0); }}
+                  <button
+                    onClick={() => { setCurrentPage('about'); window.scrollTo(0, 0); }}
                     className="w-full sm:w-auto py-4 sm:py-2 text-msl-gold hover:text-white font-bold flex items-center justify-center gap-2 mx-auto transition-colors group border border-white/10 sm:border-none rounded-xl bg-white/5 sm:bg-transparent"
                   >
-                      Learn More About Us <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform"/>
+                    Learn More About Us <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
-                
+
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
                   {STATS.map((stat, idx) => (
                     <div key={idx} className="bg-msl-card border border-white/5 p-6 rounded-2xl text-center hover:bg-msl-cardHover transition-colors group">
@@ -156,39 +156,39 @@ const App = () => {
             <section className="py-24 bg-msl-black border-t border-white/10" aria-label="Our Programs">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                   <div>
-                      <h2 className="text-4xl font-bold text-white mb-2">Our Programs</h2>
-                      <p className="text-gray-400 max-w-xl text-lg">Building opportunities for student leaders through events, training, and nationwide esports initiatives.</p>
-                   </div>
-                   <button 
-                    onClick={() => {setCurrentPage('programs'); window.scrollTo(0,0);}} 
+                  <div>
+                    <h2 className="text-4xl font-bold text-white mb-2">Our Programs</h2>
+                    <p className="text-gray-400 max-w-xl text-lg">Building opportunities for student leaders through events, training, and nationwide esports initiatives.</p>
+                  </div>
+                  <button
+                    onClick={() => { setCurrentPage('programs'); window.scrollTo(0, 0); }}
                     className="w-full md:w-auto px-6 py-4 bg-white/5 border border-white/10 md:border-transparent rounded-xl text-msl-gold hover:text-white font-bold flex items-center justify-center gap-2 transition-colors active:bg-white/10"
-                   >
-                      View All Programs <ArrowRight size={16} />
-                   </button>
+                  >
+                    View All Programs <ArrowRight size={16} />
+                  </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:auto-rows-[280px]">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:auto-rows-[280px]">
                   {PROGRAMS_WIDGET_DATA.map((prog, idx) => (
-                    <div 
-                      key={idx} 
+                    <div
+                      key={idx}
                       className={`${prog.colSpan} relative rounded-2xl overflow-hidden group cursor-pointer shadow-md hover:shadow-2xl transition-all duration-300 border border-white/10 h-[280px] md:h-auto`}
-                      onClick={() => {setCurrentPage('programs'); window.scrollTo(0,0);}}
+                      onClick={() => { setCurrentPage('programs'); window.scrollTo(0, 0); }}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
-                           setCurrentPage('programs'); 
-                           window.scrollTo(0,0);
+                          setCurrentPage('programs');
+                          window.scrollTo(0, 0);
                         }
                       }}
                       role="button"
                       tabIndex={0}
                     >
                       <div className="absolute inset-0">
-                          <img 
-                              src={prog.image} 
-                              alt={prog.title}
-                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
-                          />
+                        <img
+                          src={prog.image}
+                          alt={prog.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                        />
                       </div>
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-90 transition-opacity" />
                       <div className="absolute inset-0 p-8 flex flex-col justify-end transform translate-y-0 lg:translate-y-2 lg:group-hover:translate-y-0 transition-transform duration-300">
@@ -220,7 +220,7 @@ const App = () => {
                   <p className="text-gray-400 mt-4 text-lg">Select how you want to get involved with MSL Philippines.</p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
                   {/* Student Path */}
                   <div className="bg-msl-card border border-white/10 rounded-3xl p-8 md:p-10 relative overflow-hidden group hover:border-msl-gold/50 transition-all duration-300 flex flex-col">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-msl-gold/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
@@ -231,8 +231,8 @@ const App = () => {
                     <p className="text-gray-400 mb-10 leading-relaxed text-lg flex-grow">
                       Establish an MSL community in your school. Gain access to official tournaments, leadership grants, and mentorship programs.
                     </p>
-                    <button 
-                      onClick={() => { setCurrentPage('careers'); window.scrollTo(0,0); }}
+                    <button
+                      onClick={() => { setCurrentPage('careers'); window.scrollTo(0, 0); }}
                       className="w-full py-4 bg-msl-gold hover:bg-msl-goldHover text-black rounded-xl font-bold text-lg transition-all shadow-lg shadow-msl-gold/20 flex items-center justify-center gap-2 hover:translate-y-[-2px]"
                     >
                       Be A Member <ArrowRight size={20} />
@@ -249,8 +249,8 @@ const App = () => {
                     <p className="text-gray-400 mb-10 leading-relaxed text-lg flex-grow">
                       Empower the next generation. Collaborate with us for campus activations, brand integration, and student-led events.
                     </p>
-                    <button 
-                      onClick={() => { setCurrentPage('partnerships'); window.scrollTo(0,0); }}
+                    <button
+                      onClick={() => { setCurrentPage('partnerships'); window.scrollTo(0, 0); }}
                       className="w-full py-4 bg-white/5 hover:bg-white/10 text-white border border-white/20 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2 group-hover:border-white/40 hover:translate-y-[-2px]"
                     >
                       Partner With Us <ArrowRight size={20} />
@@ -267,8 +267,8 @@ const App = () => {
   return (
     <div className="min-h-screen bg-msl-black text-white font-sans selection:bg-msl-gold selection:text-black">
       {/* WCAG: Skip Link for Keyboard Navigation */}
-      <a 
-        href="#main-content" 
+      <a
+        href="#main-content"
         className="fixed top-0 left-0 z-[100] bg-msl-gold text-black px-4 py-2 font-bold transform -translate-y-full focus:translate-y-0 transition-transform"
       >
         Skip to main content
@@ -278,13 +278,13 @@ const App = () => {
       <ComplianceBanner />
 
       <Navbar onNavigate={setCurrentPage} currentPage={currentPage} />
-      
+
       <main id="main-content" tabIndex={-1} className="focus:outline-none">
         {renderContent()}
       </main>
 
       <Footer onNavigate={setCurrentPage} />
-      
+
       {/* CSS for custom animations */}
       <style>{`
         @keyframes marquee {

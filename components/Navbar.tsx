@@ -61,15 +61,15 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
             <span className="text-white font-bold text-lg tracking-wider">MSL Philippines</span>
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <div className="ml-10 flex items-baseline space-x-6" role="menubar">
               {navItems.map((item) => (
                 <div key={item.id} className="relative group" role="none">
                   <button
                     onClick={() => handleNavClick(item.id)}
                     className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1 outline-none focus-visible:ring-2 focus-visible:ring-msl-gold focus-visible:ring-offset-2 focus-visible:ring-offset-black ${currentPage === item.id
-                        ? 'text-msl-gold'
-                        : 'text-gray-300 hover:text-msl-gold'
+                      ? 'text-msl-gold'
+                      : 'text-gray-300 hover:text-msl-gold'
                       }`}
                     role="menuitem"
                     aria-haspopup={item.dropdown ? "true" : "false"}
@@ -95,8 +95,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
                               handleNavClick(subItem.page);
                             }}
                             className={`block w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors outline-none focus-visible:bg-white/10 focus-visible:text-white ${currentPage === subItem.page
-                                ? 'bg-msl-gold text-black font-bold'
-                                : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                              ? 'bg-msl-gold text-black font-bold'
+                              : 'text-gray-300 hover:bg-white/10 hover:text-white'
                               }`}
                             role="menuitem"
                           >
@@ -117,7 +117,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
             </div>
           </div>
 
-          <div className="md:hidden">
+          <div className="lg:hidden">
             {/* Mobile Touch Target Expansion: min-w/h 44px */}
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -136,7 +136,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
       {isOpen && (
         <div
           id="mobile-menu"
-          className="md:hidden bg-[#050505] border-b border-white/10 h-screen absolute top-20 left-0 w-full z-40 overflow-y-auto"
+          className="lg:hidden bg-[#050505] border-b border-white/10 h-screen absolute top-20 left-0 w-full z-40 overflow-y-auto"
         >
           <div className="px-4 pt-4 pb-20 space-y-2">
             {navItems.map((item) => (
@@ -145,8 +145,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
                   <button
                     onClick={() => handleNavClick(item.id)}
                     className={`flex-grow text-left px-4 py-4 rounded-xl text-lg font-bold border border-transparent active:scale-[0.98] transition-all outline-none focus-visible:border-msl-gold ${currentPage === item.id
-                        ? 'text-msl-gold bg-white/10 border-white/5'
-                        : 'text-gray-300 hover:text-white hover:bg-white/5'
+                      ? 'text-msl-gold bg-white/10 border-white/5'
+                      : 'text-gray-300 hover:text-white hover:bg-white/5'
                       }`}
                   >
                     {item.label}
@@ -176,8 +176,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
                         key={subIdx}
                         onClick={() => handleNavClick(subItem.page)}
                         className={`block w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-colors border-l-2 outline-none focus-visible:bg-white/5 ${currentPage === subItem.page
-                            ? 'border-msl-gold text-msl-gold bg-white/5'
-                            : 'border-white/10 text-gray-400 hover:text-white hover:border-white/30'
+                          ? 'border-msl-gold text-msl-gold bg-white/5'
+                          : 'border-white/10 text-gray-400 hover:text-white hover:border-white/30'
                           }`}
                       >
                         {subItem.label}
