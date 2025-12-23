@@ -1,0 +1,60 @@
+import React from 'react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import EventCarousel from './EventCarousel';
+
+interface HeroProps {
+  onNavigate: (page: string) => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
+  return (
+    <section className="relative pt-24 pb-12 px-4 sm:px-6 lg:px-12 max-w-[1600px] mx-auto min-h-screen flex flex-col justify-center">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center w-full">
+          
+          {/* Left: Static Identity - Takes up 5/12 columns */}
+          <div className="space-y-6 animate-fade-in-up lg:col-span-5 relative z-10">
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+              Empowering <br className="hidden sm:block"/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">student-gamers</span> <br className="hidden sm:block"/>
+              to become the next generation leaders
+            </h1>
+            
+            <p className="text-base md:text-lg text-gray-400 max-w-xl leading-relaxed">
+              Moonton Student Leaders (MSL) Philippines empowers campuses, partners, and creators to shape the future of gaming communities nationwide.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 pt-2">
+              <button 
+                onClick={() => { onNavigate('careers'); window.scrollTo(0, 0); }}
+                className="px-6 py-3 bg-yellow-500 hover:bg-yellow-400 text-[#0f172a] rounded-lg font-bold text-base transition-all shadow-[0_0_20px_rgba(234,179,8,0.2)] flex items-center justify-center gap-2"
+              >
+                Be A Member
+              </button>
+              <button className="px-6 py-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-lg font-bold text-base transition-all flex items-center justify-center gap-2">
+                Partner With Us <ArrowRight size={18} />
+              </button>
+            </div>
+          </div>
+
+          {/* Right: The Mandated Carousel - Takes up 7/12 columns (Made Bigger) */}
+          <div className="w-full lg:col-span-7 animate-fade-in-left relative">
+            {/* Header for Carousel */}
+            <div className="flex items-center justify-between mb-6 px-2">
+                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-[0.2em]">Happening Now</h3>
+                <div className="flex gap-2">
+                    <div className="p-2 rounded-full bg-white/5 text-gray-500 cursor-default border border-white/5"><ChevronLeft size={20} /></div>
+                    <div className="p-2 rounded-full bg-white/5 text-gray-500 cursor-default border border-white/5"><ChevronRight size={20} /></div>
+                </div>
+            </div>
+            
+            {/* Carousel Component */}
+            <EventCarousel />
+          </div>
+
+        </div>
+    </section>
+  );
+};
+
+export default Hero;

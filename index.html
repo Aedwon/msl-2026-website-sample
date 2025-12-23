@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Official website for MSL Philippines - Empowering student-gamers to become the next generation leaders." />
+    <title>MSL Philippines</title>
+    <!-- Keeping Tailwind CDN for simplicity in this setup -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Teko', 'sans-serif'],
+            },
+            colors: {
+              msl: {
+                gold: '#F2C21A',
+                goldHover: '#d4a810',
+                blue: '#3B82F6', // Reverted to Standard Blue (WCAG AA Compliant)
+                black: '#050505',
+                dark: '#000000',
+                surface: '#0B0B0B',
+                card: '#121212',
+                cardHover: '#1A1A1A'
+              }
+            },
+            animation: {
+              marquee: 'marquee 30s linear infinite',
+            },
+            keyframes: {
+              marquee: {
+                '0%': { transform: 'translateX(0)' },
+                '100%': { transform: 'translateX(-50%)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #050505;
+        color: #ffffff;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+      }
+      .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+      /* WCAG: Focus Visibility - fallback */
+      :focus-visible {
+        outline: 2px solid #F2C21A;
+        outline-offset: 2px;
+      }
+      /* WCAG: Reduced Motion */
+      @media (prefers-reduced-motion: reduce) {
+        *, ::before, ::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+      /* WCAG: Pause Animation Utility */
+      .pause-on-hover:hover,
+      .pause-on-hover:focus-within {
+        animation-play-state: paused !important;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "vite": "https://esm.sh/vite@^7.3.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
