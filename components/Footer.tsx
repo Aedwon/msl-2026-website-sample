@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Facebook, Mail, Instagram, ShieldAlert, Lock, Heart, ShieldCheck, Copyright, Accessibility } from 'lucide-react';
+import { Facebook, Youtube, ShieldAlert, Lock, Heart, ShieldCheck, Copyright, Accessibility } from 'lucide-react';
 
 interface FooterProps {
     onNavigate?: (page: string) => void;
@@ -27,13 +27,15 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                             The official student leader body of Mobile Legends: Bang Bang in the Philippines.
                         </p>
                         <div className="flex items-center gap-4 mb-6">
-                            <img src="/moonton-logo.png" alt="Moonton" className="h-16 w-auto opacity-90 hover:opacity-100 transition-opacity" />
-                            <img src="/mlbb-logo.png" alt="Mobile Legends: Bang Bang" className="h-8 w-auto opacity-70 hover:opacity-100 transition-opacity" />
+                            <img src="/moonton-logo.png" alt="Moonton" className="h-12 w-auto opacity-90 hover:opacity-100 transition-opacity" />
+                            <img src="/mlbb-logo.png" alt="Mobile Legends: Bang Bang" className="h-10 w-auto opacity-70 hover:opacity-100 transition-opacity" />
                         </div>
-                        <div className="flex gap-4">
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 transition-colors text-white" aria-label="Facebook"><Facebook size={18} /></a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-pink-600 transition-colors text-white" aria-label="Instagram"><Instagram size={18} /></a>
-                            <a href="mailto:contact@moontonslph.org" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-red-500 transition-colors text-white" aria-label="Email"><Mail size={18} /></a>
+                        <div className="flex gap-4 justify-center md:justify-start">
+                            <a href="https://www.facebook.com/MSLPhilippines" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 transition-colors text-white" aria-label="Facebook"><Facebook size={18} /></a>
+                            <a href="https://www.tiktok.com/@moontonstudentleaders.ph" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-black hover:text-white transition-colors text-white" aria-label="TikTok">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px]"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" /></svg>
+                            </a>
+                            <a href="https://www.youtube.com/@MSLPhilippines" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-red-600 transition-colors text-white" aria-label="YouTube"><Youtube size={18} /></a>
                         </div>
                     </div>
 
