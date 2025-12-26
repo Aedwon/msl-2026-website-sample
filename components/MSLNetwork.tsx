@@ -146,61 +146,79 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                 </div>
             </section>
 
-            {/* --- FEATURED PARTNER SPOTLIGHT --- */}
-            <section className="py-24 px-4 sm:px-6 lg:px-8 bg-msl-surface">
-                <div className="max-w-7xl mx-auto">
-                    <div className="grid lg:grid-cols-2 gap-16 items-center">
-                        <div className="relative group">
-                            {/* Photo Frame - Styled like "Mythic Card" from Buffs */}
-                            <div className="absolute inset-0 bg-msl-gold/10 blur-[60px] rounded-full pointer-events-none group-hover:bg-msl-gold/20 transition-colors duration-500"></div>
+            {/* --- FEATURED PARTNER SPOTLIGHT (Cinematic Redesign) --- */}
+            <section className="relative py-32 overflow-hidden bg-black">
+                {/* 1. Full Bleed Background Image with Gradient Mask */}
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=2000"
+                        alt="Teletigers Event"
+                        className="w-full h-full object-cover opacity-60"
+                    />
+                    {/* Cinematic Fade: Transparent center, fading to black edges/right */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60"></div>
+                </div>
 
-                            <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-video group-hover:border-msl-gold/30 transition-colors duration-300">
-                                <img
-                                    src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=2000"
-                                    alt="Partner Event"
-                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                                />
-                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 pt-12">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <Star size={14} className="text-msl-gold fill-current" />
-                                        <p className="text-xs font-bold text-msl-gold uppercase tracking-wider">MVP Spotlight</p>
-                                    </div>
-                                    <h4 className="text-white font-bold text-2xl mb-1">Teletigers Esports - UST</h4>
-                                    <p className="text-gray-400 text-sm">Paskuhan Cup '24 • Empowered by Partnerships</p>
-                                </div>
-                            </div>
+                <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-end">
+
+                    {/* Visual Brand / Badge (Left) */}
+                    <div className="lg:col-span-7">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-msl-gold text-black text-sm font-black uppercase mb-8 shadow-[0_0_20px_rgba(242,194,26,0.4)] animate-pulse">
+                            <Star size={16} fill="currentColor" /> MVP Spotlight
                         </div>
-
-                        <div>
-                            {/* Section Header */}
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase mb-6">
-                                <MonitorPlay size={12} /> Real Impact
-                            </div>
-                            <h2 className="text-4xl font-extrabold text-white mb-6 leading-tight">
-                                Legendary Support <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">For Your Events.</span>
-                            </h2>
-                            <p className="text-xl text-gray-400 mb-8 leading-relaxed">
-                                We don't just spectate. We provide the buffs, the production resources, and the gold needed for your events to go valid.
-                            </p>
-                            <div className="grid sm:grid-cols-2 gap-4">
-                                <div className="p-6 rounded-2xl bg-msl-card border border-white/5 hover:border-white/10 transition-colors">
-                                    <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 mb-4">
-                                        <MonitorPlay size={20} />
-                                    </div>
-                                    <h4 className="text-white font-bold text-lg mb-2">Broadcast Support</h4>
-                                    <p className="text-gray-400 text-sm">Access to casting talent and production assets.</p>
-                                </div>
-                                <div className="p-6 rounded-2xl bg-msl-card border border-white/5 hover:border-white/10 transition-colors">
-                                    <div className="w-10 h-10 rounded-lg bg-msl-gold/10 flex items-center justify-center text-msl-gold mb-4">
-                                        <Gem size={20} />
-                                    </div>
-                                    <h4 className="text-white font-bold text-lg mb-2">Prize Injection</h4>
-                                    <p className="text-gray-400 text-sm">Diamond and cash grants for your major tournaments.</p>
-                                </div>
-                            </div>
+                        <h2 className="text-6xl md:text-8xl font-black text-white leading-none tracking-tighter mb-4 drop-shadow-2xl">
+                            TELETIGERS
+                        </h2>
+                        <h3 className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500 mb-8">
+                            ESPORTS - UST
+                        </h3>
+                        <div className="flex items-center gap-4 text-gray-300 font-mono text-sm uppercase tracking-widest">
+                            <div className="w-12 h-0.5 bg-msl-gold"></div>
+                            <span>Paskuhan Cup '24</span>
                         </div>
                     </div>
+
+                    {/* "Inventory" / Stats (Right) */}
+                    <div className="lg:col-span-5 bg-black/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
+                        <h4 className="text-gray-400 font-bold uppercase tracking-widest text-xs mb-6 flex items-center gap-2">
+                            <Zap size={14} className="text-msl-gold" /> Equipped Buffs
+                        </h4>
+
+                        <div className="space-y-4">
+                            {/* Buff Item 1 */}
+                            <div className="flex items-center gap-4 group">
+                                <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-900 rounded-xl border border-blue-400/30 flex items-center justify-center shrink-0 shadow-lg group-hover:scale-110 transition-transform">
+                                    <MonitorPlay size={24} className="text-white" />
+                                </div>
+                                <div>
+                                    <div className="text-white font-bold text-lg">Broadcast Rig</div>
+                                    <div className="text-blue-400 text-xs font-mono uppercase">+ Pro Production</div>
+                                </div>
+                            </div>
+
+                            {/* Divider with Glitch effect line */}
+                            <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+
+                            {/* Buff Item 2 */}
+                            <div className="flex items-center gap-4 group">
+                                <div className="w-14 h-14 bg-gradient-to-br from-msl-gold to-yellow-700 rounded-xl border border-yellow-400/30 flex items-center justify-center shrink-0 shadow-lg group-hover:scale-110 transition-transform">
+                                    <Gem size={24} className="text-white" />
+                                </div>
+                                <div>
+                                    <div className="text-white font-bold text-lg">Prize Injection</div>
+                                    <div className="text-msl-gold text-xs font-mono uppercase">+ Cash & Diamonds</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mt-8 pt-6 border-t border-white/10">
+                            <p className="text-gray-400 text-sm leading-relaxed">
+                                "The MSL Network didn't just sponsor us; they upgraded our entire event infrastructure."
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
