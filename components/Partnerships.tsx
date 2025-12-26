@@ -153,7 +153,7 @@ const CAMPAIGN_PREVIEWS = [
 
 const MAIN_PROGRAM = {
   title: "The MSL Network",
-  desc: "Our core ecosystem managing official relations with collegiate esports organizations. We act as the centralized bridge handling accreditation, partnership growth, and exclusive resource distribution.",
+  desc: "The official ecosystem for collegiate esports. We provide the funding, education, and platform support to turn your campus club into a powerhouse organization.",
   icon: Network,
   color: "text-msl-gold",
   bg: "bg-msl-gold/10"
@@ -387,7 +387,7 @@ const Partnerships: React.FC<PartnershipsProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* --- 2. THE ARCHITECTS (IMPACT) - FLIPPED LAYOUT ON DESKTOP --- */}
+      {/* --- 2. PARTNER WINS SHOWCASE (Redesigned) --- */}
       <section className="py-24 bg-gradient-to-b from-msl-surface to-black px-4 sm:px-6 lg:px-8 border-b border-white/10 relative overflow-hidden">
         {/* Decorative background glow */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-msl-gold/5 blur-[120px] rounded-full pointer-events-none" />
@@ -395,98 +395,82 @@ const Partnerships: React.FC<PartnershipsProps> = ({ onNavigate }) => {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-            <div className="relative lg:order-2">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="h-1 w-12 bg-msl-gold"></div>
-                <span className="text-msl-gold font-bold uppercase tracking-widest text-xs md:text-sm">Spearheading The Action</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
-                The Architects of <br />
-                <span className="text-white">Esports, Events, and Education.</span>
-              </h2>
-              <p className="text-gray-400 text-lg leading-relaxed mb-8">
-                We build more than just tournaments. We design <span className="text-white font-bold">educational programs</span> and <span className="text-white font-bold">immersive activations</span> that empower student organizations to grow, sustain, and lead.
-              </p>
-
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-msl-gold rounded-xl flex items-center justify-center shrink-0 shadow-lg shadow-msl-gold/20">
-                    <Trophy className="text-black" size={24} />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-1">MSL Collegiate Cup</h3>
-                    <p className="text-sm text-gray-400">
-                      The official collegiate league of MLBB in the Philippines.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/20">
-                    <Megaphone className="text-white" size={24} />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-1">Moonton Game Campaigns</h3>
-                    <p className="text-sm text-gray-400">
-                      We translate global campaigns into grassroots campus activations.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* TEXT CONTENT (Right on Desktop, Top on Mobile) -> lg:order-1 puts this visual on LEFT on desktop */}
-            <div className="relative lg:order-1 w-full overflow-hidden">
-              {/* Visual Representation of Tournament/Campaign */}
-              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-msl-card">
+            {/* LEFT COLUMN: THE SPOTLIGHT CARD */}
+            <div className="relative group">
+              <div className="absolute inset-0 bg-msl-gold/20 blur-[40px] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-msl-card aspect-video lg:aspect-[4/3]">
                 <img
                   src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1600"
                   alt="Esports Tournament Stage"
-                  className="w-full h-auto min-h-[300px] object-cover opacity-80"
+                  className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-msl-card via-transparent to-transparent" />
-                <div className="absolute bottom-8 left-4 right-4 md:left-8 md:right-8">
-                  <div className="inline-block px-3 py-1 bg-red-600 text-white text-xs font-bold uppercase rounded-md mb-3 animate-pulse">
-                    Flagship Event
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+
+                {/* Badge */}
+                <div className="absolute top-6 left-6">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-msl-gold text-black text-xs font-black uppercase rounded shadow-lg shadow-msl-gold/20 animate-pulse">
+                    <Star size={12} fill="currentColor" /> MVP Spotlight
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">MCC Season 4</h3>
-                  <p className="text-gray-300 text-sm">The road to the nationals starts here. Powered by Partnerships.</p>
                 </div>
-              </div>
 
-              {/* Compact Campaign Scroll with Conditional Fade */}
-              <div className="mt-4 relative group/scroll">
-                {/* Left Gradient Fade - Shows when scrolled right */}
-                <div className={`absolute left - 0 top - 0 h - full w - 12 bg - gradient - to - r from - black to - transparent z - 20 pointer - events - none transition - opacity duration - 300 ${showLeftFade ? 'opacity-100' : 'opacity-0'} `} />
-
-                {/* Right Gradient Fade - Shows when content overflows */}
-                <div className={`absolute right - 0 top - 0 h - full w - 12 bg - gradient - to - l from - black to - transparent z - 20 pointer - events - none transition - opacity duration - 300 ${showRightFade ? 'opacity-100' : 'opacity-0'} `} />
-
-                <div
-                  ref={scrollContainerRef}
-                  onScroll={handleScroll}
-                  className="flex gap-4 overflow-x-auto scrollbar-hide pb-2"
-                >
-                  {CAMPAIGN_PREVIEWS.map((camp, cIdx) => (
-                    <div key={cIdx} className="min-w-[140px] h-[80px] rounded-xl relative overflow-hidden flex-shrink-0 border border-white/10 group">
-                      <img src={camp.image} alt={camp.title} className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent" />
-
-                      {/* Label */}
-                      {(camp as any).label && (
-                        <div className="absolute top-2 right-2 px-1.5 py-0.5 bg-red-600 text-white text-[8px] font-bold uppercase rounded animate-pulse shadow-sm z-10">
-                          {(camp as any).label}
-                        </div>
-                      )}
-
-                      <div className="absolute bottom-2 left-3">
-                        <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-0.5 flex items-center gap-1"><camp.icon size={10} className="text-msl-gold" /> Campaign</p>
-                        <p className="text-sm font-bold text-white leading-none">{camp.title}</p>
-                      </div>
-                    </div>
-                  ))}
+                {/* Content */}
+                <div className="absolute bottom-8 left-8 right-8">
+                  <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-2 leading-tight">
+                    Teletigers Esports - UST
+                  </h3>
+                  <div className="flex items-center gap-3 text-gray-300 text-sm font-medium">
+                    <span className="bg-white/10 px-2 py-1 rounded">Paskuhan Cup '24</span>
+                    <span className="text-msl-gold flex items-center gap-1">
+                      <Zap size={12} fill="currentColor" /> Powered by Partnerships
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* RIGHT COLUMN: LEGENDARY SUPPORT SUITE */}
+            <div className="relative">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-1 w-12 bg-blue-500"></div>
+                <span className="text-blue-400 font-bold uppercase tracking-widest text-xs md:text-sm">Real Impact</span>
+              </div>
+
+              <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-[1.1]">
+                Legendary Support <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">For Your Events.</span>
+              </h2>
+
+              <p className="text-gray-400 text-lg leading-relaxed mb-10">
+                We don't just spectate. We provide the buffs, the loot, and the gold needed for your events to go valid.
+              </p>
+
+              {/* Feature Cards Grid (Aligned) */}
+              <div className="grid sm:grid-cols-2 gap-4">
+                {/* Card 1: Prize Pool */}
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors group/card">
+                  <div className="w-12 h-12 bg-msl-gold/20 rounded-xl flex items-center justify-center mb-4 text-msl-gold group-hover/card:scale-110 transition-transform">
+                    <Gem size={24} />
+                  </div>
+                  <h4 className="text-white font-bold text-lg mb-2">Prize Pool Funding</h4>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Official Diamond and Cash grants to raise the stakes of your tournament.
+                  </p>
+                </div>
+
+                {/* Card 2: Loot Drops */}
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors group/card">
+                  <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-4 text-purple-400 group-hover/card:scale-110 transition-transform">
+                    <Gift size={24} />
+                  </div>
+                  <h4 className="text-white font-bold text-lg mb-2">Community Loot Drops</h4>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Care packages containing jerseys and swag to hype up your audience.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
       </section>
@@ -519,12 +503,12 @@ const Partnerships: React.FC<PartnershipsProps> = ({ onNavigate }) => {
                 <div className="grid sm:grid-cols-2 gap-6 mb-8 bg-black/20 p-6 rounded-2xl border border-white/5">
                   <div>
                     <h4 className="text-sm font-bold text-green-400 flex items-center gap-2 mb-3">
-                      <Gift size={16} /> Via Buffs & Support
+                      <Gift size={16} /> Resource Unlocks
                     </h4>
                     <ul className="space-y-2">
                       {[
-                        "Up to 150,000 Diamonds / sem",
-                        "Monetary Sponsorship",
+                        "Official Funding & Grants",
+                        "Merchandise Care Packages",
                         "Tournament Lobby Access"
                       ].map((item, i) => (
                         <li key={i} className="text-sm text-gray-300 flex items-start gap-2">
@@ -540,10 +524,10 @@ const Partnerships: React.FC<PartnershipsProps> = ({ onNavigate }) => {
                     </h4>
                     <ul className="space-y-2">
                       {[
-                        "Exclusive Campaign Access",
-                        "Esports Trainings & Seminars",
-                        "Education Modules",
-                        "Partner Visibility"
+                        "Industry Masterclasses",
+                        "Path to Pro Mentorship",
+                        "Exclusive Campaigns",
+                        "Ascension Tiers"
                       ].map((item, i) => (
                         <li key={i} className="text-sm text-gray-300 flex items-start gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-msl-gold mt-1.5 shrink-0" />
