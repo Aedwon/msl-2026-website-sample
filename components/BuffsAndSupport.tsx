@@ -20,7 +20,7 @@ import {
     Zap,
     Users,
     FileText,
-    Briefcase
+    ClipboardList
 } from 'lucide-react';
 
 interface BuffsAndSupportProps {
@@ -290,11 +290,11 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
                     <div className="grid lg:grid-cols-2 gap-8">
 
                         {/* 1. DIAMONDS CALCULATOR */}
-                        <div className="bg-msl-card border border-white/10 rounded-3xl p-8 md:p-10 shadow-lg relative overflow-hidden group hover:border-blue-500/30 transition-all">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+                        <div className="bg-msl-card border border-white/5 rounded-3xl p-8 md:p-10 shadow-lg relative overflow-hidden group hover:border-msl-gold/30 transition-all">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-msl-gold/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
 
                             <div className="flex items-center gap-4 mb-8">
-                                <div className="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center border border-blue-500/20 shadow-[0_0_15px_-5px_rgba(59,130,246,0.5)]">
+                                <div className="w-12 h-12 rounded-xl bg-msl-gold/10 text-msl-gold flex items-center justify-center border border-msl-gold/20 shadow-[0_0_15px_-5px_rgba(242,194,26,0.3)]">
                                     <Gem size={24} />
                                 </div>
                                 <h3 className="text-2xl font-bold text-white">Diamonds Support</h3>
@@ -308,7 +308,7 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
                                             <button
                                                 key={opt}
                                                 onClick={() => setDiamondScope(opt)}
-                                                className={`px-4 py-2 rounded-lg text-sm font-bold capitalize transition-all border ${diamondScope === opt ? 'bg-blue-600 text-white border-blue-500 shadow-lg shadow-blue-900/40 transform scale-105' : 'bg-black/40 text-gray-400 border-white/10 hover:bg-white/5 hover:border-white/20'}`}
+                                                className={`px-4 py-2 rounded-lg text-sm font-bold capitalize transition-all border ${diamondScope === opt ? 'bg-msl-gold text-black border-msl-gold shadow-lg shadow-yellow-900/20 transform scale-105' : 'bg-black/40 text-gray-500 border-white/5 hover:bg-white/5 hover:border-white/10 hover:text-gray-300'}`}
                                             >
                                                 {opt}
                                             </button>
@@ -318,24 +318,24 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
 
                                 <div className="grid grid-cols-2 gap-6">
                                     <div className="relative">
-                                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Event Type</label>
-                                        <div className="absolute right-3 top-[2.2rem] pointer-events-none text-gray-500"><ChevronDown size={16} /></div>
+                                        <label className="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Event Type</label>
+                                        <div className="absolute right-3 top-[2.2rem] pointer-events-none text-gray-600"><ChevronDown size={16} /></div>
                                         <select
                                             value={diamondType}
                                             onChange={(e) => setDiamondType(e.target.value)}
-                                            className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white appearance-none focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition-all"
+                                            className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-gray-200 appearance-none focus:outline-none focus:border-msl-gold focus:ring-1 focus:ring-msl-gold/50 transition-all font-medium"
                                         >
                                             <option value="tournament">Tournament</option>
                                             <option value="non">Non-Tournament</option>
                                         </select>
                                     </div>
                                     <div className="relative">
-                                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Accreditation</label>
-                                        <div className="absolute right-3 top-[2.2rem] pointer-events-none text-gray-500"><ChevronDown size={16} /></div>
+                                        <label className="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Accreditation</label>
+                                        <div className="absolute right-3 top-[2.2rem] pointer-events-none text-gray-600"><ChevronDown size={16} /></div>
                                         <select
                                             value={diamondTier}
                                             onChange={(e) => setDiamondTier(e.target.value)}
-                                            className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white appearance-none focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition-all"
+                                            className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-gray-200 appearance-none focus:outline-none focus:border-msl-gold focus:ring-1 focus:ring-msl-gold/50 transition-all font-medium"
                                         >
                                             <option value="I">Level I</option>
                                             <option value="II">Level II</option>
@@ -345,10 +345,10 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
                                     </div>
                                 </div>
 
-                                <div className="pt-6 border-t border-white/10">
-                                    <div className="bg-black/40 rounded-2xl p-6 border border-white/5 flex items-center justify-between">
+                                <div className="pt-6 border-t border-white/5">
+                                    <div className="bg-black/40 rounded-2xl p-6 border border-white/5 flex items-center justify-between group-hover:border-msl-gold/20 transition-colors">
                                         <span className="text-xs text-gray-500 uppercase tracking-widest font-bold">Total Allocation</span>
-                                        <span className="text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                                        <span className="text-3xl lg:text-4xl font-black text-msl-gold">
                                             {getDiamondBudget()}
                                         </span>
                                     </div>
@@ -357,21 +357,21 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
                         </div>
 
                         {/* 2. SHS EVENTS */}
-                        <div className="bg-msl-card border border-white/10 rounded-3xl p-8 md:p-10 shadow-lg relative overflow-hidden group hover:border-indigo-500/30 transition-all">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+                        <div className="bg-msl-card border border-white/5 rounded-3xl p-8 md:p-10 shadow-lg relative overflow-hidden group hover:border-white/20 transition-all">
+                            {/* Removed colorful glow */}
 
                             <div className="flex items-center gap-4 mb-8">
-                                <div className="w-12 h-12 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center border border-indigo-500/20 shadow-[0_0_15px_-5px_rgba(99,102,241,0.5)]">
+                                <div className="w-12 h-12 rounded-xl bg-white/5 text-gray-300 flex items-center justify-center border border-white/10 shadow-lg">
                                     <School size={24} />
                                 </div>
                                 <h3 className="text-2xl font-bold text-white">Senior High School</h3>
                             </div>
 
                             <div className="space-y-8">
-                                <label className="flex items-center justify-between p-4 bg-black/40 rounded-xl border border-white/10 cursor-pointer hover:border-indigo-500/50 transition-all group/check">
-                                    <span className="font-bold text-white group-hover/check:text-indigo-400 transition-colors">High School Intramurals</span>
-                                    <div className={`w-6 h-6 rounded border flex items-center justify-center transition-all ${shsIntramurals ? 'bg-indigo-600 border-indigo-600' : 'border-gray-600 bg-transparent'}`}>
-                                        {shsIntramurals && <CheckCircle size={14} className="text-white" />}
+                                <label className="flex items-center justify-between p-4 bg-black/40 rounded-xl border border-white/10 cursor-pointer hover:border-white/30 transition-all group/check">
+                                    <span className="font-bold text-gray-300 group-hover/check:text-white transition-colors">High School Intramurals</span>
+                                    <div className={`w-6 h-6 rounded border flex items-center justify-center transition-all ${shsIntramurals ? 'bg-white border-white' : 'border-gray-700 bg-transparent'}`}>
+                                        {shsIntramurals && <CheckCircle size={14} className="text-black" />}
                                     </div>
                                     <input
                                         type="checkbox"
@@ -383,13 +383,13 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
 
                                 <div className={`grid grid-cols-2 gap-6 transition-all duration-300 ${shsIntramurals ? 'opacity-30 pointer-events-none blur-sm' : 'opacity-100'}`}>
                                     <div className="col-span-2">
-                                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Event Type</label>
-                                        <div className="flex bg-black/60 p-1.5 rounded-xl border border-white/10">
+                                        <label className="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Event Type</label>
+                                        <div className="flex bg-black/40 p-1.5 rounded-xl border border-white/10">
                                             {['tournament', 'non'].map(opt => (
                                                 <button
                                                     key={opt}
                                                     onClick={() => setShsType(opt)}
-                                                    className={`flex-1 py-2.5 rounded-lg text-sm font-bold capitalize transition-all ${shsType === opt ? 'bg-indigo-600 text-white shadow-md' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+                                                    className={`flex-1 py-2.5 rounded-lg text-sm font-bold capitalize transition-all ${shsType === opt ? 'bg-white/10 text-white shadow-md border border-white/10' : 'text-gray-500 hover:text-gray-300'}`}
                                                 >
                                                     {opt === 'non' ? 'Non-Tournament' : opt}
                                                 </button>
@@ -398,26 +398,26 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
                                     </div>
 
                                     <div className="relative">
-                                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Setup</label>
-                                        <div className="absolute right-3 top-[2.2rem] pointer-events-none text-gray-500"><ChevronDown size={16} /></div>
+                                        <label className="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Setup</label>
+                                        <div className="absolute right-3 top-[2.2rem] pointer-events-none text-gray-600"><ChevronDown size={16} /></div>
                                         <select
                                             value={shsSetup}
                                             onChange={(e) => setShsSetup(e.target.value)}
                                             disabled={shsType !== 'tournament'}
-                                            className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white appearance-none focus:outline-none focus:border-indigo-500 transition-all opacity-100 disabled:opacity-50"
+                                            className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-gray-200 appearance-none focus:outline-none focus:border-white/30 transition-all opacity-100 disabled:opacity-50 font-medium"
                                         >
                                             <option value="on-ground">Onsite</option>
                                             <option value="online">Online</option>
                                         </select>
                                     </div>
                                     <div className="relative">
-                                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Mode</label>
-                                        <div className="absolute right-3 top-[2.2rem] pointer-events-none text-gray-500"><ChevronDown size={16} /></div>
+                                        <label className="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Mode</label>
+                                        <div className="absolute right-3 top-[2.2rem] pointer-events-none text-gray-600"><ChevronDown size={16} /></div>
                                         <select
                                             value={shsLivestream}
                                             onChange={(e) => setShsLivestream(e.target.value)}
                                             disabled={shsType !== 'tournament'}
-                                            className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white appearance-none focus:outline-none focus:border-indigo-500 transition-all opacity-100 disabled:opacity-50"
+                                            className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-gray-200 appearance-none focus:outline-none focus:border-white/30 transition-all opacity-100 disabled:opacity-50 font-medium"
                                         >
                                             <option value="with">Livestreamed</option>
                                             <option value="without">Off-stream</option>
@@ -425,10 +425,10 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
                                     </div>
                                 </div>
 
-                                <div className="pt-6 border-t border-white/10">
+                                <div className="pt-6 border-t border-white/5">
                                     <div className="bg-black/40 rounded-2xl p-6 border border-white/5 flex items-center justify-between">
                                         <span className="text-xs text-gray-500 uppercase tracking-widest font-bold">Total Allocation</span>
-                                        <span className="text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-300">
+                                        <span className="text-3xl lg:text-4xl font-black text-white">
                                             {getShsBudget()}
                                         </span>
                                     </div>
@@ -437,11 +437,11 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
                         </div>
 
                         {/* 3. EVENTS FOR A CAUSE */}
-                        <div className="bg-msl-card border border-white/10 rounded-3xl p-8 md:p-10 shadow-lg relative overflow-hidden group hover:border-red-500/30 transition-all">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+                        <div className="bg-msl-card border border-white/5 rounded-3xl p-8 md:p-10 shadow-lg relative overflow-hidden group hover:border-white/20 transition-all">
+                            {/* Removed red glow */}
 
                             <div className="flex items-center gap-4 mb-8">
-                                <div className="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center border border-red-500/20 shadow-[0_0_15px_-5px_rgba(239,68,68,0.5)]">
+                                <div className="w-12 h-12 rounded-xl bg-white/5 text-gray-300 flex items-center justify-center border border-white/10 shadow-lg">
                                     <HeartHandshake size={24} />
                                 </div>
                                 <h3 className="text-2xl font-bold text-white">Events for a Cause</h3>
@@ -449,12 +449,12 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
 
                             <div className="space-y-8">
                                 <div className="relative">
-                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Setup Type</label>
-                                    <div className="absolute right-3 top-[2.2rem] pointer-events-none text-gray-500"><ChevronDown size={16} /></div>
+                                    <label className="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Setup Type</label>
+                                    <div className="absolute right-3 top-[2.2rem] pointer-events-none text-gray-600"><ChevronDown size={16} /></div>
                                     <select
                                         value={causeSetup}
                                         onChange={(e) => setCauseSetup(e.target.value)}
-                                        className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white appearance-none focus:outline-none focus:border-red-500 transition-all"
+                                        className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-gray-200 appearance-none focus:outline-none focus:border-white/30 transition-all font-medium"
                                     >
                                         <option value="on-ground">Onsite / Physical</option>
                                         <option value="online">Online / Virtual</option>
@@ -464,8 +464,8 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
 
                                 <div>
                                     <div className="flex justify-between mb-4">
-                                        <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Team Volume</label>
-                                        <span className="text-xs font-bold text-red-400 bg-red-500/10 px-2 py-0.5 rounded border border-red-500/20">
+                                        <label className="text-xs font-bold text-gray-600 uppercase tracking-wider">Team Volume</label>
+                                        <span className="text-xs font-bold text-gray-300 bg-white/10 px-2 py-0.5 rounded border border-white/10">
                                             {['4-7 Teams (Small)', '8-15 Teams (Medium)', '>16 Teams (Large)'][causeTeamsIdx - 1]}
                                         </span>
                                     </div>
@@ -476,7 +476,7 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
                                         step="1"
                                         value={causeTeamsIdx}
                                         onChange={(e) => setCauseTeamsIdx(Number(e.target.value))}
-                                        className="w-full h-3 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-red-500 hover:accent-red-400 transition-all"
+                                        className="w-full h-3 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-white hover:accent-gray-300 transition-all"
                                     />
                                     <div className="flex justify-between text-[10px] text-gray-600 mt-2 font-bold uppercase tracking-wider">
                                         <span>Small</span>
@@ -485,10 +485,10 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
                                     </div>
                                 </div>
 
-                                <div className="pt-6 border-t border-white/10">
+                                <div className="pt-6 border-t border-white/5">
                                     <div className="bg-black/40 rounded-2xl p-6 border border-white/5 flex items-center justify-between">
                                         <span className="text-xs text-gray-500 uppercase tracking-widest font-bold">Total Allocation</span>
-                                        <span className="text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-300">
+                                        <span className="text-3xl lg:text-4xl font-black text-white">
                                             {getCauseBudget()}
                                         </span>
                                     </div>
@@ -497,11 +497,11 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
                         </div>
 
                         {/* 4. MONETARY GRANTS */}
-                        <div className="bg-msl-card border border-white/10 rounded-3xl p-8 md:p-10 shadow-lg relative overflow-hidden group hover:border-msl-gold/30 transition-all">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-msl-gold/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+                        <div className="bg-msl-card border border-white/5 rounded-3xl p-8 md:p-10 shadow-lg relative overflow-hidden group hover:border-msl-gold/30 transition-all">
+                            {/* Removed excessive glow */}
 
                             <div className="flex items-center gap-4 mb-8">
-                                <div className="w-12 h-12 rounded-xl bg-msl-gold/20 text-msl-gold flex items-center justify-center border border-msl-gold/20 shadow-[0_0_15px_-5px_rgba(242,194,26,0.5)]">
+                                <div className="w-12 h-12 rounded-xl bg-msl-gold/10 text-msl-gold flex items-center justify-center border border-msl-gold/20 shadow-lg">
                                     <Banknote size={24} />
                                 </div>
                                 <h3 className="text-2xl font-bold text-white">Monetary Grants</h3>
@@ -509,13 +509,13 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
 
                             <div className="space-y-8">
                                 <div>
-                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Target Scope</label>
+                                    <label className="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-3">Target Scope</label>
                                     <div className="grid grid-cols-2 gap-2">
                                         {['college', 'university', 'system', 'nationwide'].map(opt => (
                                             <button
                                                 key={opt}
                                                 onClick={() => setMoneyScope(opt)}
-                                                className={`px-3 py-2.5 rounded-lg text-sm font-bold capitalize transition-all border ${moneyScope === opt ? 'bg-msl-gold text-black border-msl-gold shadow-lg shadow-yellow-900/40' : 'bg-black/40 text-gray-400 border-white/10 hover:bg-white/5 hover:border-white/20'}`}
+                                                className={`px-3 py-2.5 rounded-lg text-sm font-bold capitalize transition-all border ${moneyScope === opt ? 'bg-msl-gold text-black border-msl-gold shadow-lg shadow-yellow-900/20' : 'bg-black/40 text-gray-500 border-white/5 hover:bg-white/5 hover:border-white/10 hover:text-gray-300'}`}
                                             >
                                                 {opt}
                                             </button>
@@ -524,22 +524,22 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
                                 </div>
 
                                 <div className="relative">
-                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Activity Base</label>
-                                    <div className="absolute right-3 top-[2.2rem] pointer-events-none text-gray-500"><ChevronDown size={16} /></div>
+                                    <label className="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Activity Base</label>
+                                    <div className="absolute right-3 top-[2.2rem] pointer-events-none text-gray-600"><ChevronDown size={16} /></div>
                                     <select
                                         value={moneyType}
                                         onChange={(e) => setMoneyType(e.target.value)}
-                                        className="w-full px-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white appearance-none focus:outline-none focus:border-msl-gold transition-all"
+                                        className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-gray-200 appearance-none focus:outline-none focus:border-msl-gold transition-all font-medium"
                                     >
                                         <option value="tournament">Tournament</option>
                                         <option value="non">Non-Tournament</option>
                                     </select>
                                 </div>
 
-                                <div className="pt-6 border-t border-white/10">
-                                    <div className="bg-black/40 rounded-2xl p-6 border border-white/5 flex items-center justify-between">
+                                <div className="pt-6 border-t border-white/5">
+                                    <div className="bg-black/40 rounded-2xl p-6 border border-white/5 flex items-center justify-between group-hover:border-msl-gold/20 transition-colors">
                                         <span className="text-xs text-gray-500 uppercase tracking-widest font-bold">Total Allocation</span>
-                                        <span className={`text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-msl-gold to-yellow-200 ${moneyScope === 'nationwide' ? 'text-xl' : ''}`}>
+                                        <span className={`text-3xl lg:text-4xl font-black text-msl-gold ${moneyScope === 'nationwide' ? 'text-xl' : ''}`}>
                                             {getMoneyBudget()}
                                         </span>
                                     </div>
@@ -576,17 +576,19 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
                         <div className="flex flex-col md:flex-row gap-12 items-start">
                             {/* Left: The "Mission" */}
                             <div className="w-full md:w-1/3 shrink-0">
-                                <div className="bg-white/5 rounded-2xl p-6 border border-white/5 mb-6">
-                                    <div className="w-16 h-16 bg-gradient-to-br from-gray-800 to-black rounded-xl border border-white/10 flex items-center justify-center mb-6 shadow-2xl">
-                                        <Briefcase size={32} className="text-gray-300" />
+                                <div className="bg-gradient-to-br from-red-900/10 to-black rounded-2xl p-6 border border-red-500/10 mb-6 relative overflow-hidden group hover:border-red-500/20 transition-all">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+
+                                    <div className="w-16 h-16 bg-gradient-to-br from-red-500/20 to-orange-600/5 rounded-xl border border-red-500/20 flex items-center justify-center mb-6 shadow-[0_0_15px_-5px_rgba(239,68,68,0.3)]">
+                                        <ClipboardList size={32} className="text-red-400" />
                                     </div>
                                     <h3 className="text-2xl font-bold text-white mb-2">Proposal Blueprint</h3>
-                                    <p className="text-gray-500 text-sm leading-relaxed">
+                                    <p className="text-gray-400 text-sm leading-relaxed">
                                         Your deck must be professional, concise, and impact-focused. Use this structure to guarantee a review.
                                     </p>
                                 </div>
-                                <button className="w-full py-4 bg-white text-black hover:bg-gray-200 rounded-xl font-bold text-lg transition-all shadow-lg flex items-center justify-center gap-2">
-                                    Submit Proposal <ArrowRight size={20} />
+                                <button className="w-full py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2 group hover:border-red-500/50 hover:text-red-400">
+                                    Submit Proposal <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                 </button>
                             </div>
 
