@@ -43,7 +43,7 @@ const DEPARTMENTS = [
         color: 'text-msl-gold',
         bg: 'bg-msl-gold/10',
         border: 'border-msl-gold/20',
-        description: 'Acquires sponsors and manages the organizational infrastructure (Finance & Web).',
+        description: 'The central engine of MSL. We manage the partner ecosystem, drive nationwide activations, and build the financial & digital infrastructure.',
         tasks: [
             'Sponsorship Acquisition',
             'Collegiate Org Relations',
@@ -71,13 +71,13 @@ const DEPARTMENTS = [
 const LEADERS = [
     {
         name: "Thrice Austine F. Vasquez",
-        role: "Campus Dept.",
+        role: "Campus",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600&h=600",
         color: "text-blue-500",
     },
     {
         name: "Mary Clarence S. Pasco",
-        role: "Contents & Social Media Dept.",
+        role: "Contents & Social Media",
         image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=600&h=600",
         color: "text-purple-500",
     },
@@ -275,20 +275,20 @@ const About: React.FC<AboutProps> = ({ onNavigate }) => {
                                 </div>
 
                                 {/* Content Overlap */}
-                                <div className="absolute bottom-0 left-0 w-full p-6">
-                                    <h3 className="text-2xl font-bold text-white mb-1 leading-tight drop-shadow-md">
+                                <div className="absolute bottom-0 left-0 w-full p-4">
+                                    <h3 className="text-lg font-bold text-white mb-0.5 leading-tight drop-shadow-md">
                                         {leader.name}
                                     </h3>
-                                    <p className={`text-base font-bold ${leader.color} mb-4`}>
+                                    <p className={`text-xs font-bold uppercase tracking-wider ${leader.color} mb-3 opacity-90`}>
                                         {leader.role}
                                     </p>
 
-                                    <div className="flex gap-3">
-                                        <button className="p-2 bg-white/10 rounded-full hover:bg-white/20 text-gray-300 hover:text-white transition-colors backdrop-blur-sm border border-white/5">
-                                            <Linkedin size={18} />
+                                    <div className="flex gap-2">
+                                        <button className="p-1.5 bg-white/10 rounded-full hover:bg-white/20 text-gray-300 hover:text-white transition-colors backdrop-blur-sm border border-white/5">
+                                            <Linkedin size={14} />
                                         </button>
-                                        <button className="p-2 bg-white/10 rounded-full hover:bg-white/20 text-gray-300 hover:text-white transition-colors backdrop-blur-sm border border-white/5">
-                                            <Twitter size={18} />
+                                        <button className="p-1.5 bg-white/10 rounded-full hover:bg-white/20 text-gray-300 hover:text-white transition-colors backdrop-blur-sm border border-white/5">
+                                            <Twitter size={14} />
                                         </button>
                                     </div>
                                 </div>
@@ -300,7 +300,7 @@ const About: React.FC<AboutProps> = ({ onNavigate }) => {
 
             {/* CTA (Surface) */}
             <section className="py-20 text-center px-4 bg-msl-surface border-t border-white/10">
-                <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">Ready to Lead the Game?</h2>
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">Ready to Lead?</h2>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <button
                         onClick={() => { onNavigate('programs'); window.scrollTo(0, 0); }}

@@ -23,8 +23,10 @@ import Hero from './components/Hero';
 import About from './components/About';
 import ProgramsPage from './components/Programs';
 import Careers from './components/Careers';
+import BuffsAndSupport from './components/BuffsAndSupport';
 import News from './components/News'; // Import News Page
 import Campus from './components/Campus'; // Import Campus Page
+import CampusTournaments from './components/CampusTournaments'; // Import Campus Tournaments Page
 import Partnerships from './components/Partnerships'; // Import Partnerships Page
 import Contents from './components/Contents'; // Import Contents Page
 import GeneralAffairs from './components/GeneralAffairs'; // Import General Affairs Page
@@ -88,13 +90,17 @@ const App = () => {
       case 'about':
         return <About onNavigate={setCurrentPage} />;
       case 'programs':
-        return <ProgramsPage />;
+        return <ProgramsPage onNavigate={setCurrentPage} />;
       case 'careers':
         return <Careers />;
       case 'news':
         return <News />;
       case 'campus':
         return <Campus onNavigate={setCurrentPage} />;
+      case 'campus-tournaments':
+        return <CampusTournaments onNavigate={setCurrentPage} />;
+      case 'buffs-support':
+        return <BuffsAndSupport onNavigate={setCurrentPage} />;
       case 'partnerships':
         return <Partnerships onNavigate={setCurrentPage} />;
       case 'contents':
