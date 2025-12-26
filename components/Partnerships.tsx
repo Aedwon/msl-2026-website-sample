@@ -564,7 +564,7 @@ const Partnerships: React.FC<PartnershipsProps> = ({ onNavigate }) => {
                 <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-0 border-b border-white/10 pb-2">Core Pillars</p>
                 {NETWORK_SUBPROGRAMS.map((sub, idx) => (
                   <div key={idx} className="bg-black/40 backdrop-blur-sm border border-white/10 p-5 rounded-xl flex items-start gap-4 hover:bg-white/5 transition-colors group/card">
-                    <div className={`p - 3 rounded - xl ${sub.bg} ${sub.color} shrink - 0 group - hover / card: scale - 110 transition - transform`}>
+                    <div className={`p-3 rounded-xl ${sub.bg} ${sub.color} shrink-0 group-hover/card:scale-110 transition-transform`}>
                       <sub.icon size={24} />
                     </div>
                     <div>
@@ -586,7 +586,7 @@ const Partnerships: React.FC<PartnershipsProps> = ({ onNavigate }) => {
               {OTHER_INITIATIVES.map((item, idx) => (
                 <div key={idx} className="bg-msl-card p-6 rounded-2xl border border-white/5 hover:border-white/20 transition-all group">
                   <div className="flex items-center gap-4 mb-3">
-                    <div className={`p - 2 rounded - lg ${item.bg} ${item.color} `}>
+                    <div className={`p-2 rounded-lg ${item.bg} ${item.color}`}>
                       <item.icon size={20} />
                     </div>
                     <h4 className="font-bold text-white text-lg">{item.title}</h4>
@@ -615,13 +615,13 @@ const Partnerships: React.FC<PartnershipsProps> = ({ onNavigate }) => {
             {DIVISIONS.map((div, idx) => (
               <div key={idx} className="bg-msl-card rounded-2xl p-6 border border-white/10 relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300 shadow-lg">
                 {/* Gradient Background on Hover based on color */}
-                <div className={`absolute inset - 0 opacity - 0 group - hover: opacity - 10 transition - opacity duration - 500 ${div.bg.replace('/10', '/30')} `} />
+                <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 ${div.bg.replace('/10', '/30')}`} />
 
                 {/* Colored Top Bar */}
-                <div className={`h - 1 w - full absolute top - 0 left - 0 ${div.color.replace('text-', 'bg-')} `} />
+                <div className={`h-1 w-full absolute top-0 left-0 ${div.color.replace('text-', 'bg-')}`} />
 
                 <div className="relative z-10">
-                  <div className={`w - 14 h - 14 rounded - xl ${div.bg} flex items - center justify - center mb - 6 ${div.color} group - hover: scale - 110 transition - transform ring - 1 ${div.border} `}>
+                  <div className={`w-14 h-14 rounded-xl ${div.bg} flex items-center justify-center mb-6 ${div.color} group-hover:scale-110 transition-transform border ${div.border}`}>
                     <div.icon size={28} />
                   </div>
 
