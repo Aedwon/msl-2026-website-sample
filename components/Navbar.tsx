@@ -36,7 +36,16 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
         { label: 'General Affairs', page: 'general' }
       ]
     },
-    { id: 'programs', label: 'Programs' },
+    {
+      id: 'programs',
+      label: 'Programs',
+      dropdown: [
+        { label: 'The MSL Network', page: 'msl-network' },
+        { label: 'Campus Tournaments', page: 'campus-tournaments' },
+        { label: 'Buffs & Support', page: 'buffs-support' },
+        { label: 'Referral Program', page: 'general' }
+      ]
+    },
     { id: 'careers', label: 'Careers' },
     { id: 'news', label: 'News' }
   ];

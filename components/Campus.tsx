@@ -566,7 +566,7 @@ const Campus: React.FC<CampusProps> = ({ onNavigate }) => {
                 <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
                     <div>
                         <h2 className="text-3xl font-bold text-white mb-2">Community Directory</h2>
-                        <p className="text-gray-400">Browse our network of official campus communities.</p>
+                        <p className="text-gray-400">Browse our <button onClick={() => onNavigate('msl-network')} className="text-blue-400 hover:text-blue-300 underline underline-offset-4">network of official campus communities</button>.</p>
                     </div>
 
                     {/* Search & Filter Controls */}
@@ -608,8 +608,8 @@ const Campus: React.FC<CampusProps> = ({ onNavigate }) => {
                                                 setIsFilterOpen(false);
                                             }}
                                             className={`w-full px-4 py-2 text-left text-sm font-bold rounded-lg transition-colors ${activeRegion === region
-                                                    ? 'bg-blue-600 text-white'
-                                                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                                                ? 'bg-blue-600 text-white'
+                                                : 'text-gray-400 hover:text-white hover:bg-white/5'
                                                 }`}
                                         >
                                             {region}

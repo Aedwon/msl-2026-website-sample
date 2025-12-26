@@ -32,6 +32,7 @@ import Contents from './components/Contents'; // Import Contents Page
 import GeneralAffairs from './components/GeneralAffairs'; // Import General Affairs Page
 import SafeSpaces from './components/SafeSpaces'; // Import Safe Spaces Page
 import Legal from './components/Legal'; // Import Legal Page
+import MSLNetwork from './components/MSLNetwork'; // Import MSL Network Page
 import TrustTicker from './components/TrustTicker';
 import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
@@ -103,6 +104,8 @@ const App = () => {
         return <BuffsAndSupport onNavigate={setCurrentPage} />;
       case 'partnerships':
         return <Partnerships onNavigate={setCurrentPage} />;
+      case 'msl-network':
+        return <MSLNetwork onNavigate={setCurrentPage} />;
       case 'contents':
         return <Contents onNavigate={setCurrentPage} />;
       case 'general':

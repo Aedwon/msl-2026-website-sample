@@ -42,6 +42,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                     <div>
                         <h4 className="text-white font-bold mb-6">Programs</h4>
                         <ul className="space-y-2 text-gray-400 text-sm">
+                            <li><a href="#" onClick={(e) => handleNav(e, 'msl-network')} className="block py-2 hover:text-msl-gold transition-colors">The MSL Network</a></li>
                             <li><a href="#" onClick={(e) => handleNav(e, 'programs')} className="block py-2 hover:text-msl-gold transition-colors">Campus Tournaments</a></li>
                             <li><a href="#" onClick={(e) => handleNav(e, 'programs')} className="block py-2 hover:text-msl-gold transition-colors">MCC League</a></li>
                             <li><a href="#" onClick={(e) => handleNav(e, 'programs')} className="block py-2 hover:text-msl-gold transition-colors">Leadership Summit</a></li>
