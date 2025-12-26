@@ -20,7 +20,8 @@ import {
     Zap,
     Users,
     FileText,
-    ClipboardList
+    ClipboardList,
+    ShoppingBag
 } from 'lucide-react';
 
 interface BuffsAndSupportProps {
@@ -277,13 +278,100 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
                 </div>
             </section>
 
+            {/* MERCHANDISE LIFESTYLE / SPONSORSHIP SHOWCASE */}
+            <section className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black via-msl-surface to-black opacity-80 pointer-events-none"></div>
+
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
+
+                    {/* Left: Text Content */}
+                    <div className="order-2 lg:order-1">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-msl-gold/10 text-msl-gold text-xs font-bold uppercase mb-6 border border-msl-gold/20">
+                            <ShoppingBag size={12} fill="currentColor" /> Community Loot
+                        </div>
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+                            Reward Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-msl-gold to-yellow-200">Community</span>
+                        </h2>
+                        <div className="space-y-6 text-lg text-gray-400 leading-relaxed">
+                            <p>
+                                Elevate your event with official MSL gear drops. We provide premium merchandise to be used as <span className="text-white font-bold">giveaways</span> and <span className="text-white font-bold">tournament prizes</span>.
+                            </p>
+                            <p>
+                                Accredited partners receive care packages containing jerseys, shirts, and accessories to hype up their audience. Make your event unforgettable with legendary loot.
+                            </p>
+                        </div>
+
+                        <div className="mt-10 flex flex-wrap gap-4">
+                            <div className="px-6 py-4 bg-white/5 border border-white/10 rounded-2xl flex items-center gap-4">
+                                <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center border border-white/10">
+                                    <Trophy size={20} className="text-msl-gold" />
+                                </div>
+                                <div>
+                                    <p className="text-white font-bold text-sm">Grand Prizes</p>
+                                    <p className="text-xs text-gray-500">For Champions</p>
+                                </div>
+                            </div>
+                            <div className="px-6 py-4 bg-white/5 border border-white/10 rounded-2xl flex items-center gap-4">
+                                <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center border border-white/10">
+                                    <Gift size={20} className="text-purple-400" />
+                                </div>
+                                <div>
+                                    <p className="text-white font-bold text-sm">Giveaways</p>
+                                    <p className="text-xs text-gray-500">For Trivia & Raffles</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right: Lifestyle Gallery Collage */}
+                    <div className="order-1 lg:order-2 relative h-[500px] w-full">
+                        {/* Background blobs */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-br from-msl-gold/10 via-purple-500/5 to-blue-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+
+                        {/* Photo 1: Main Feature (Mockup of heavy usage) */}
+                        <div className="absolute top-0 right-0 w-[60%] h-[60%] bg-gray-800 rounded-2xl border-4 border-black shadow-2xl overflow-hidden -rotate-3 hover:rotate-0 transition-transform duration-500 z-10">
+                            {/* Placeholder: Crowd Shot */}
+                            <div className="w-full h-full bg-gray-800 relative opacity-60">
+                                <svg className="w-full h-full text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                </svg>
+                            </div>
+                            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+                                <p className="text-white font-bold text-sm">UP Gaming Guild</p>
+                                <p className="text-xs text-gray-400">Season '25 Finals</p>
+                            </div>
+                        </div>
+
+                        {/* Photo 2: Secondary (Detail) */}
+                        <div className="absolute bottom-0 left-4 w-[45%] h-[55%] bg-gray-900 rounded-2xl border-4 border-black shadow-2xl overflow-hidden rotate-6 hover:rotate-0 transition-transform duration-500 z-20">
+                            {/* Placeholder: Jersey Close up */}
+                            <div className="w-full h-full bg-gray-900 relative opacity-60 flex items-center justify-center">
+                                <Shirt size={64} className="text-white/20" />
+                            </div>
+                            <div className="absolute bottom-4 left-4">
+                                <span className="px-2 py-1 bg-msl-gold text-black text-[10px] font-bold uppercase rounded">Limited Edition</span>
+                            </div>
+                        </div>
+
+                        {/* Photo 3: Small Accent */}
+                        <div className="absolute top-12 left-0 w-[30%] h-[30%] bg-gray-800 rounded-xl border-4 border-black shadow-xl overflow-hidden -rotate-12 hover:rotate-0 transition-transform duration-500 z-0">
+                            {/* Placeholder: Lanyard */}
+                            <div className="w-full h-full p-4 flex items-center justify-center">
+                                <div className="w-2 h-16 bg-blue-500/50 rounded-full"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
             {/* CALCULATORS SECTION */}
             <section className="py-24 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-white mb-4">Support Calculator</h2>
+                        <h2 className="text-4xl font-bold text-white mb-4">Buff Configurator</h2>
                         <p className="text-gray-400 max-w-2xl mx-auto">
-                            Estimate the max support you can unlock. Select your parameters below.
+                            Select your parameters to optimize your sponsorship loadout.
                         </p>
                     </div>
 
@@ -707,8 +795,11 @@ const BuffsAndSupport: React.FC<BuffsAndSupportProps> = ({ onNavigate }) => {
                         </div>
                     </div>
 
-                    <div className="mt-16 text-center">
-                        <button className="w-full sm:w-auto px-8 py-4 bg-transparent border border-msl-gold text-msl-gold hover:bg-msl-gold hover:text-black rounded-xl font-bold text-lg transition-all">
+                    <div className="mt-16 text-center flex flex-col md:flex-row gap-4 justify-center">
+                        <button className="w-full sm:w-auto px-8 py-4 bg-msl-gold text-black rounded-xl font-black text-lg hover:bg-yellow-300 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2">
+                            <Zap size={20} fill="currentColor" /> Apply for Buffs Now
+                        </button>
+                        <button className="w-full sm:w-auto px-8 py-4 bg-transparent border border-white/20 text-gray-400 hover:text-white hover:border-white/40 hover:bg-white/5 rounded-xl font-bold text-lg transition-all">
                             View Full Documentation
                         </button>
                     </div>
