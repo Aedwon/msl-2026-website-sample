@@ -210,9 +210,45 @@ const CampusTournaments: React.FC<CampusTournamentsProps> = ({ onNavigate }) => 
                     {/* FILTERS */}
                     <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-10">
 
-                        {/* Region Filter */}
-                        <div className="w-full md:w-auto overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
-                            <div className="flex bg-white/5 rounded-xl p-1 border border-white/10">
+                        {/* Region Filter - MOBILE DROPDOWN / DESKTOP TABS */}
+                        <div className="w-full md:w-auto">
+                            {/* Mobile Dropdown */}
+                            <div className="relative md:hidden w-full">
+                                <button
+                                    onClick={() => {
+                                        const el = document.getElementById('region-dropdown');
+                                        if (el) el.classList.toggle('hidden');
+                                    }}
+                                    className="w-full flex items-center justify-between px-4 py-3 bg-msl-card border border-white/10 rounded-xl text-white font-bold hover:bg-white/5 transition-all focus:outline-none focus:border-blue-500"
+                                >
+                                    <span className="flex items-center gap-2 text-sm">
+                                        <Filter size={16} className="text-gray-400" />
+                                        {activeRegion === 'All' ? 'All Regions' : activeRegion}
+                                    </span>
+                                    <Filter size={16} className="text-gray-400" />
+                                </button>
+
+                                <div id="region-dropdown" className="hidden absolute top-full left-0 mt-2 w-full bg-[#0f172a] border border-white/10 rounded-xl shadow-xl z-20 overflow-hidden p-1">
+                                    {REGIONS.map((region) => (
+                                        <button
+                                            key={region}
+                                            onClick={() => {
+                                                setActiveRegion(region);
+                                                document.getElementById('region-dropdown')?.classList.add('hidden');
+                                            }}
+                                            className={`w-full px-4 py-3 text-left text-sm font-bold rounded-lg transition-colors ${activeRegion === region
+                                                ? 'bg-blue-600 text-white'
+                                                : 'text-gray-400 hover:text-white hover:bg-white/5'
+                                                }`}
+                                        >
+                                            {region}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Desktop Tabs */}
+                            <div className="hidden md:flex bg-white/5 rounded-xl p-1 border border-white/10">
                                 {REGIONS.map(region => (
                                     <button
                                         key={region}
@@ -229,14 +265,14 @@ const CampusTournaments: React.FC<CampusTournamentsProps> = ({ onNavigate }) => 
                         </div>
 
                         {/* Status Filter */}
-                        <div className="w-full md:w-auto flex items-center justify-end gap-3 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
+                        <div className="w-full md:w-auto flex items-center justify-start md:justify-end gap-3 overflow-x-auto pb-4 md:pb-0 scrollbar-hide mask-fade-right">
                             {STATUSES.map(status => (
                                 <button
                                     key={status}
                                     onClick={() => setActiveStatus(status)}
-                                    className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border whitespace-nowrap ${activeStatus === status
-                                        ? 'bg-msl-card border-blue-500 text-blue-400'
-                                        : 'bg-transparent border-white/10 text-gray-500 hover:text-white hover:border-white/30'
+                                    className={`px-4 py-2 rounded-full text-xs font-bold transition-all border whitespace-nowrap flex-shrink-0 ${activeStatus === status
+                                        ? 'bg-blue-500/10 border-blue-500 text-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.2)]'
+                                        : 'bg-white/5 border-white/10 text-gray-400 hover:text-white hover:border-white/30 hover:bg-white/10'
                                         }`}
                                 >
                                     {status}
