@@ -33,6 +33,7 @@ const TIERS = [
     {
         id: 'tier-c',
         name: 'Tier C',
+        label: 'Tier C',
         color: 'text-gray-400',
         borderColor: 'border-white/10',
         bg: 'bg-white/5',
@@ -44,6 +45,7 @@ const TIERS = [
     {
         id: 'tier-b',
         name: 'Tier B',
+        label: 'Tier B',
         color: 'text-blue-400',
         borderColor: 'border-blue-500/30',
         bg: 'bg-blue-900/10',
@@ -55,6 +57,7 @@ const TIERS = [
     {
         id: 'tier-a',
         name: 'Tier A',
+        label: 'Tier A',
         color: 'text-purple-400',
         borderColor: 'border-purple-500/30',
         bg: 'bg-purple-900/10',
@@ -64,8 +67,9 @@ const TIERS = [
         perks: { activations: 'High Priority', creative: 'Full Access' }
     },
     {
-        id: 'super-school',
+        id: 'tier-ss',
         name: 'Super School',
+        label: 'Tier SS',
         color: 'text-msl-gold',
         borderColor: 'border-msl-gold/50',
         bg: 'bg-yellow-900/10',
@@ -76,6 +80,75 @@ const TIERS = [
         isSpecial: true
     }
 ];
+
+const AWARDS_DATA = {
+    major: [
+        {
+            title: "Organization of the Year",
+            desc: "The grand award presented to the most outstanding MSL chapter that demonstrated excellence across leadership, execution, creativity, and community impact through MLBB initiatives.",
+            grant: "₱15,000",
+            receivables: ["Trophy", "Certificate", "Cash Support"],
+            highlight: true
+        },
+        {
+            title: "Rising Organization Award",
+            desc: "Presented to a new or growing MSL chapter that showed remarkable development, initiative, and promise within its first year of active participation.",
+            grant: "₱10,000",
+            receivables: ["Trophy", "Certificate", "Cash Support"]
+        },
+        {
+            title: "Best Event of the Year",
+            desc: "Recognizes the most exceptional MLBB-related event distinguished by strong organization, innovation, and engagement both on-site and online.",
+            receivables: ["Trophy", "Certificate"]
+        },
+        {
+            title: "Student Community Impact Award",
+            desc: "Given to an organization that made a significant positive difference within its campus community through MLBB events, partnerships, and student-led initiatives.",
+            receivables: ["Trophy", "Certificate"]
+        }
+    ],
+    community: [
+        {
+            title: "Service Through Esports",
+            desc: "Awarded to organizations that used MLBB-related initiatives to create meaningful social impact, community service, or educational advocacy.",
+            grant: "₱10,000",
+            receivables: ["Trophy", "Certificate", "Cash Support"],
+            icon: <Shield size={24} />
+        },
+        {
+            title: "Collaboration of the Year",
+            desc: "Recognizes the best joint project or event between multiple schools or organizations that strengthened community ties within the MSL Network.",
+            receivables: ["Trophy", "Certificate"],
+            icon: <Users size={24} />
+        },
+        {
+            title: "Organization Partner of the Year",
+            desc: "Given to a brand, institution, or organization that provided outstanding support and collaboration, contributing significantly to the success and growth of MSL and MLBB campus initiatives.",
+            receivables: ["Trophy", "Certificate"],
+            icon: <Building2 size={24} />
+        }
+    ],
+    individual: [
+        {
+            title: "Esports Advocate of the Year",
+            desc: "Given to a student leader who exemplifies passion, leadership, and dedication in advancing MLBB esports and its positive influence on students.",
+            grant: "₱5,000",
+            receivables: ["Certificate", "Trophy", "Cash Support"]
+        },
+        {
+            title: "Student Talent of the Year",
+            desc: "Honors outstanding individual performance in areas such as shoutcasting, hosting, or other MLBB-related talents that uplifted the MSL community.",
+            grant: "₱5,000",
+            receivables: ["Certificate", "Trophy", "Cash Support"]
+        },
+        {
+            title: "Student Creator of the Year",
+            desc: "Recognizes a student who demonstrated exceptional creativity and influence through MLBB-centered digital content or storytelling.",
+            grant: "₱5,000",
+            receivables: ["Certificate", "Trophy", "Cash Support"]
+        }
+    ]
+};
 
 const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
     const [activeTier, setActiveTier] = useState(TIERS[3]); // Default to Super School
@@ -392,7 +465,7 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                             ${isActive ? 'opacity-100 translate-x-0' : 'opacity-30 translate-x-4 group-hover:opacity-60 group-hover:translate-x-2'}
                                         `}>
                                             <div className={`text-lg font-black uppercase tracking-wider leading-none mb-1 ${isActive ? 'text-white' : 'text-gray-600'}`}>
-                                                {tier.name}
+                                                {tier.label}
                                             </div>
                                         </div>
 
@@ -400,7 +473,7 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                         <div className={`absolute top-full mt-3 left-1/2 -translate-x-1/2 whitespace-nowrap lg:hidden transition-all duration-300
                                             ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}
                                         `}>
-                                            <div className={`text-[10px] font-bold uppercase tracking-widest ${tier.color}`}>{tier.name}</div>
+                                            <div className={`text-[10px] font-bold uppercase tracking-widest ${tier.color}`}>{tier.label}</div>
                                         </div>
                                     </button>
                                 );
@@ -638,28 +711,121 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
             </section>
 
             {/* --- MSL NETWORK AWARDS --- */}
-            <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-msl-gold/10 to-black border-t border-white/10 relative overflow-hidden">
+            {/* --- MSL NETWORK AWARDS --- */}
+            <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-msl-gold/5 to-black border-t border-white/10 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-msl-gold/5 blur-[120px] rounded-full pointer-events-none" />
-                <div className="max-w-7xl mx-auto relative z-10 grid md:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-msl-gold/20 border border-msl-gold/30 text-msl-gold text-xs font-bold uppercase mb-6">
+
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <div className="text-center mb-16">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-msl-gold/20 border border-msl-gold/30 text-msl-gold text-xs font-bold uppercase mb-4">
                             <Crown size={12} /> Hall of Legends
                         </div>
                         <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">The MSL Network Awards</h2>
-                        <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                            Our annual gala recognizing the best of the best. From "Organization of the Year" to "Breakout Student Leader", we immortalize those who define the meta.
+                        <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+                            Honoring the outstanding achievements of student organizations and leaders who have elevated the campus esports experience.
                         </p>
-                        <button className="px-8 py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-white rounded-xl font-bold transition-all flex items-center gap-2">
-                            View Hall of Fame <ArrowRight size={18} />
-                        </button>
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
-                        {['Org of the Year', 'Best Production', 'Student Leader', 'Event of the Year'].map((award, i) => (
-                            <div key={i} className="aspect-square bg-black/40 border border-msl-gold/20 rounded-2xl flex flex-col items-center justify-center text-center p-4 hover:border-msl-gold/50 transition-colors">
-                                <Trophy size={32} className="text-msl-gold mb-3" />
-                                <span className="text-white font-bold text-sm">{award}</span>
+
+                    {/* MAJOR AWARDS GRID */}
+                    <div className="mb-20">
+                        <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                            <Trophy className="text-msl-gold" /> Major Awards
+                        </h3>
+                        <div className="grid md:grid-cols-2 gap-6">
+                            {AWARDS_DATA.major.map((award, i) => (
+                                <div key={i} className={`group relative p-8 rounded-3xl border transition-all duration-500 overflow-hidden flex flex-col justify-between
+                                    ${award.highlight
+                                        ? 'bg-gradient-to-br from-msl-gold/20 to-black border-msl-gold/50 shadow-[0_0_30px_-10px_rgba(234,179,8,0.3)]'
+                                        : 'bg-black/40 border-white/10 hover:border-white/20'}`
+                                }>
+                                    <div>
+                                        <div className="flex justify-between items-start mb-6">
+                                            {award.highlight && <Crown size={32} className="text-msl-gold mb-4" />}
+                                            {award.grant && (
+                                                <div className="px-4 py-2 rounded-xl bg-msl-gold text-black font-black text-sm shadow-lg">
+                                                    {award.grant} Grant
+                                                </div>
+                                            )}
+                                        </div>
+                                        <h4 className={`font-black uppercase tracking-tight mb-2 ${award.highlight ? 'text-3xl text-white' : 'text-2xl text-gray-200'}`}>
+                                            {award.title}
+                                        </h4>
+                                        <p className="text-gray-400 leading-relaxed mb-8">{award.desc}</p>
+                                    </div>
+
+                                    {/* Receivables Footer */}
+                                    <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-white/5">
+                                        {award.receivables.map((item, idx) => (
+                                            <span key={idx} className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-white/5 text-gray-400 border border-white/5">
+                                                {item}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* COMMUNITY & INDIVIDUAL SPLIT */}
+                    <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+
+                        {/* Community Awards */}
+                        <div className="lg:col-span-7 flex flex-col gap-4">
+                            <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                                <Users className="text-blue-400" /> Community Awards
+                            </h3>
+                            <div className="space-y-4 h-full">
+                                {AWARDS_DATA.community.map((award, i) => (
+                                    <div key={i} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-white/10 transition-all group h-full flex flex-col justify-center">
+                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
+                                            <div className="flex items-center gap-3">
+                                                <div className="p-2 rounded-lg bg-blue-900/20 text-blue-400 border border-blue-500/20">{award.icon}</div>
+                                                <h4 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">{award.title}</h4>
+                                            </div>
+                                            {award.grant && (
+                                                <span className="px-3 py-1 rounded-lg bg-blue-500/20 text-blue-400 text-xs font-bold border border-blue-500/30 whitespace-nowrap shadow-[0_0_10px_rgba(59,130,246,0.2)]">
+                                                    {award.grant} Grant
+                                                </span>
+                                            )}
+                                        </div>
+                                        <p className="text-gray-300 text-sm leading-relaxed mb-4 pl-[52px]">{award.desc}</p>
+                                        <div className="flex gap-2 pl-[52px]">
+                                            {award.receivables.map((item, idx) => (
+                                                <span key={idx} className="text-[10px] uppercase text-gray-400 font-bold tracking-wider">{item}  {idx < award.receivables.length - 1 && <span className="text-gray-600 mx-1">•</span>}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        </div>
+
+                        {/* Individual Awards */}
+                        <div className="lg:col-span-5 flex flex-col gap-4">
+                            <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                                <Star className="text-purple-400" /> Individual Awards
+                            </h3>
+                            <div className="grid gap-4 h-full">
+                                {AWARDS_DATA.individual.map((award, i) => (
+                                    <div key={i} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/30 hover:bg-white/10 transition-all h-full">
+                                        <div className="flex justify-between items-start mb-3">
+                                            <h4 className="font-bold text-white text-base">{award.title}</h4>
+                                            <span className="text-msl-gold font-bold text-xs bg-msl-gold/10 px-2.5 py-1 rounded-lg border border-msl-gold/20 shadow-[0_0_10px_rgba(234,179,8,0.1)]">{award.grant}</span>
+                                        </div>
+                                        <p className="text-gray-400 text-xs leading-relaxed mb-3">{award.desc}</p>
+                                        <div className="flex flex-wrap gap-2 mt-auto">
+                                            {award.receivables.map((item, idx) => (
+                                                <span key={idx} className="text-[10px] font-bold text-gray-500 px-1.5 py-0.5 rounded bg-black/30 border border-white/5">{item}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                                {/* Call to action */}
+                                <div className="p-6 rounded-2xl border border-dashed border-white/10 flex items-center justify-center text-center hover:bg-white/5 transition-colors cursor-default">
+                                    <p className="text-gray-500 text-sm">Valid for <span className="text-white font-bold">Season 2026</span></p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
