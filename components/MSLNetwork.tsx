@@ -185,15 +185,15 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                         </div>
 
                         {/* SECONDARY INFO: Org Details & Buffs (Sidebar) */}
-                        <div className="lg:col-span-4 order-1 lg:order-2 flex flex-col gap-6 h-full">
+                        <div className="contents lg:col-span-4 lg:order-2 lg:flex lg:flex-col lg:gap-6 lg:h-full">
 
                             {/* Org Header Card */}
-                            <div className="bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 shadow-xl flex-1 flex flex-col justify-center">
-                                <h2 className="text-4xl font-black text-white leading-none tracking-tighter mb-2">
-                                    TELETIGERS
+                            <div className="order-1 lg:order-none bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 shadow-xl flex-1 flex flex-col justify-center">
+                                <h2 className="text-3xl sm:text-4xl font-black text-white leading-none tracking-tighter mb-2">
+                                    UST TELETIGERS ESPORTS CLUB
                                 </h2>
-                                <div className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-msl-gold to-yellow-200 mb-6">
-                                    UST • ESPORTS
+                                <div className="text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-msl-gold to-yellow-200 mb-6">
+                                    UNIVERSITY OF SANTO TOMAS
                                 </div>
                                 <p className="text-gray-400 text-sm leading-relaxed border-l-2 border-msl-gold pl-4 italic">
                                     "The MSL Network didn't just sponsor us; they upgraded our entire event infrastructure."
@@ -201,7 +201,7 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                             </div>
 
                             {/* Buffs Card */}
-                            <div className="bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 shadow-xl flex-1 flex flex-col justify-center">
+                            <div className="order-3 lg:order-none bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 shadow-xl flex-1 flex flex-col justify-center">
                                 <h4 className="text-gray-500 font-bold uppercase tracking-widest text-xs mb-6 flex items-center gap-2">
                                     <Zap size={14} className="text-msl-gold" /> Equipped Buffs
                                 </h4>
@@ -213,7 +213,7 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                             <MonitorPlay size={20} className="text-blue-400" />
                                         </div>
                                         <div>
-                                            <div className="text-white font-bold text-sm">Broadcast Rig</div>
+                                            <div className="text-white font-bold text-sm">Tournament Lobby</div>
                                             <div className="text-blue-500 text-[10px] font-mono uppercase">+ Pro Production</div>
                                         </div>
                                     </div>
@@ -226,7 +226,7 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                             <Gem size={20} className="text-msl-gold" />
                                         </div>
                                         <div>
-                                            <div className="text-white font-bold text-sm">Prize Injection</div>
+                                            <div className="text-white font-bold text-sm">Prize Pool Support</div>
                                             <div className="text-msl-gold text-[10px] font-mono uppercase">+ Cash & Diamonds</div>
                                         </div>
                                     </div>
