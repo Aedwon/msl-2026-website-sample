@@ -53,31 +53,31 @@ const PROGRAMS_WIDGET_DATA = [
     title: "Campus Tournaments",
     desc: "Intra-school competitions that unite student gamers and strengthen campus pride.",
     image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800",
-    colSpan: "md:col-span-1"
+    colSpan: "md:col-span-1 lg:col-span-1"
   },
   {
     title: "Inter-school Tournaments",
     desc: "Nationwide clashes where schools face off and champions rise together.",
     image: "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?auto=format&fit=crop&q=80&w=800",
-    colSpan: "md:col-span-2"
+    colSpan: "md:col-span-1 lg:col-span-2"
   },
   {
     title: "Trainings and Seminars",
     desc: "Workshops that sharpen leadership, esports skills, and community-building know-how.",
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
-    colSpan: "md:col-span-1"
+    colSpan: "md:col-span-1 lg:col-span-1"
   },
   {
     title: "Event Sponsorships",
     desc: "Partner-backed opportunities that elevate student-led initiatives across campuses.",
     image: "https://images.unsplash.com/photo-1560439514-e960a3ef5019?auto=format&fit=crop&q=80&w=800",
-    colSpan: "md:col-span-2"
+    colSpan: "md:col-span-1 lg:col-span-2"
   },
   {
     title: "MLBB Campaigns",
     desc: "Creative activations and nationwide drives that celebrate the spirit of Mobile Legends.",
     image: "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&q=80&w=800",
-    colSpan: "md:col-span-2"
+    colSpan: "md:col-span-2 lg:col-span-2"
   }
 ];
 
@@ -164,14 +164,14 @@ const App = () => {
             {/* --- SECTION 4: PROGRAMS (Black) --- */}
             <section className="py-24 bg-msl-black border-t border-white/10" aria-label="Our Programs">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
                   <div>
                     <h2 className="text-4xl font-bold text-white mb-2">Our Programs</h2>
                     <p className="text-gray-400 max-w-xl text-lg">Building opportunities for student leaders through events, training, and nationwide esports initiatives.</p>
                   </div>
                   <button
                     onClick={() => { setCurrentPage('programs'); window.scrollTo(0, 0); }}
-                    className="w-full md:w-auto px-6 py-4 bg-white/5 border border-white/10 md:border-transparent rounded-xl text-msl-gold hover:text-white font-bold flex items-center justify-center gap-2 transition-colors active:bg-white/10"
+                    className="w-full md:w-auto px-6 py-4 bg-white/5 border border-white/10 md:border-transparent rounded-xl text-msl-gold hover:text-white font-bold flex items-center justify-center gap-2 transition-colors active:bg-white/10 whitespace-nowrap"
                   >
                     View All Programs <ArrowRight size={16} />
                   </button>
