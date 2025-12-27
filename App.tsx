@@ -33,6 +33,7 @@ import GeneralAffairs from './components/GeneralAffairs'; // Import General Affa
 import SafeSpaces from './components/SafeSpaces'; // Import Safe Spaces Page
 import Legal from './components/Legal'; // Import Legal Page
 import MSLNetwork from './components/MSLNetwork'; // Import MSL Network Page
+import MSLCollegiateCup from './components/MSLCollegiateCup'; // Import MSL Collegiate Cup Page
 import TrustTicker from './components/TrustTicker';
 import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
@@ -106,6 +107,8 @@ const App = () => {
         return <Partnerships onNavigate={setCurrentPage} />;
       case 'msl-network':
         return <MSLNetwork onNavigate={setCurrentPage} />;
+      case 'msl-collegiate-cup':
+        return <MSLCollegiateCup onNavigate={setCurrentPage} />;
       case 'contents':
         return <Contents onNavigate={setCurrentPage} />;
       case 'general':

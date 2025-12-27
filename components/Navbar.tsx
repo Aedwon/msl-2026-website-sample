@@ -41,6 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
       label: 'Programs',
       dropdown: [
         { label: 'The MSL Network', page: 'msl-network' },
+        { label: 'MSL Collegiate Cup', page: 'msl-collegiate-cup' },
         { label: 'Campus Tournaments', page: 'campus-tournaments' },
         { label: 'Buffs & Support', page: 'buffs-support' },
         { label: 'Referral Program', page: 'general' }
