@@ -926,10 +926,10 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                         <span className="w-2 h-2 rounded-full bg-msl-gold"></span> Applications Open for Season 2026
                     </div>
 
-                    <h2 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tight">Build A Dynasty.</h2>
+                    <h2 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tight">Build Your Legacy.</h2>
 
                     <p className="text-xl md:text-2xl text-gray-400 mb-12 leading-relaxed max-w-2xl mx-auto">
-                        Join the elite network of student organizations redefining collegiate esports. Secure funding, mentorship, and your legacy.
+                        Join the elite network of student organizations redefining collegiate esports. Secure funding, mentorship, and a lasting impact.
                     </p>
 
                     <button
