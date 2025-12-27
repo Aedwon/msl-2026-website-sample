@@ -87,14 +87,14 @@ const AWARDS_DATA = {
             title: "Organization of the Year",
             desc: "The grand award presented to the most outstanding MSL chapter that demonstrated excellence across leadership, execution, creativity, and community impact through MLBB initiatives.",
             grant: "₱15,000",
-            receivables: ["Trophy", "Certificate", "Cash Support"],
+            receivables: ["Trophy", "Certificate", "Cash"],
             highlight: true
         },
         {
             title: "Rising Organization Award",
             desc: "Presented to a new or growing MSL chapter that showed remarkable development, initiative, and promise within its first year of active participation.",
             grant: "₱10,000",
-            receivables: ["Trophy", "Certificate", "Cash Support"]
+            receivables: ["Trophy", "Certificate", "Cash"]
         },
         {
             title: "Best Event of the Year",
@@ -112,7 +112,7 @@ const AWARDS_DATA = {
             title: "Service Through Esports",
             desc: "Awarded to organizations that used MLBB-related initiatives to create meaningful social impact, community service, or educational advocacy.",
             grant: "₱10,000",
-            receivables: ["Trophy", "Certificate", "Cash Support"],
+            receivables: ["Trophy", "Certificate", "Cash"],
             icon: <Shield size={24} />
         },
         {
@@ -133,19 +133,19 @@ const AWARDS_DATA = {
             title: "Esports Advocate of the Year",
             desc: "Given to a student leader who exemplifies passion, leadership, and dedication in advancing MLBB esports and its positive influence on students.",
             grant: "₱5,000",
-            receivables: ["Certificate", "Trophy", "Cash Support"]
+            receivables: ["Certificate", "Trophy", "Cash"]
         },
         {
             title: "Student Talent of the Year",
             desc: "Honors outstanding individual performance in areas such as shoutcasting, hosting, or other MLBB-related talents that uplifted the MSL community.",
             grant: "₱5,000",
-            receivables: ["Certificate", "Trophy", "Cash Support"]
+            receivables: ["Certificate", "Trophy", "Cash"]
         },
         {
             title: "Student Creator of the Year",
             desc: "Recognizes a student who demonstrated exceptional creativity and influence through MLBB-centered digital content or storytelling.",
             grant: "₱5,000",
-            receivables: ["Certificate", "Trophy", "Cash Support"]
+            receivables: ["Certificate", "Trophy", "Cash"]
         }
     ]
 };
@@ -230,7 +230,7 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
 
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                    <div className="flex items-center gap-3 mb-8">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-8">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-msl-gold text-black text-sm font-black uppercase shadow-[0_0_20px_rgba(242,194,26,0.4)] animate-pulse">
                             <Star size={16} fill="currentColor" /> MVP Spotlight
                         </div>
@@ -497,10 +497,10 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                         </div>
 
                                         {/* Requirements Summary */}
-                                        <div className="flex items-center gap-6 text-right">
+                                        <div className="flex flex-col items-end gap-6 text-right">
                                             <div className="hidden md:block">
                                                 <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Entry Gate</div>
-                                                <div className="text-xl font-bold text-white">{activeTier.reqs.turnouts}</div>
+                                                <div className="text-xl font-bold text-white">{activeTier.id === 'tier-ss' ? 'Waived' : activeTier.reqs.turnouts}</div>
                                             </div>
                                             <div className="w-16 h-16 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center text-gray-400">
                                                 {activeTier.isSpecial ? <Crown size={32} className="text-msl-gold animate-pulse" /> : <Target size={32} />}
@@ -527,11 +527,11 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                             <div className="grid grid-cols-3 gap-4 text-center">
                                                 <div>
                                                     <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">Members</p>
-                                                    <p className={`text-xl font-bold whitespace-nowrap ${activeTier.reqs.members === 'Waived' ? 'text-msl-gold' : 'text-white'}`}>{activeTier.reqs.members}</p>
+                                                    <p className={`font-black uppercase tracking-tight ${activeTier.id === 'tier-ss' ? 'text-msl-gold drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]' : 'text-white'} text-lg sm:text-2xl`}>{activeTier.reqs.members}</p>
                                                 </div>
                                                 <div className="border-x border-white/5">
                                                     <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">Active %</p>
-                                                    <p className={`text-xl font-bold whitespace-nowrap ${activeTier.reqs.participation === 'Waived' ? 'text-msl-gold' : 'text-white'}`}>{activeTier.reqs.participation}</p>
+                                                    <p className={`font-black uppercase tracking-tight ${activeTier.id === 'tier-ss' ? 'text-msl-gold drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]' : 'text-white'} text-lg sm:text-2xl`}>{activeTier.reqs.participation}</p>
                                                 </div>
                                                 <div>
                                                     <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">Team Turnout</p>
@@ -794,13 +794,13 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                     <div className="lg:col-span-6 order-2 lg:order-none h-full">
                                         <div className="p-8 rounded-2xl bg-black/40 border border-white/10 hover:border-blue-500/30 hover:bg-white/10 transition-all group h-full flex flex-col justify-between">
                                             <div>
-                                                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-2">
+                                                <div className="flex justify-between items-start gap-4 mb-2">
                                                     <div className="flex items-center gap-3">
                                                         <div className="p-2 rounded-lg bg-blue-900/20 text-blue-400 border border-blue-500/20 shrink-0">{commAward.icon}</div>
                                                         <h4 className="text-2xl font-black uppercase tracking-tight text-white group-hover:text-blue-400 transition-colors">{commAward.title}</h4>
                                                     </div>
                                                     {commAward.grant && (
-                                                        <span className="px-3 py-1 rounded-xl bg-blue-500/20 text-blue-400 text-xs font-bold border border-blue-500/30 whitespace-nowrap shadow-[0_0_10px_rgba(59,130,246,0.2)]">
+                                                        <span className="shrink-0 px-3 py-1 rounded-xl bg-blue-500/20 text-blue-400 text-xs font-bold border border-blue-500/30 whitespace-nowrap shadow-[0_0_10px_rgba(59,130,246,0.2)]">
                                                             {commAward.grant} Grant
                                                         </span>
                                                     )}
