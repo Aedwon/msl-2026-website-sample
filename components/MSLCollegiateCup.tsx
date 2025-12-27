@@ -157,15 +157,56 @@ const STANDINGS = [
     { rank: 4, team: 'Maroons', code: 'UP', w: 0, l: 3, pts: 0 },
 ];
 
-const TEAMS = [
-    'UST Teletigers', 'DLSU Viridis Arcus', 'ADMU LG Esports', 'UP Maroons',
-    'FEU Tams FX', 'UE Zenith', 'NU Bulldogs', 'AdU Falcons',
-    'SBU Red Lions', 'LPU Pirates', 'CSB Blazers', 'Mapua Cardinals'
+// --- TEAM DATA ---
+const TEAMS_DATA = [
+    { id: 'ust', name: 'UST Teletigers', code: 'UST', logo: '🐯', color: 'from-yellow-400 to-black', isFinalist: true, stats: { wins: 12, losses: 2, winRate: '86%', heroes: ['Fanny', 'Ling', 'Chou'], kda: '4.5' } },
+    { id: 'dlsu', name: 'DLSU Viridis Arcus', code: 'DLSU', logo: '🏹', color: 'from-green-600 to-black', isFinalist: true, stats: { wins: 11, losses: 3, winRate: '79%', heroes: ['Gusion', 'Franco', 'Beatrix'], kda: '4.2' } },
+    { id: 'admu', name: 'ADMU LG Esports', code: 'ADMU', logo: '🦅', color: 'from-blue-600 to-black', isFinalist: true, stats: { wins: 9, losses: 5, winRate: '64%', heroes: ['Lunox', 'Ruby', 'Pharsa'], kda: '3.8' } },
+    { id: 'up', name: 'UP Fighting Maroons', code: 'UP', logo: '✊', color: 'from-red-700 to-black', isFinalist: true, stats: { wins: 8, losses: 6, winRate: '57%', heroes: ['Benedetta', 'Lapu-Lapu', 'Yu Zhong'], kda: '3.5' } },
+    { id: 'feu', name: 'FEU Tams FX', code: 'FEU', logo: '🐃', color: 'from-yellow-600 to-green-800', isFinalist: true, stats: { wins: 8, losses: 6, winRate: '57%', heroes: ['Faramis', 'Gloo', 'Karrie'], kda: '3.4' } },
+    { id: 'nu', name: 'NU Bulldogs', code: 'NU', logo: 'bulldog', color: 'from-blue-800 to-yellow-500', isFinalist: true, stats: { wins: 7, losses: 7, winRate: '50%', heroes: ['Akai', 'Yve', 'Claude'], kda: '3.1' } },
+    { id: 'adu', name: 'AdU Falcons', code: 'AdU', logo: 'falcon', color: 'from-blue-900 to-white', isFinalist: true, stats: { wins: 6, losses: 8, winRate: '43%', heroes: ['Hayabusa', 'Kaja', 'Harith'], kda: '3.0' } },
+    { id: 'ue', name: 'UE Zenith', code: 'UE', logo: 'warrior', color: 'from-red-600 to-white', isFinalist: true, stats: { wins: 5, losses: 9, winRate: '36%', heroes: ['Fredrinn', 'Pharsa', 'Brody'], kda: '2.8' } },
+    // Non-finalists (for reference logic, but won't be displayed)
+    { id: 'sbu', name: 'SBU Red Lions', code: 'SBU', logo: 'lion', color: 'from-red-600 to-black', isFinalist: false, stats: { wins: 4, losses: 10, winRate: '29%', heroes: [], kda: '2.5' } },
+];
+
+const HERO_STATS = [
+    { rank: 1, hero: 'Yi Sun-shin', matches: 93, wins: 41, losses: 52, winRate: '44.09%', pickRate: '52.84%', blue: { matches: 45, w: 23, l: 22, wr: '51.11%' }, red: { matches: 48, w: 18, l: 30, wr: '37.50%' }, bans: 46, banRate: '26.14%' },
+    { rank: 2, hero: 'Gatotkaca', matches: 90, wins: 45, losses: 45, winRate: '50.00%', pickRate: '51.14%', blue: { matches: 42, w: 22, l: 20, wr: '52.38%' }, red: { matches: 48, w: 23, l: 25, wr: '47.92%' }, bans: 27, banRate: '15.34%' },
+    { rank: 3, hero: 'Lancelot', matches: 84, wins: 49, losses: 35, winRate: '58.33%', pickRate: '47.73%', blue: { matches: 53, w: 31, l: 22, wr: '58.49%' }, red: { matches: 31, w: 18, l: 13, wr: '58.06%' }, bans: 79, banRate: '44.89%' },
+    { rank: 4, hero: 'Lapu-Lapu', matches: 84, wins: 44, losses: 40, winRate: '52.38%', pickRate: '47.73%', blue: { matches: 40, w: 24, l: 16, wr: '60.00%' }, red: { matches: 44, w: 20, l: 24, wr: '45.45%' }, bans: 37, banRate: '21.02%' },
+    { rank: 5, hero: 'Harith', matches: 76, wins: 42, losses: 34, winRate: '55.26%', pickRate: '43.18%', blue: { matches: 32, w: 18, l: 14, wr: '56.25%' }, red: { matches: 44, w: 24, l: 20, wr: '54.55%' }, bans: 75, banRate: '42.61%' },
+    { rank: 6, hero: 'Kimmy', matches: 70, wins: 35, losses: 35, winRate: '50.00%', pickRate: '39.77%', blue: { matches: 36, w: 19, l: 17, wr: '52.78%' }, red: { matches: 34, w: 16, l: 18, wr: '47.06%' }, bans: 36, banRate: '20.45%' },
+    { rank: 7, hero: 'Granger', matches: 69, wins: 30, losses: 39, winRate: '43.48%', pickRate: '39.20%', blue: { matches: 41, w: 20, l: 21, wr: '48.78%' }, red: { matches: 28, w: 10, l: 18, wr: '35.71%' }, bans: 41, banRate: '23.30%' },
+    { rank: 8, hero: 'Zhuxin', matches: 61, wins: 31, losses: 30, winRate: '50.82%', pickRate: '34.66%', blue: { matches: 31, w: 17, l: 14, wr: '54.84%' }, red: { matches: 30, w: 14, l: 16, wr: '46.67%' }, bans: 107, banRate: '60.80%' },
+    { rank: 9, hero: 'Pharsa', matches: 57, wins: 36, losses: 21, winRate: '63.16%', pickRate: '32.39%', blue: { matches: 31, w: 23, l: 8, wr: '74.19%' }, red: { matches: 26, w: 13, l: 13, wr: '50.00%' }, bans: 44, banRate: '25.00%' },
+    { rank: 10, hero: 'Arlott', matches: 56, wins: 27, losses: 29, winRate: '48.21%', pickRate: '31.82%', blue: { matches: 33, w: 17, l: 16, wr: '51.52%' }, red: { matches: 23, w: 10, l: 13, wr: '43.48%' }, bans: 67, banRate: '38.07%' },
+];
+
+const PLAYER_STATS = [
+    { id: 1, name: 'Hatsune', teamId: 'ust', role: 'Gold Laner', kda: 6.4, gold: 850, dmg: 4500, heroes: ['Claude', 'Wanwan', 'Beatrix'] },
+    { id: 2, name: 'Sora', teamId: 'dlsu', role: 'Jungler', kda: 5.8, gold: 780, dmg: 4100, heroes: ['Fanny', 'Ling', 'Hayabusa'] },
+    { id: 3, name: 'Yuki', teamId: 'admu', role: 'Mid Laner', kda: 5.2, gold: 690, dmg: 5200, heroes: ['Pharsa', 'Yve', 'Valentina'] },
+    { id: 4, name: 'Riku', teamId: 'up', role: 'Roamer', kda: 4.9, gold: 450, dmg: 1200, heroes: ['Khufra', 'Atlas', 'Chou'] },
+    { id: 5, name: 'Kaito', teamId: 'feu', role: 'Exp Laner', kda: 4.1, gold: 620, dmg: 3800, heroes: ['Lapu-Lapu', 'Yu Zhong', 'Arlott'] },
+    { id: 6, name: 'Ren', teamId: 'nu', role: 'Jungler', kda: 3.9, gold: 750, dmg: 3900, heroes: ['Akai', 'Fredrinn', 'Baxia'] },
+    { id: 7, name: 'Haru', teamId: 'adu', role: 'Gold Laner', kda: 3.5, gold: 800, dmg: 4200, heroes: ['Brody', 'Clint', 'Lesley'] },
+    { id: 8, name: 'Makoto', teamId: 'ue', role: 'Mid Laner', kda: 3.2, gold: 670, dmg: 4800, heroes: ['Lylia', 'Cecilion', 'Xavier'] },
 ];
 
 const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
-    const [activeTab, setActiveTab] = useState<'overview' | 'bracket' | 'teams' | 'schedule'>('overview');
+    const [activeTab, setActiveTab] = useState<'overview' | 'stats' | 'vs' | 'bracket' | 'teams' | 'schedule'>('overview');
     const [activeInfoSection, setActiveInfoSection] = useState<'format' | 'schedule' | 'prizing' | 'rules'>('format');
+    const [statsTab, setStatsTab] = useState<'overall' | 'teams' | 'players'>('overall');
+    // Stats Hub Filters
+    const [overallSubTab, setOverallSubTab] = useState<'picks' | 'blue' | 'red' | 'bans'>('picks');
+    const [statsTeamFilter, setStatsTeamFilter] = useState<string>('all');
+    const [statsPlayerTeamFilter, setStatsPlayerTeamFilter] = useState<string>('all');
+    const [statsPlayerFilter, setStatsPlayerFilter] = useState<string>('all');
+
+    const [vsMode, setVsMode] = useState<'team' | 'player'>('team');
+    const [vsSelection, setVsSelection] = useState<{ left: string | null, right: string | null }>({ left: null, right: null });
     const [selectedStage, setSelectedStage] = useState(TOURNAMENT_STAGES[0]);
     const [activeMonth, setActiveMonth] = useState(0);
     const [selectedDate, setSelectedDate] = useState<{ month: number, day: number } | null>(null);
@@ -274,6 +315,26 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                         </div>
                     </div>
 
+                    {/* MAIN NAVIGATION TABS (Moved here for better UX) */}
+                    <nav className="flex justify-between w-full md:w-auto md:gap-12 ml-auto md:ml-0 md:mr-auto">
+                        {[
+                            { id: 'overview', label: 'Overview' },
+                            { id: 'stats', label: 'Stats Hub' },
+                            { id: 'vs', label: 'VS Mode' },
+                            { id: 'teams', label: 'Teams' },
+                        ].map(tab => (
+                            <button
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id as any)}
+                                className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all
+                                    ${activeTab === tab.id ? 'bg-white text-black' : 'text-gray-400 hover:text-white hover:bg-white/5'}
+                                `}
+                            >
+                                {tab.label}
+                            </button>
+                        ))}
+                    </nav>
+
                     <div className="flex gap-3">
                         {/* MATCH CARDS */}
                         {UPCOMING_MATCHES.map((match) => (
@@ -309,500 +370,826 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                 </div>
             </section>
 
-            {/* --- THE TOURNAMENT BRAIN (Robust Toggles) --- */}
-            <section className="py-24 px-4 sm:px-6 lg:px-8 bg-msl-black relative">
-                <div className="max-w-7xl mx-auto">
-
-                    {/* Section Header */}
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Tournament Info</h2>
-                        <div className="w-24 h-1 bg-msl-gold mx-auto rounded-full"></div>
-                    </div>
-
-                    {/* TOGGLE NAVIGATION (Segmented Control) */}
-                    <div className="flex flex-wrap justify-center gap-2 mb-12 bg-white/5 p-2 rounded-2xl max-w-3xl mx-auto backdrop-blur-sm border border-white/5">
-                        {[
-                            { id: 'format', icon: Award, label: 'Format' },
-                            { id: 'schedule', icon: Calendar, label: 'Schedule' },
-                            { id: 'prizing', icon: Trophy, label: 'Prize Pool' },
-                            { id: 'rules', icon: FileText, label: 'Rules' },
-                        ].map((item) => (
-                            <button
-                                key={item.id}
-                                onClick={() => setActiveInfoSection(item.id as any)}
-                                className={`flex-1 min-w-[120px] py-3 px-4 rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2
-                                    ${activeInfoSection === item.id
-                                        ? 'bg-msl-gold text-black shadow-lg'
-                                        : 'text-gray-400 hover:text-white hover:bg-white/5'}
-                                `}
-                            >
-                                <item.icon size={16} /> {item.label}
-                            </button>
-                        ))}
-                    </div>
-
-                    {/* CONTENT AREA */}
-                    <div className="min-h-[400px]">
-
-                        {/* FORMAT VIEW (ENHANCED VISUAL FUNNEL) */}
-                        {activeInfoSection === 'format' && (
-                            <div className="animate-fade-in flex flex-col lg:flex-row gap-8">
-
-                                {/* THE FUNNEL (Visual Selection) */}
-                                <div className="lg:w-1/2 flex flex-col items-center gap-4 py-8">
-
-                                    {/* Layer 1: The Qualifiers (THE FORGE - Gritty/Industrial) */}
-                                    <div className="w-full relative group">
-                                        <div className="absolute -inset-2 bg-gradient-to-b from-gray-700 to-transparent opacity-20 blur-xl rounded-full"></div>
-                                        <div className="grid grid-cols-2 gap-3 relative z-10">
-                                            {TOURNAMENT_STAGES.slice(0, 4).map((stage) => (
-                                                <button
-                                                    key={stage.id}
-                                                    onClick={() => setSelectedStage(stage)}
-                                                    className={`p-4 rounded-lg border-2 relative overflow-hidden transition-all text-left h-28 flex flex-col justify-end
-                                                        ${selectedStage.id === stage.id
-                                                            ? 'bg-[#2a2a2a] border-gray-400 text-white shadow-[0_0_30px_rgba(0,0,0,0.8)] scale-[1.03] z-20'
-                                                            : 'bg-[#151515] border-[#333] text-gray-500 hover:border-gray-500 hover:text-gray-300 hover:bg-[#1a1a1a]'}
-                                                    `}
-                                                >
-                                                    {/* Industrial Texture */}
-                                                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-30 mix-blend-overlay"></div>
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-
-                                                    {selectedStage.id === stage.id && (
-                                                        <div className="absolute top-0 right-0 p-2 opacity-50"><Svgs.Gear size={24} className="animate-spin-slow text-gray-400" /></div>
-                                                    )}
-
-
-                                                    <div className="relative z-10">
-                                                        <div className="text-[9px] font-black uppercase tracking-[0.2em] mb-1 opacity-60 text-gray-400">{stage.subtitle}</div>
-                                                        <div className="font-black text-sm md:text-base leading-tight uppercase font-mono">{stage.title}</div>
-                                                    </div>
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Connector: Forged Pipe */}
-                                    <div className="h-12 w-2 bg-gradient-to-b from-gray-800 via-gray-600 to-gray-800 rounded-full border-x border-[#333] relative">
-                                        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-50"></div>
-                                    </div>
-
-                                    {/* Layer 2: Group Stage (THE MATRIX - Cyber/Holo) */}
-                                    <div className="w-4/5 relative group">
-                                        {/* Holographic Glow */}
-                                        <div className="absolute -inset-4 bg-blue-500/20 blur-2xl rounded-full animate-pulse-slow"></div>
-
-                                        {TOURNAMENT_STAGES.slice(4, 5).map((stage) => (
-                                            <button
-                                                key={stage.id}
-                                                onClick={() => setSelectedStage(stage)}
-                                                className={`w-full p-1 rounded-xl relative overflow-hidden transition-all group-hover:scale-[1.01]
-                                                    ${selectedStage.id === stage.id ? 'scale-[1.05]' : ''}
-                                                `}
-                                            >
-                                                <div className={`absolute inset-0 bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-600 animate-border-flow ${selectedStage.id === stage.id ? 'opacity-100' : 'opacity-30'}`}></div>
-                                                <div className="bg-[#050a14] relative rounded-lg p-6 flex flex-col items-center justify-center h-40 border border-blue-500/30 overflow-hidden">
-
-                                                    {/* Tech Grid Background */}
-                                                    <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-[#050a14] via-transparent to-[#050a14]"></div>
-
-                                                    {/* Scanning Line */}
-                                                    {selectedStage.id === stage.id && (
-                                                        <div className="absolute w-full h-1 bg-cyan-400/50 blur-sm top-0 animate-scan"></div>
-                                                    )}
-
-                                                    <div className="relative z-10 text-center">
-                                                        <div className={`text-[10px] font-bold uppercase tracking-[0.3em] mb-2 ${selectedStage.id === stage.id ? 'text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]' : 'text-blue-900'}`}>{stage.subtitle}</div>
-                                                        <div className={`font-black text-2xl md:text-3xl uppercase tracking-tighter ${selectedStage.id === stage.id ? 'text-white' : 'text-gray-600'}`}>{stage.title}</div>
-                                                        <div className="mt-3 flex gap-1 justify-center">
-                                                            {[...Array(4)].map((_, i) => <div key={i} className={`w-1.5 h-1.5 rounded-sm ${selectedStage.id === stage.id ? 'bg-cyan-500 animate-ping' : 'bg-blue-900'}`} style={{ animationDelay: `${i * 100}ms` }}></div>)}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </button>
-                                        ))}
-                                    </div>
-
-                                    {/* Connector: Energy Beam */}
-                                    <div className="h-12 w-1 bg-gradient-to-b from-blue-500 to-msl-gold shadow-[0_0_15px_rgba(59,130,246,0.6)]"></div>
-
-                                    {/* Layer 3: Championship (THE THRONE - Legendary/Gold) */}
-                                    <div className="w-3/5 relative group">
-                                        <div className="absolute -inset-10 bg-msl-gold/10 blur-3xl rounded-full"></div>
-
-                                        {TOURNAMENT_STAGES.slice(5, 6).map((stage) => (
-                                            <button
-                                                key={stage.id}
-                                                onClick={() => setSelectedStage(stage)}
-                                                className={`w-full p-0.5 rounded-2xl relative overflow-hidden transition-all
-                                                    ${selectedStage.id === stage.id ? 'scale-[1.1] z-30 shadow-[0_0_50px_rgba(234,179,8,0.4)]' : 'hover:scale-105'}
-                                                `}
-                                            >
-                                                {/* Gold Border Gradient */}
-                                                <div className="absolute inset-0 bg-gradient-to-tr from-[#8B6F20] via-[#FDE047] to-[#8B6F20] animate-shine"></div>
-
-                                                <div className="bg-gradient-to-b from-[#1a1200] to-black rounded-[14px] p-6 h-48 flex flex-col items-center justify-center relative overflow-hidden">
-
-                                                    {/* Gold Dust Particles (Simulated) */}
-                                                    <div className="absolute inset-0 opacity-30 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
-
-                                                    {/* Radial Burst */}
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-msl-gold/20 via-transparent to-transparent opacity-50"></div>
-
-                                                    <Trophy size={40} className={`mb-3 ${selectedStage.id === stage.id ? 'text-msl-gold drop-shadow-[0_0_15px_rgba(234,179,8,0.8)] animate-bounce-subtle' : 'text-yellow-900'}`} />
-
-                                                    <div className={`font-black text-xl md:text-3xl uppercase tracking-widest leading-none text-center ${selectedStage.id === stage.id ? 'text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 via-msl-gold to-yellow-800' : 'text-yellow-900'}`}>
-                                                        {stage.title}
-                                                    </div>
-                                                </div>
-                                            </button>
-                                        ))}
-                                    </div>
-
-                                </div>
-
-                                {/* DETAILS PANEL (Adaptive Theme) */}
-                                <div className="lg:w-1/2 flex items-center">
-                                    <div className={`w-full border rounded-3xl p-8 relative overflow-hidden transition-all duration-500
-                                        ${selectedStage.id.includes('stage-6')
-                                            ? 'bg-gradient-to-br from-[#1a1200] to-black border-msl-gold/30 shadow-[0_0_30px_rgba(234,179,8,0.1)]'
-                                            : selectedStage.id.includes('stage-5')
-                                                ? 'bg-[#050a14] border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.1)]'
-                                                : 'bg-[#121212] border-white/10'
-                                        }
-                                    `}>
-                                        {/* Dynamic Backgrounds */}
-                                        {selectedStage.id.includes('stage-6') && <div className="absolute -top-20 -right-20 w-80 h-80 bg-msl-gold/20 blur-[100px] rounded-full pointer-events-none"></div>}
-                                        {selectedStage.id.includes('stage-5') && <div className="absolute -top-20 -right-20 w-80 h-80 bg-blue-600/20 blur-[100px] rounded-full pointer-events-none"></div>}
-
-                                        <div className="relative z-10">
-                                            <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
-                                                <div>
-                                                    <div className={`text-xs font-bold uppercase tracking-widest mb-2 ${selectedStage.id.includes('stage-5') ? 'text-cyan-400' : 'text-gray-500'}`}>{selectedStage.date}</div>
-                                                    <h3 className="text-4xl md:text-5xl font-black text-white uppercase leading-[0.9]">{selectedStage.title}</h3>
-                                                </div>
-                                                <div className={`p-4 rounded-2xl border bg-white/5
-                                                    ${selectedStage.id.includes('stage-6') ? 'text-msl-gold border-msl-gold/30 shadow-[0_0_15px_rgba(234,179,8,0.2)]'
-                                                        : selectedStage.id.includes('stage-5') ? 'text-cyan-400 border-cyan-500/30 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
-                                                            : 'text-gray-400 border-white/5'}
-                                                 `}>
-                                                    {selectedStage.id.includes('stage-6') ? <Trophy size={32} /> : <Swords size={32} />}
-                                                </div>
-                                            </div>
-
-                                            <div className="grid grid-cols-2 gap-8 mb-8">
-                                                <div>
-                                                    <div className="text-[10px] uppercase font-bold text-gray-600 mb-1">Format</div>
-                                                    <div className="text-white font-bold text-lg">{selectedStage.format}</div>
-                                                </div>
-                                                <div>
-                                                    <div className="text-[10px] uppercase font-bold text-gray-600 mb-1">Prize</div>
-                                                    <div className={`text-lg font-black ${selectedStage.id.includes('stage-6') ? 'text-msl-gold' : 'text-white'}`}>{selectedStage.prize}</div>
-                                                </div>
-                                                <div className="col-span-2">
-                                                    <div className="text-[10px] uppercase font-bold text-gray-600 mb-2">Description</div>
-                                                    <p className="text-gray-300 text-base leading-relaxed">{selectedStage.desc}</p>
-                                                </div>
-                                            </div>
-
-                                            <div className={`p-4 rounded-xl border flex items-center gap-4
-                                                ${selectedStage.id.includes('stage-6') ? 'bg-msl-gold/10 border-msl-gold/30'
-                                                    : selectedStage.id.includes('stage-5') ? 'bg-blue-900/20 border-blue-500/30'
-                                                        : 'bg-white/5 border-white/5'}
-                                            `}>
-                                                <div className="shrink-0 p-2 bg-white/5 rounded-lg"><Target size={16} className="text-white" /></div>
-                                                <div>
-                                                    <div className="text-[10px] uppercase font-bold text-gray-500 mb-0.5">Progression</div>
-                                                    <div className={`font-bold text-sm ${selectedStage.id.includes('stage-6') ? 'text-msl-gold' : 'text-white'}`}>
-                                                        {selectedStage.progression}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+            {/* --- STATS HUB (DEEP DIVE) --- */}
+            {activeTab === 'stats' && (
+                <section className="py-24 px-4 bg-msl-black min-h-screen">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter">Tournament Data</h2>
+                            <div className="inline-flex bg-white/5 rounded-full p-1 border border-white/10">
+                                {['overall', 'teams', 'players'].map(t => (
+                                    <button
+                                        key={t}
+                                        onClick={() => setStatsTab(t as any)}
+                                        className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${statsTab === t ? 'bg-white text-black shadow-lg shadow-white/10' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
+                                    >
+                                        {t}
+                                    </button>
+                                ))}
                             </div>
-                        )}
+                        </div>
 
-                        {/* SCHEDULE VIEW (CALENDAR) */}
-                        {activeInfoSection === 'schedule' && (
-                            <div className="animate-fade-in">
-                                {/* Month Selector */}
-                                <div className="flex overflow-x-auto gap-2 mb-8 pb-2 scrollbar-hide">
-                                    {CALENDAR_MONTHS.map((month) => (
+                        {/* OVERALL STATS */}
+                        {statsTab === 'overall' && (
+                            <div className="animate-fade-in space-y-6">
+                                {/* Sub Toggles */}
+                                <div className="flex justify-center gap-4 mb-8">
+                                    {['picks', 'blue', 'red', 'bans'].map(t => (
                                         <button
-                                            key={month.id}
-                                            onClick={() => { setActiveMonth(month.id); setSelectedDate(null); }}
-                                            className={`px-6 py-3 rounded-xl border whitespace-nowrap text-sm font-bold uppercase tracking-wider transition-all
-                                                ${activeMonth === month.id
-                                                    ? 'bg-white text-black border-white shadow-lg scale-105'
-                                                    : 'bg-[#121212] border-white/10 text-gray-500 hover:text-gray-300 hover:border-white/30'}
-                                            `}
+                                            key={t}
+                                            onClick={() => setOverallSubTab(t as any)}
+                                            className={`text-xs font-bold uppercase tracking-widest py-1 border-b-2 transition-all ${overallSubTab === t ? 'text-msl-gold border-msl-gold' : 'text-gray-600 border-transparent hover:text-white'}`}
                                         >
-                                            {month.name} <span className="opacity-40 ml-1">2026</span>
+                                            {t === 'blue' ? 'Blue Side' : t === 'red' ? 'Red Side' : t}
                                         </button>
                                     ))}
                                 </div>
 
-                                <div className="grid lg:grid-cols-3 gap-8">
-                                    {/* CALENDAR GRID */}
-                                    <div className="lg:col-span-2">
-                                        <div className="bg-[#121212] border border-white/10 rounded-3xl p-6 md:p-8">
-                                            {/* Days Header */}
-                                            <div className="grid grid-cols-7 mb-4">
-                                                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-                                                    <div key={d} className="text-center text-[10px] uppercase font-bold text-gray-600 tracking-widest">{d}</div>
-                                                ))}
-                                            </div>
-
-                                            {/* Days Grid */}
-                                            <div className="grid grid-cols-7 gap-2 md:gap-4">
-                                                {/* Empty Padding Days */}
-                                                {[...Array(CALENDAR_MONTHS[activeMonth].startDay)].map((_, i) => (
-                                                    <div key={`empty-${i}`} className="aspect-square"></div>
-                                                ))}
-
-                                                {/* Actual Days */}
-                                                {[...Array(CALENDAR_MONTHS[activeMonth].days)].map((_, i) => {
-                                                    const day = i + 1;
-                                                    const currentMonth = CALENDAR_MONTHS[activeMonth];
-
-                                                    // Check for events/stages covering this day
-                                                    const activeStage = currentMonth.stages.find(s => day >= s.start && day <= s.end);
-                                                    // Check for matches
-                                                    const hasMatches = CALENDAR_MATCHES[`${activeMonth}-${day}`];
-
-                                                    return (
-                                                        <button
-                                                            key={day}
-                                                            onClick={() => setSelectedDate({ month: activeMonth, day })}
-                                                            className={`aspect-square rounded-xl border relative group transition-all flex flex-col items-center justify-start pt-2
-                                                                ${selectedDate?.day === day && selectedDate?.month === activeMonth
-                                                                    ? 'bg-white/10 border-white text-white z-10 scale-110 shadow-xl'
-                                                                    : hasMatches
-                                                                        ? 'bg-[#1a1a1a] border-white/20 text-gray-300 hover:border-white/50 hover:bg-[#252525]'
-                                                                        : 'bg-[#0a0a0a] border-white/5 text-gray-600 hover:border-white/10'}
-                                                            `}
-                                                        >
-                                                            <div className="text-sm font-bold">{day}</div>
-
-                                                            {/* Stage Indicator Bar */}
-                                                            {activeStage && (
-                                                                <div className={`absolute bottom-2 left-1 right-1 h-1.5 rounded-full ${activeStage.color}`}></div>
-                                                            )}
-
-                                                            {/* Match Dot */}
-                                                            {hasMatches && !activeStage && (
-                                                                <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 animate-pulse"></div>
-                                                            )}
-                                                        </button>
-                                                    );
-                                                })}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* DAY DETAILS / LEGEND */}
-                                    <div className="lg:col-span-1">
-                                        <div className="bg-[#121212] border border-white/10 rounded-3xl p-6 h-full flex flex-col">
-
-                                            {selectedDate ? (
-                                                <div className="animate-fade-in">
-                                                    <div className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1">
-                                                        {CALENDAR_MONTHS[selectedDate.month].name} {selectedDate.day}, 2026
-                                                    </div>
-                                                    <h3 className="text-2xl font-black text-white uppercase mb-6">Events</h3>
-
-                                                    {CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end) && (
-                                                        <div className={`p-4 rounded-xl mb-4 ${CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end)?.color}`}>
-                                                            <div className={`font-black uppercase text-sm ${CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end)?.textColor}`}>
-                                                                {CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end)?.name}
-                                                            </div>
-                                                        </div>
-                                                    )}
-
-                                                    {CALENDAR_MATCHES[`${selectedDate.month}-${selectedDate.day}`] ? (
-                                                        <div className="space-y-3">
-                                                            {CALENDAR_MATCHES[`${selectedDate.month}-${selectedDate.day}`].map((match, idx) => (
-                                                                <div key={idx} className="bg-black/40 border border-white/10 p-3 rounded-lg">
-                                                                    <div className="flex justify-between items-center mb-1">
-                                                                        <div className="text-xs font-bold text-gray-400">{match.time}</div>
-                                                                        {match.label && <div className="text-[9px] font-bold bg-msl-gold text-black px-1.5 py-0.5 rounded">{match.label}</div>}
-                                                                    </div>
-                                                                    <div className="font-bold text-white text-sm">
-                                                                        {match.team1} <span className="text-gray-600 px-1">vs</span> {match.team2}
-                                                                    </div>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                    ) : (
-                                                        !CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end) && (
-                                                            <div className="text-gray-500 italic text-sm">No matches scheduled.</div>
-                                                        )
-                                                    )}
-                                                </div>
-                                            ) : (
-                                                <div className="flex flex-col h-full justify-center text-center opacity-40">
-                                                    <Calendar size={48} className="mx-auto mb-4 text-gray-600" />
-                                                    <p className="text-sm text-gray-400 font-bold uppercase tracking-wider">Select a date to view details</p>
-                                                </div>
-                                            )}
-
-                                            {/* Legend at bottom */}
-                                            <div className="mt-auto pt-8 border-t border-white/5">
-                                                <div className="text-[10px] font-bold uppercase tracking-widest text-gray-600 mb-3">Legend</div>
-                                                <div className="space-y-2">
-                                                    <div className="flex items-center gap-2">
-                                                        <div className="w-3 h-3 rounded-full bg-gray-600"></div><span className="text-xs text-gray-400">Qualifiers</span>
-                                                    </div>
-                                                    <div className="flex items-center gap-2">
-                                                        <div className="w-3 h-3 rounded-full bg-blue-600"></div><span className="text-xs text-gray-400">Group Stage</span>
-                                                    </div>
-                                                    <div className="flex items-center gap-2">
-                                                        <div className="w-3 h-3 rounded-full bg-msl-gold"></div><span className="text-xs text-gray-400">Championships</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                {/* Deep Stats Table */}
+                                <div className="bg-[#121212] border border-white/10 rounded-3xl overflow-hidden overflow-x-auto">
+                                    <table className="w-full text-left text-sm whitespace-nowrap">
+                                        <thead>
+                                            <tr className="bg-white/[0.03] text-[10px] uppercase font-bold text-gray-500 tracking-wider">
+                                                <th className="p-4 pl-6">#</th>
+                                                <th className="p-4">Hero</th>
+                                                <th className="p-4 text-center">Matches</th>
+                                                <th className="p-4 text-center">Win Rate</th>
+                                                <th className="p-4 text-center">Pick Rate</th>
+                                                <th className="p-4 text-center border-l border-white/5 text-blue-400">Blue WR</th>
+                                                <th className="p-4 text-center border-r border-white/5 text-red-400">Red WR</th>
+                                                <th className="p-4 text-center">Ban Rate</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-white/5">
+                                            {HERO_STATS.map((stat, idx) => (
+                                                <tr key={stat.hero} className="hover:bg-white/[0.02] transition-colors">
+                                                    <td className="p-4 pl-6 font-mono text-gray-600">{(idx + 1).toString().padStart(2, '0')}</td>
+                                                    <td className="p-4 font-bold text-white text-base">{stat.hero}</td>
+                                                    <td className="p-4 text-center font-mono text-white">{stat.matches}</td>
+                                                    <td className="p-4 text-center font-black text-msl-gold">{stat.winRate}</td>
+                                                    <td className="p-4 text-center font-mono text-gray-400">{stat.pickRate}</td>
+                                                    <td className="p-4 text-center border-l border-white/5 font-mono text-blue-400">{stat.blue.wr}</td>
+                                                    <td className="p-4 text-center border-r border-white/5 font-mono text-red-400">{stat.red.wr}</td>
+                                                    <td className="p-4 text-center font-mono text-gray-500">{stat.banRate}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         )}
 
-                        {/* PRIZE POOL VIEW */}
-                        {activeInfoSection === 'prizing' && (
-                            <div className="animate-fade-in max-w-4xl mx-auto">
-                                <div className="bg-gradient-to-br from-yellow-900/20 to-black border border-msl-gold/30 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden mb-8">
-                                    <div className="absolute top-0 right-0 p-8 opacity-10"><Trophy size={120} /></div>
-                                    <h3 className="text-gray-400 font-bold uppercase tracking-widest text-sm mb-2">Total Prize Pool</h3>
-                                    <div className="text-6xl md:text-8xl font-black text-msl-gold mb-8 drop-shadow-md">₱1,000,000</div>
+                        {/* TEAM STATS */}
+                        {statsTab === 'teams' && (
+                            <div className="animate-fade-in space-y-8">
+                                <div className="flex flex-wrap items-center justify-center gap-4">
+                                    <button
+                                        onClick={() => setStatsTeamFilter('all')}
+                                        className={`px-4 py-2 rounded-lg border text-xs font-bold uppercase transition-all ${statsTeamFilter === 'all' ? 'bg-white text-black border-white' : 'bg-transparent text-gray-500 border-white/10 hover:border-white/30'}`}
+                                    >
+                                        All Teams
+                                    </button>
+                                    {TEAMS_DATA.filter(t => t.isFinalist).map(team => (
+                                        <button
+                                            key={team.id}
+                                            onClick={() => setStatsTeamFilter(team.id)}
+                                            className={`px-4 py-2 rounded-lg border text-xs font-bold uppercase transition-all flex items-center gap-2 ${statsTeamFilter === team.id ? 'bg-white text-black border-white' : 'bg-transparent text-gray-500 border-white/10 hover:border-white/30'}`}
+                                        >
+                                            <span>{team.logo}</span> {team.code}
+                                        </button>
+                                    ))}
+                                </div>
 
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
-                                        {[
-                                            { place: 'Champion', prize: '₱500,000', color: 'text-msl-gold' },
-                                            { place: '2nd Place', prize: '₱250,000', color: 'text-gray-300' },
-                                            { place: '3rd Place', prize: '₱100,000', color: 'text-orange-700' },
-                                            { place: '4th Place', prize: '₱50,000', color: 'text-gray-500' },
-                                        ].map((item, idx) => (
-                                            <div key={idx} className="bg-black/40 p-4 rounded-xl border border-white/5">
-                                                <div className="text-[10px] uppercase font-bold text-gray-500 mb-1">{item.place}</div>
-                                                <div className={`text-xl md:text-2xl font-black ${item.color}`}>{item.prize}</div>
+                                {statsTeamFilter === 'all' ? (
+                                    <div className="bg-[#121212] border border-white/10 rounded-3xl overflow-hidden overflow-x-auto">
+                                        <table className="w-full text-left border-collapse">
+                                            <thead>
+                                                <tr className="border-b border-white/5 text-[10px] uppercase tracking-widest text-gray-500 bg-white/[0.02]">
+                                                    <th className="p-4 font-bold pl-8">Team</th>
+                                                    <th className="p-4 font-bold text-center">Win Rate</th>
+                                                    <th className="p-4 font-bold text-center">KDA</th>
+                                                    <th className="p-4 font-bold text-center">Wins</th>
+                                                    <th className="p-4 font-bold text-center">Losses</th>
+                                                    <th className="p-4 font-bold text-left pl-8">Signature Picks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {TEAMS_DATA.slice(0, 8).sort((a, b) => parseFloat(b.stats.winRate) - parseFloat(a.stats.winRate)).map((team) => (
+                                                    <tr key={team.id} className="border-b border-white/5 hover:bg-white/[0.02]">
+                                                        <td className="p-4 pl-8 flex items-center gap-3">
+                                                            <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${team.color} flex items-center justify-center text-lg shadow-lg`}>
+                                                                {team.logo}
+                                                            </div>
+                                                            <div>
+                                                                <div className="font-bold text-white text-sm">{team.name}</div>
+                                                                <div className="text-[9px] font-bold text-gray-500">{team.code}</div>
+                                                            </div>
+                                                        </td>
+                                                        <td className="p-4 text-center font-black text-msl-gold text-lg">{team.stats.winRate}</td>
+                                                        <td className="p-4 text-center font-mono text-gray-400">{team.stats.kda}</td>
+                                                        <td className="p-4 text-center font-bold text-green-400">{team.stats.wins}</td>
+                                                        <td className="p-4 text-center font-bold text-red-400">{team.stats.losses}</td>
+                                                        <td className="p-4 pl-8">
+                                                            <div className="flex gap-1.5">
+                                                                {team.stats.heroes.map(h => (
+                                                                    <span key={h} className="px-2 py-0.5 bg-white/5 rounded text-[9px] uppercase font-bold text-gray-400 border border-white/5">{h}</span>
+                                                                ))}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                ) : (
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        {/* Team Specific Dashboard Mockup */}
+                                        <div className="md:col-span-1 bg-[#121212] border border-white/10 rounded-3xl p-8 flex flex-col items-center justify-center text-center">
+                                            {(() => {
+                                                const t = TEAMS_DATA.find(x => x.id === statsTeamFilter);
+                                                return t ? (
+                                                    <>
+                                                        <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${t.color} flex items-center justify-center text-6xl shadow-2xl mb-6`}>
+                                                            {t.logo}
+                                                        </div>
+                                                        <h3 className="text-3xl font-black text-white uppercase leading-none">{t.name}</h3>
+                                                        <div className="text-xl font-bold text-gray-500 mb-8">{t.code}</div>
+                                                        <div className="grid grid-cols-2 gap-4 w-full">
+                                                            <div className="p-4 bg-white/5 rounded-xl">
+                                                                <div className="text-2xl font-black text-green-400">{t.stats.wins}</div>
+                                                                <div className="text-[9px] uppercase font-bold text-gray-500">Wins</div>
+                                                            </div>
+                                                            <div className="p-4 bg-white/5 rounded-xl">
+                                                                <div className="text-2xl font-black text-red-500">{t.stats.losses}</div>
+                                                                <div className="text-[9px] uppercase font-bold text-gray-500">Losses</div>
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                ) : null;
+                                            })()}
+                                        </div>
+                                        <div className="md:col-span-2 bg-[#121212] border border-white/10 rounded-3xl p-8">
+                                            <h4 className="text-lg font-bold text-white uppercase mb-6 flex items-center gap-2"><Trophy size={18} className="text-msl-gold" /> Performance Metrics</h4>
+                                            <div className="space-y-4">
+                                                {/* Mock Metrics */}
+                                                <div>
+                                                    <div className="flex justify-between text-xs font-bold uppercase text-gray-500 mb-2"><span>Team Fight Participation</span> <span className="text-white">78%</span></div>
+                                                    <div className="h-2 bg-white/5 rounded-full overflow-hidden"><div className="h-full w-[78%] bg-blue-500"></div></div>
+                                                </div>
+                                                <div>
+                                                    <div className="flex justify-between text-xs font-bold uppercase text-gray-500 mb-2"><span>Major Objective Control</span> <span className="text-white">65%</span></div>
+                                                    <div className="h-2 bg-white/5 rounded-full overflow-hidden"><div className="h-full w-[65%] bg-purple-500"></div></div>
+                                                </div>
+                                                <div>
+                                                    <div className="flex justify-between text-xs font-bold uppercase text-gray-500 mb-2"><span>First Blood Rate</span> <span className="text-white">45%</span></div>
+                                                    <div className="h-2 bg-white/5 rounded-full overflow-hidden"><div className="h-full w-[45%] bg-red-500"></div></div>
+                                                </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {/* PLAYER STATS */}
+                        {statsTab === 'players' && (
+                            <div className="animate-fade-in space-y-8">
+                                <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+                                    <select
+                                        className="bg-[#121212] border border-white/10 rounded-lg px-4 py-2 text-sm font-bold text-white focus:outline-none focus:border-msl-gold uppercase"
+                                        value={statsPlayerTeamFilter}
+                                        onChange={(e) => setStatsPlayerTeamFilter(e.target.value)}
+                                    >
+                                        <option value="all">All Teams</option>
+                                        {TEAMS_DATA.filter(t => t.isFinalist).map(t => <option key={t.id} value={t.id}>{t.code}</option>)}
+                                    </select>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                    {(statsPlayerTeamFilter === 'all' ? PLAYER_STATS : PLAYER_STATS.filter(p => p.teamId === statsPlayerTeamFilter)).map(player => (
+                                        <div key={player.id} className="bg-[#121212] border border-white/10 rounded-2xl p-6 hover:border-msl-gold/50 transition-colors group cursor-pointer">
+                                            <div className="flex items-center gap-4 mb-4">
+                                                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-xl">👤</div>
+                                                <div>
+                                                    <div className="font-black text-white text-lg leading-none group-hover:text-msl-gold transition-colors">{player.name}</div>
+                                                    <div className="text-[10px] uppercase font-bold text-gray-500">{player.role}</div>
+                                                </div>
+                                            </div>
+                                            <div className="grid grid-cols-3 gap-2 mb-4">
+                                                <div className="text-center p-2 bg-white/5 rounded-lg">
+                                                    <div className="text-xs font-black text-white">{player.kda}</div>
+                                                    <div className="text-[8px] uppercase font-bold text-gray-600">KDA</div>
+                                                </div>
+                                                <div className="text-center p-2 bg-white/5 rounded-lg">
+                                                    <div className="text-xs font-black text-msl-gold">{player.gold}</div>
+                                                    <div className="text-[8px] uppercase font-bold text-gray-600">GPM</div>
+                                                </div>
+                                                <div className="text-center p-2 bg-white/5 rounded-lg">
+                                                    <div className="text-xs font-black text-red-500">{player.dmg}</div>
+                                                    <div className="text-[8px] uppercase font-bold text-gray-600">DPM</div>
+                                                </div>
+                                            </div>
+                                            <div className="flex gap-1 justify-center">
+                                                {player.heroes.map(h => (
+                                                    <span key={h} className="text-[9px] px-1.5 py-0.5 bg-white/5 rounded text-gray-500">{h}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div >
+                </section >
+            )}
+
+            {/* --- VS MODE --- */}
+            {
+                activeTab === 'vs' && (
+                    <section className="py-24 px-4 bg-msl-black min-h-screen">
+                        <div className="max-w-6xl mx-auto">
+                            <div className="text-center mb-16">
+                                <h2 className="text-5xl font-black text-white mb-4 uppercase">VS Mode</h2>
+                                <p className="text-gray-400">Compare Teams, Players, and Heroes head-to-head.</p>
+
+                                <div className="inline-flex bg-white/5 p-1 rounded-xl mt-8">
+                                    <button onClick={() => setVsMode('team')} className={`px-6 py-2 rounded-lg text-sm font-bold uppercase transition-all ${vsMode === 'team' ? 'bg-msl-gold text-black' : 'text-gray-400 hover:text-white'}`}>Teams</button>
+                                    <button onClick={() => setVsMode('player')} className={`px-6 py-2 rounded-lg text-sm font-bold uppercase transition-all ${vsMode === 'player' ? 'bg-msl-gold text-black' : 'text-gray-400 hover:text-white'}`}>Players</button>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                                {/* LEFT SELECTION */}
+                                <div className="bg-[#121212] border border-white/10 rounded-3xl p-6 min-h-[400px]">
+                                    <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Select Team A</h3>
+                                    <div className="space-y-2">
+                                        {TEAMS_DATA.slice(0, 4).map(team => (
+                                            <button
+                                                key={team.id}
+                                                onClick={() => setVsSelection(prev => ({ ...prev, left: team.id }))}
+                                                className={`w-full p-4 rounded-xl border flex items-center gap-3 transition-all ${vsSelection.left === team.id ? 'bg-white/10 border-msl-gold text-white' : 'bg-black/20 border-white/5 text-gray-500 hover:bg-white/5'}`}
+                                            >
+                                                <span className="text-xl">{team.logo}</span>
+                                                <span className="font-bold">{team.code}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* CENTER STATS COMPARISON */}
+                                <div className="flex flex-col items-center gap-4">
+                                    <div className="w-16 h-16 rounded-full bg-msl-gold flex items-center justify-center font-black text-black text-xl shadow-[0_0_30px_rgba(234,179,8,0.5)] z-10">VS</div>
+                                    {vsSelection.left && vsSelection.right && (
+                                        <div className="w-full space-y-4 animate-fade-in-up">
+                                            <div className="bg-[#121212] border border-white/10 p-4 rounded-xl text-center">
+                                                <div className="text-[10px] uppercase font-bold text-gray-500">Win Rate</div>
+                                                <div className="flex justify-between items-end mt-2 h-16 gap-4">
+                                                    <div className="w-1/2 bg-gray-800 rounded-t-lg relative group">
+                                                        <div className="absolute bottom-0 w-full bg-blue-500 rounded-t-lg transition-all duration-1000" style={{ height: TEAMS_DATA.find(t => t.id === vsSelection.left)?.stats.winRate }}></div>
+                                                        <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-blue-400">{TEAMS_DATA.find(t => t.id === vsSelection.left)?.stats.winRate}</span>
+                                                    </div>
+                                                    <div className="w-1/2 bg-gray-800 rounded-t-lg relative">
+                                                        <div className="absolute bottom-0 w-full bg-red-500 rounded-t-lg transition-all duration-1000" style={{ height: TEAMS_DATA.find(t => t.id === vsSelection.right)?.stats.winRate }}></div>
+                                                        <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold text-red-400">{TEAMS_DATA.find(t => t.id === vsSelection.right)?.stats.winRate}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* RIGHT SELECTION */}
+                                <div className="bg-[#121212] border border-white/10 rounded-3xl p-6 min-h-[400px]">
+                                    <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Select Team B</h3>
+                                    <div className="space-y-2">
+                                        {TEAMS_DATA.slice(4, 8).map(team => (
+                                            <button
+                                                key={team.id}
+                                                onClick={() => setVsSelection(prev => ({ ...prev, right: team.id }))}
+                                                className={`w-full p-4 rounded-xl border flex items-center gap-3 transition-all ${vsSelection.right === team.id ? 'bg-white/10 border-red-500 text-white' : 'bg-black/20 border-white/5 text-gray-500 hover:bg-white/5'}`}
+                                            >
+                                                <span className="text-xl">{team.logo}</span>
+                                                <span className="font-bold">{team.code}</span>
+                                            </button>
                                         ))}
                                     </div>
                                 </div>
                             </div>
-                        )}
+                        </div>
+                    </section>
+                )
+            }
 
-                        {/* RULES VIEW */}
-                        {activeInfoSection === 'rules' && (
-                            <div className="animate-fade-in w-full h-[600px] bg-[#121212] rounded-2xl border border-white/10 overflow-hidden relative group">
-                                <div className="absolute top-4 right-4 z-10">
-                                    <a
-                                        href="https://msl-philippines.notion.site/ebd/2a66a35bd22f80ca9183d186718ae814"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="px-4 py-2 bg-black/80 hover:bg-black text-white text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 flex items-center gap-2 transition-all hover:scale-105 shadow-xl"
-                                    >
-                                        <ExternalLink size={12} /> Open in Notion
-                                    </a>
+            {
+                activeTab === 'overview' && (
+                    <div className="animate-fade-in">
+                        {/* --- THE TOURNAMENT BRAIN (Robust Toggles) --- */}
+                        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-msl-black relative">
+                            <div className="max-w-7xl mx-auto">
+
+                                {/* Section Header */}
+                                <div className="text-center mb-12">
+                                    <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Tournament Info</h2>
+                                    <div className="w-24 h-1 bg-msl-gold mx-auto rounded-full"></div>
                                 </div>
-                                <iframe
-                                    src="https://msl-philippines.notion.site/ebd/2a66a35bd22f80ca9183d186718ae814"
-                                    width="100%"
-                                    height="100%"
-                                    frameBorder="0"
-                                    allowFullScreen
-                                    className="w-full h-full"
-                                    title="Tournament Rules"
-                                />
-                            </div>
-                        )}
 
-                    </div>
-                </div>
-            </section>
+                                {/* TOGGLE NAVIGATION (Segmented Control) */}
+                                <div className="flex flex-wrap justify-center gap-2 mb-12 bg-white/5 p-2 rounded-2xl max-w-3xl mx-auto backdrop-blur-sm border border-white/5">
+                                    {[
+                                        { id: 'format', icon: Award, label: 'Format' },
+                                        { id: 'schedule', icon: Calendar, label: 'Schedule' },
+                                        { id: 'prizing', icon: Trophy, label: 'Prize Pool' },
+                                        { id: 'rules', icon: FileText, label: 'Rules' },
+                                    ].map((item) => (
+                                        <button
+                                            key={item.id}
+                                            onClick={() => setActiveInfoSection(item.id as any)}
+                                            className={`flex-1 min-w-[120px] py-3 px-4 rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2
+                                    ${activeInfoSection === item.id
+                                                    ? 'bg-msl-gold text-black shadow-lg'
+                                                    : 'text-gray-400 hover:text-white hover:bg-white/5'}
+                                `}
+                                        >
+                                            <item.icon size={16} /> {item.label}
+                                        </button>
+                                    ))}
+                                </div>
 
-            {/* --- STANDINGS --- */}
-            <section className="py-24 bg-[#0a0a0a] border-t border-white/5">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                        <div>
-                            <h2 className="text-3xl font-black text-white mb-2 uppercase">Group Standings</h2>
-                            <p className="text-gray-400 text-sm">Top 2 from each group advance to Playoffs.</p>
-                        </div>
-                        <div className="flex gap-2">
-                            {['A', 'B', 'C', 'D'].map(g => (
-                                <button key={g} className={`w-10 h-10 rounded-lg font-bold border ${g === 'A' ? 'bg-msl-gold text-black border-msl-gold' : 'bg-transparent text-gray-500 border-white/10 hover:border-white/30'}`}>
-                                    {g}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
+                                {/* CONTENT AREA */}
+                                <div className="min-h-[400px]">
 
-                    {/* Responsive Table */}
-                    <div className="bg-[#121212] rounded-3xl border border-white/10 overflow-hidden">
-                        <div className="overflow-x-auto">
-                            <table className="w-full text-left border-collapse">
-                                <thead>
-                                    <tr className="border-b border-white/5 text-[10px] uppercase tracking-widest text-gray-500 bg-white/[0.02]">
-                                        <th className="p-6 font-bold w-16">#</th>
-                                        <th className="p-6 font-bold">Team</th>
-                                        <th className="p-6 font-bold text-center">W</th>
-                                        <th className="p-6 font-bold text-center">L</th>
-                                        <th className="p-6 font-bold text-center">Pts</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {STANDINGS.map((row) => (
-                                        <tr key={row.code} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors group">
-                                            <td className="p-6 font-bold text-gray-600 group-hover:text-white">{row.rank}</td>
-                                            <td className="p-6">
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-8 h-8 rounded-full bg-gray-800 border border-white/10 flex items-center justify-center text-xs font-bold text-gray-500">{row.code[0]}</div>
-                                                    <div>
-                                                        <div className="font-bold text-white text-lg">{row.team}</div>
-                                                        <div className="text-[10px] text-gray-500 uppercase tracking-wider">{row.code}</div>
+                                    {/* FORMAT VIEW (ENHANCED VISUAL FUNNEL) */}
+                                    {activeInfoSection === 'format' && (
+                                        <div className="animate-fade-in flex flex-col lg:flex-row gap-8">
+
+                                            {/* THE FUNNEL (Visual Selection) */}
+                                            <div className="lg:w-1/2 flex flex-col items-center gap-4 py-8">
+
+                                                {/* Layer 1: The Qualifiers (THE FORGE - Gritty/Industrial) */}
+                                                <div className="w-full relative group">
+                                                    <div className="absolute -inset-2 bg-gradient-to-b from-gray-700 to-transparent opacity-20 blur-xl rounded-full"></div>
+                                                    <div className="grid grid-cols-2 gap-3 relative z-10">
+                                                        {TOURNAMENT_STAGES.slice(0, 4).map((stage) => (
+                                                            <button
+                                                                key={stage.id}
+                                                                onClick={() => setSelectedStage(stage)}
+                                                                className={`p-4 rounded-lg border-2 relative overflow-hidden transition-all text-left h-28 flex flex-col justify-end
+                                                        ${selectedStage.id === stage.id
+                                                                        ? 'bg-[#2a2a2a] border-gray-400 text-white shadow-[0_0_30px_rgba(0,0,0,0.8)] scale-[1.03] z-20'
+                                                                        : 'bg-[#151515] border-[#333] text-gray-500 hover:border-gray-500 hover:text-gray-300 hover:bg-[#1a1a1a]'}
+                                                    `}
+                                                            >
+                                                                {/* Industrial Texture */}
+                                                                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-30 mix-blend-overlay"></div>
+                                                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+
+                                                                {selectedStage.id === stage.id && (
+                                                                    <div className="absolute top-0 right-0 p-2 opacity-50"><Svgs.Gear size={24} className="animate-spin-slow text-gray-400" /></div>
+                                                                )}
+
+
+                                                                <div className="relative z-10">
+                                                                    <div className="text-[9px] font-black uppercase tracking-[0.2em] mb-1 opacity-60 text-gray-400">{stage.subtitle}</div>
+                                                                    <div className="font-black text-sm md:text-base leading-tight uppercase font-mono">{stage.title}</div>
+                                                                </div>
+                                                            </button>
+                                                        ))}
                                                     </div>
                                                 </div>
-                                            </td>
-                                            <td className="p-6 font-bold text-white text-center">{row.w}</td>
-                                            <td className="p-6 font-bold text-gray-500 text-center">{row.l}</td>
-                                            <td className="p-6 font-black text-msl-gold text-center text-xl">{row.pts}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-            {/* --- PARTICIPATING TEAMS --- */}
-            <section className="py-24 bg-msl-black border-t border-white/5 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-900/10 blur-[100px] rounded-full pointer-events-none" />
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl font-black text-white mb-4 uppercase">The Challengers</h2>
-                        <p className="text-gray-400">Representing the best universities across the archipelago.</p>
-                    </div>
+                                                {/* Connector: Forged Pipe */}
+                                                <div className="h-12 w-2 bg-gradient-to-b from-gray-800 via-gray-600 to-gray-800 rounded-full border-x border-[#333] relative">
+                                                    <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-50"></div>
+                                                </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                        {TEAMS.map((team, i) => (
-                            <div key={i} className="aspect-square bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl flex flex-col items-center justify-center p-4 transition-all hover:-translate-y-1 cursor-pointer group">
-                                <div className="w-16 h-16 rounded-full bg-black border-2 border-white/10 mb-3 group-hover:border-msl-gold/50 transition-colors flex items-center justify-center text-2xl font-black text-gray-700 group-hover:text-msl-gold">
-                                    {team.charAt(0)}
+                                                {/* Layer 2: Group Stage (THE MATRIX - Cyber/Holo) */}
+                                                <div className="w-4/5 relative group">
+                                                    {/* Holographic Glow */}
+                                                    <div className="absolute -inset-4 bg-blue-500/20 blur-2xl rounded-full animate-pulse-slow"></div>
+
+                                                    {TOURNAMENT_STAGES.slice(4, 5).map((stage) => (
+                                                        <button
+                                                            key={stage.id}
+                                                            onClick={() => setSelectedStage(stage)}
+                                                            className={`w-full p-1 rounded-xl relative overflow-hidden transition-all group-hover:scale-[1.01]
+                                                    ${selectedStage.id === stage.id ? 'scale-[1.05]' : ''}
+                                                `}
+                                                        >
+                                                            <div className={`absolute inset-0 bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-600 animate-border-flow ${selectedStage.id === stage.id ? 'opacity-100' : 'opacity-30'}`}></div>
+                                                            <div className="bg-[#050a14] relative rounded-lg p-6 flex flex-col items-center justify-center h-40 border border-blue-500/30 overflow-hidden">
+
+                                                                {/* Tech Grid Background */}
+                                                                <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                                                                <div className="absolute inset-0 bg-gradient-to-t from-[#050a14] via-transparent to-[#050a14]"></div>
+
+                                                                {/* Scanning Line */}
+                                                                {selectedStage.id === stage.id && (
+                                                                    <div className="absolute w-full h-1 bg-cyan-400/50 blur-sm top-0 animate-scan"></div>
+                                                                )}
+
+                                                                <div className="relative z-10 text-center">
+                                                                    <div className={`text-[10px] font-bold uppercase tracking-[0.3em] mb-2 ${selectedStage.id === stage.id ? 'text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]' : 'text-blue-900'}`}>{stage.subtitle}</div>
+                                                                    <div className={`font-black text-2xl md:text-3xl uppercase tracking-tighter ${selectedStage.id === stage.id ? 'text-white' : 'text-gray-600'}`}>{stage.title}</div>
+                                                                    <div className="mt-3 flex gap-1 justify-center">
+                                                                        {[...Array(4)].map((_, i) => <div key={i} className={`w-1.5 h-1.5 rounded-sm ${selectedStage.id === stage.id ? 'bg-cyan-500 animate-ping' : 'bg-blue-900'}`} style={{ animationDelay: `${i * 100}ms` }}></div>)}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </button>
+                                                    ))}
+                                                </div>
+
+                                                {/* Connector: Energy Beam */}
+                                                <div className="h-12 w-1 bg-gradient-to-b from-blue-500 to-msl-gold shadow-[0_0_15px_rgba(59,130,246,0.6)]"></div>
+
+                                                {/* Layer 3: Championship (THE THRONE - Legendary/Gold) */}
+                                                <div className="w-3/5 relative group">
+                                                    <div className="absolute -inset-10 bg-msl-gold/10 blur-3xl rounded-full"></div>
+
+                                                    {TOURNAMENT_STAGES.slice(5, 6).map((stage) => (
+                                                        <button
+                                                            key={stage.id}
+                                                            onClick={() => setSelectedStage(stage)}
+                                                            className={`w-full p-0.5 rounded-2xl relative overflow-hidden transition-all
+                                                    ${selectedStage.id === stage.id ? 'scale-[1.1] z-30 shadow-[0_0_50px_rgba(234,179,8,0.4)]' : 'hover:scale-105'}
+                                                `}
+                                                        >
+                                                            {/* Gold Border Gradient */}
+                                                            <div className="absolute inset-0 bg-gradient-to-tr from-[#8B6F20] via-[#FDE047] to-[#8B6F20] animate-shine"></div>
+
+                                                            <div className="bg-gradient-to-b from-[#1a1200] to-black rounded-[14px] p-6 h-48 flex flex-col items-center justify-center relative overflow-hidden">
+
+                                                                {/* Gold Dust Particles (Simulated) */}
+                                                                <div className="absolute inset-0 opacity-30 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+
+                                                                {/* Radial Burst */}
+                                                                <div className="absolute inset-0 bg-gradient-to-t from-msl-gold/20 via-transparent to-transparent opacity-50"></div>
+
+                                                                <Trophy size={40} className={`mb-3 ${selectedStage.id === stage.id ? 'text-msl-gold drop-shadow-[0_0_15px_rgba(234,179,8,0.8)] animate-bounce-subtle' : 'text-yellow-900'}`} />
+
+                                                                <div className={`font-black text-xl md:text-3xl uppercase tracking-widest leading-none text-center ${selectedStage.id === stage.id ? 'text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 via-msl-gold to-yellow-800' : 'text-yellow-900'}`}>
+                                                                    {stage.title}
+                                                                </div>
+                                                            </div>
+                                                        </button>
+                                                    ))}
+                                                </div>
+
+                                            </div>
+
+                                            {/* DETAILS PANEL (Adaptive Theme) */}
+                                            <div className="lg:w-1/2 flex items-center">
+                                                <div className={`w-full border rounded-3xl p-8 relative overflow-hidden transition-all duration-500
+                                        ${selectedStage.id.includes('stage-6')
+                                                        ? 'bg-gradient-to-br from-[#1a1200] to-black border-msl-gold/30 shadow-[0_0_30px_rgba(234,179,8,0.1)]'
+                                                        : selectedStage.id.includes('stage-5')
+                                                            ? 'bg-[#050a14] border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.1)]'
+                                                            : 'bg-[#121212] border-white/10'
+                                                    }
+                                    `}>
+                                                    {/* Dynamic Backgrounds */}
+                                                    {selectedStage.id.includes('stage-6') && <div className="absolute -top-20 -right-20 w-80 h-80 bg-msl-gold/20 blur-[100px] rounded-full pointer-events-none"></div>}
+                                                    {selectedStage.id.includes('stage-5') && <div className="absolute -top-20 -right-20 w-80 h-80 bg-blue-600/20 blur-[100px] rounded-full pointer-events-none"></div>}
+
+                                                    <div className="relative z-10">
+                                                        <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
+                                                            <div>
+                                                                <div className={`text-xs font-bold uppercase tracking-widest mb-2 ${selectedStage.id.includes('stage-5') ? 'text-cyan-400' : 'text-gray-500'}`}>{selectedStage.date}</div>
+                                                                <h3 className="text-4xl md:text-5xl font-black text-white uppercase leading-[0.9]">{selectedStage.title}</h3>
+                                                            </div>
+                                                            <div className={`p-4 rounded-2xl border bg-white/5
+                                                    ${selectedStage.id.includes('stage-6') ? 'text-msl-gold border-msl-gold/30 shadow-[0_0_15px_rgba(234,179,8,0.2)]'
+                                                                    : selectedStage.id.includes('stage-5') ? 'text-cyan-400 border-cyan-500/30 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
+                                                                        : 'text-gray-400 border-white/5'}
+                                                 `}>
+                                                                {selectedStage.id.includes('stage-6') ? <Trophy size={32} /> : <Swords size={32} />}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="grid grid-cols-2 gap-8 mb-8">
+                                                            <div>
+                                                                <div className="text-[10px] uppercase font-bold text-gray-600 mb-1">Format</div>
+                                                                <div className="text-white font-bold text-lg">{selectedStage.format}</div>
+                                                            </div>
+                                                            <div>
+                                                                <div className="text-[10px] uppercase font-bold text-gray-600 mb-1">Prize</div>
+                                                                <div className={`text-lg font-black ${selectedStage.id.includes('stage-6') ? 'text-msl-gold' : 'text-white'}`}>{selectedStage.prize}</div>
+                                                            </div>
+                                                            <div className="col-span-2">
+                                                                <div className="text-[10px] uppercase font-bold text-gray-600 mb-2">Description</div>
+                                                                <p className="text-gray-300 text-base leading-relaxed">{selectedStage.desc}</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className={`p-4 rounded-xl border flex items-center gap-4
+                                                ${selectedStage.id.includes('stage-6') ? 'bg-msl-gold/10 border-msl-gold/30'
+                                                                : selectedStage.id.includes('stage-5') ? 'bg-blue-900/20 border-blue-500/30'
+                                                                    : 'bg-white/5 border-white/5'}
+                                            `}>
+                                                            <div className="shrink-0 p-2 bg-white/5 rounded-lg"><Target size={16} className="text-white" /></div>
+                                                            <div>
+                                                                <div className="text-[10px] uppercase font-bold text-gray-500 mb-0.5">Progression</div>
+                                                                <div className={`font-bold text-sm ${selectedStage.id.includes('stage-6') ? 'text-msl-gold' : 'text-white'}`}>
+                                                                    {selectedStage.progression}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* SCHEDULE VIEW (CALENDAR) */}
+                                    {activeInfoSection === 'schedule' && (
+                                        <div className="animate-fade-in">
+                                            {/* Month Selector */}
+                                            <div className="flex overflow-x-auto gap-2 mb-8 pb-2 scrollbar-hide">
+                                                {CALENDAR_MONTHS.map((month) => (
+                                                    <button
+                                                        key={month.id}
+                                                        onClick={() => { setActiveMonth(month.id); setSelectedDate(null); }}
+                                                        className={`px-6 py-3 rounded-xl border whitespace-nowrap text-sm font-bold uppercase tracking-wider transition-all
+                                                ${activeMonth === month.id
+                                                                ? 'bg-white text-black border-white shadow-lg scale-105'
+                                                                : 'bg-[#121212] border-white/10 text-gray-500 hover:text-gray-300 hover:border-white/30'}
+                                            `}
+                                                    >
+                                                        {month.name} <span className="opacity-40 ml-1">2026</span>
+                                                    </button>
+                                                ))}
+                                            </div>
+
+
+                                            <div className="grid lg:grid-cols-3 gap-8">
+                                                {/* CALENDAR GRID */}
+                                                <div className="lg:col-span-2">
+                                                    <div className="bg-[#121212] border border-white/10 rounded-3xl p-6 md:p-8">
+                                                        {/* Days Header */}
+                                                        <div className="grid grid-cols-7 mb-4">
+                                                            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
+                                                                <div key={d} className="text-center text-[10px] uppercase font-bold text-gray-600 tracking-widest">{d}</div>
+                                                            ))}
+                                                        </div>
+
+                                                        {/* Days Grid */}
+                                                        <div className="grid grid-cols-7 gap-2 md:gap-4">
+                                                            {/* Empty Padding Days */}
+                                                            {[...Array(CALENDAR_MONTHS[activeMonth].startDay)].map((_, i) => (
+                                                                <div key={`empty-${i}`} className="aspect-square"></div>
+                                                            ))}
+
+                                                            {/* Actual Days */}
+                                                            {[...Array(CALENDAR_MONTHS[activeMonth].days)].map((_, i) => {
+                                                                const day = i + 1;
+                                                                const currentMonth = CALENDAR_MONTHS[activeMonth];
+
+                                                                // Check for events/stages covering this day
+                                                                const activeStage = currentMonth.stages.find(s => day >= s.start && day <= s.end);
+                                                                // Check for matches
+                                                                const hasMatches = CALENDAR_MATCHES[`${activeMonth}-${day}`];
+
+                                                                return (
+                                                                    <button
+                                                                        key={day}
+                                                                        onClick={() => setSelectedDate({ month: activeMonth, day })}
+                                                                        className={`aspect-square rounded-xl border relative group transition-all flex flex-col items-center justify-start pt-2
+                                                                ${selectedDate?.day === day && selectedDate?.month === activeMonth
+                                                                                ? 'bg-white/10 border-white text-white z-10 scale-110 shadow-xl'
+                                                                                : hasMatches
+                                                                                    ? 'bg-[#1a1a1a] border-white/20 text-gray-300 hover:border-white/50 hover:bg-[#252525]'
+                                                                                    : 'bg-[#0a0a0a] border-white/5 text-gray-600 hover:border-white/10'}
+                                                            `}
+                                                                    >
+                                                                        <div className="text-sm font-bold">{day}</div>
+
+                                                                        {/* Stage Indicator Bar */}
+                                                                        {activeStage && (
+                                                                            <div className={`absolute bottom-2 left-1 right-1 h-1.5 rounded-full ${activeStage.color}`}></div>
+                                                                        )}
+
+                                                                        {/* Match Dot */}
+                                                                        {hasMatches && !activeStage && (
+                                                                            <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 animate-pulse"></div>
+                                                                        )}
+                                                                    </button>
+                                                                );
+                                                            })}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* DAY DETAILS / LEGEND */}
+                                                <div className="lg:col-span-1">
+                                                    <div className="bg-[#121212] border border-white/10 rounded-3xl p-6 h-full flex flex-col">
+
+                                                        {selectedDate ? (
+                                                            <div className="animate-fade-in">
+                                                                <div className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1">
+                                                                    {CALENDAR_MONTHS[selectedDate.month].name} {selectedDate.day}, 2026
+                                                                </div>
+                                                                <h3 className="text-2xl font-black text-white uppercase mb-6">Events</h3>
+
+                                                                {CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end) && (
+                                                                    <div className={`p-4 rounded-xl mb-4 ${CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end)?.color}`}>
+                                                                        <div className={`font-black uppercase text-sm ${CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end)?.textColor}`}>
+                                                                            {CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end)?.name}
+                                                                        </div>
+                                                                    </div>
+                                                                )}
+
+                                                                {CALENDAR_MATCHES[`${selectedDate.month}-${selectedDate.day}`] ? (
+                                                                    <div className="space-y-3">
+                                                                        {CALENDAR_MATCHES[`${selectedDate.month}-${selectedDate.day}`].map((match, idx) => (
+                                                                            <div key={idx} className="bg-black/40 border border-white/10 p-3 rounded-lg">
+                                                                                <div className="flex justify-between items-center mb-1">
+                                                                                    <div className="text-xs font-bold text-gray-400">{match.time}</div>
+                                                                                    {match.label && <div className="text-[9px] font-bold bg-msl-gold text-black px-1.5 py-0.5 rounded">{match.label}</div>}
+                                                                                </div>
+                                                                                <div className="font-bold text-white text-sm">
+                                                                                    {match.team1} <span className="text-gray-600 px-1">vs</span> {match.team2}
+                                                                                </div>
+                                                                            </div>
+                                                                        ))}
+                                                                    </div>
+                                                                ) : (
+                                                                    !CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end) && (
+                                                                        <div className="text-gray-500 italic text-sm">No matches scheduled.</div>
+                                                                    )
+                                                                )}
+                                                            </div>
+                                                        ) : (
+                                                            <div className="flex flex-col h-full justify-center text-center opacity-40">
+                                                                <Calendar size={48} className="mx-auto mb-4 text-gray-600" />
+                                                                <p className="text-sm text-gray-400 font-bold uppercase tracking-wider">Select a date to view details</p>
+                                                            </div>
+                                                        )}
+
+                                                        {/* Legend at bottom */}
+                                                        <div className="mt-auto pt-8 border-t border-white/5">
+                                                            <div className="text-[10px] font-bold uppercase tracking-widest text-gray-600 mb-3">Legend</div>
+                                                            <div className="space-y-2">
+                                                                <div className="flex items-center gap-2">
+                                                                    <div className="w-3 h-3 rounded-full bg-gray-600"></div><span className="text-xs text-gray-400">Qualifiers</span>
+                                                                </div>
+                                                                <div className="flex items-center gap-2">
+                                                                    <div className="w-3 h-3 rounded-full bg-blue-600"></div><span className="text-xs text-gray-400">Group Stage</span>
+                                                                </div>
+                                                                <div className="flex items-center gap-2">
+                                                                    <div className="w-3 h-3 rounded-full bg-msl-gold"></div><span className="text-xs text-gray-400">Championships</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* PRIZE POOL VIEW */}
+                                    {activeInfoSection === 'prizing' && (
+                                        <div className="animate-fade-in max-w-4xl mx-auto">
+                                            <div className="bg-gradient-to-br from-yellow-900/20 to-black border border-msl-gold/30 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden mb-8">
+                                                <div className="absolute top-0 right-0 p-8 opacity-10"><Trophy size={120} /></div>
+                                                <h3 className="text-gray-400 font-bold uppercase tracking-widest text-sm mb-2">Total Prize Pool</h3>
+                                                <div className="text-6xl md:text-8xl font-black text-msl-gold mb-8 drop-shadow-md">₱1,000,000</div>
+
+                                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
+                                                    {[
+                                                        { place: 'Champion', prize: '₱500,000', color: 'text-msl-gold' },
+                                                        { place: '2nd Place', prize: '₱250,000', color: 'text-gray-300' },
+                                                        { place: '3rd Place', prize: '₱100,000', color: 'text-orange-700' },
+                                                        { place: '4th Place', prize: '₱50,000', color: 'text-gray-500' },
+                                                    ].map((item, idx) => (
+                                                        <div key={idx} className="bg-black/40 p-4 rounded-xl border border-white/5">
+                                                            <div className="text-[10px] uppercase font-bold text-gray-500 mb-1">{item.place}</div>
+                                                            <div className={`text-xl md:text-2xl font-black ${item.color}`}>{item.prize}</div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* RULES VIEW */}
+                                    {activeInfoSection === 'rules' && (
+                                        <div className="animate-fade-in w-full h-[600px] bg-[#121212] rounded-2xl border border-white/10 overflow-hidden relative group">
+                                            <div className="absolute top-4 right-4 z-10">
+                                                <a
+                                                    href="https://msl-philippines.notion.site/ebd/2a66a35bd22f80ca9183d186718ae814"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="px-4 py-2 bg-black/80 hover:bg-black text-white text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 flex items-center gap-2 transition-all hover:scale-105 shadow-xl"
+                                                >
+                                                    <ExternalLink size={12} /> Open in Notion
+                                                </a>
+                                            </div>
+                                            <iframe
+                                                src="https://msl-philippines.notion.site/ebd/2a66a35bd22f80ca9183d186718ae814"
+                                                width="100%"
+                                                height="100%"
+                                                frameBorder="0"
+                                                allowFullScreen
+                                                className="w-full h-full"
+                                                title="Tournament Rules"
+                                            />
+                                        </div>
+                                    )}
+
                                 </div>
-                                <div className="text-xs font-bold text-gray-400 text-center uppercase leading-tight group-hover:text-white transition-colors">{team}</div>
                             </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+                        </section>
 
-        </div>
+                        {/* --- STANDINGS --- */}
+                        <section className="py-24 bg-[#0a0a0a] border-t border-white/5">
+                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                                    <div>
+                                        <h2 className="text-3xl font-black text-white mb-2 uppercase">Group Standings</h2>
+                                        <p className="text-gray-400 text-sm">Top 2 from each group advance to Playoffs.</p>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        {['A', 'B', 'C', 'D'].map(g => (
+                                            <button key={g} className={`w-10 h-10 rounded-lg font-bold border ${g === 'A' ? 'bg-msl-gold text-black border-msl-gold' : 'bg-transparent text-gray-500 border-white/10 hover:border-white/30'}`}>
+                                                {g}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Responsive Table */}
+                                <div className="bg-[#121212] rounded-3xl border border-white/10 overflow-hidden">
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-left border-collapse">
+                                            <thead>
+                                                <tr className="border-b border-white/5 text-[10px] uppercase tracking-widest text-gray-500 bg-white/[0.02]">
+                                                    <th className="p-6 font-bold w-16">#</th>
+                                                    <th className="p-6 font-bold">Team</th>
+                                                    <th className="p-6 font-bold text-center">W</th>
+                                                    <th className="p-6 font-bold text-center">L</th>
+                                                    <th className="p-6 font-bold text-center">Pts</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {STANDINGS.map((row) => (
+                                                    <tr key={row.code} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors group">
+                                                        <td className="p-6 font-bold text-gray-600 group-hover:text-white">{row.rank}</td>
+                                                        <td className="p-6">
+                                                            <div className="flex items-center gap-4">
+                                                                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-gray-400">
+                                                                    {row.code[0]}
+                                                                </div>
+                                                                <div>
+                                                                    <div className="font-bold text-white max-w-[120px] md:max-w-none truncate">{row.team}</div>
+                                                                    <div className="text-[10px] font-bold text-gray-500 uppercase">{row.code}</div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td className="p-6 font-bold text-center text-green-400">{row.w}</td>
+                                                        <td className="p-6 font-bold text-center text-red-400">{row.l}</td>
+                                                        <td className="p-6 font-bold text-center text-white text-lg">{row.pts}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                )
+            }
+
+
+
+            {
+                activeTab === 'teams' && (
+                    <section className="py-24 bg-msl-black min-h-screen">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="text-center mb-16">
+                                <h2 className="text-3xl font-black text-white mb-4 uppercase">The Challengers</h2>
+                                <p className="text-gray-400">Representing the Top 8 Universities across the archipelago.</p>
+                            </div>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                                {TEAMS_DATA.filter(t => t.isFinalist).map((team) => (
+                                    <div key={team.id} className="aspect-square bg-[#121212] border border-white/10 rounded-2xl flex flex-col items-center justify-center p-6 transition-all hover:-translate-y-1 hover:border-msl-gold/50 cursor-pointer group relative overflow-hidden">
+                                        {/* Background Gradient */}
+                                        <div className={`absolute inset-0 bg-gradient-to-br ${team.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+
+                                        <div className="w-24 h-24 rounded-full bg-black border-2 border-white/10 mb-4 group-hover:scale-110 transition-transform flex items-center justify-center text-4xl shadow-xl z-10">
+                                            {team.logo}
+                                        </div>
+                                        <div className="text-xl font-black text-white uppercase leading-none mb-1 z-10">{team.code}</div>
+                                        <div className="text-[10px] font-bold text-gray-500 uppercase z-10">{team.name}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                )
+            }
+
+        </div >
     );
 };
 
