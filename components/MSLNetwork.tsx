@@ -20,7 +20,9 @@ import {
     Gift,
     Server,
     Gamepad2,
-    Medal
+    Medal,
+    Calendar,
+    FileText
 } from 'lucide-react';
 
 interface MSLNetworkProps {
