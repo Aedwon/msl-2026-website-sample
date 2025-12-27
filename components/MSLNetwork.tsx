@@ -18,7 +18,8 @@ import {
     Building2,
     MonitorPlay,
     Gift,
-    Server
+    Server,
+    Gamepad2
 } from 'lucide-react';
 
 interface MSLNetworkProps {
@@ -263,9 +264,9 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                             </div>
 
                             <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black via-black/90 to-transparent">
-                                <h3 className="text-2xl font-bold text-white mb-2">Resource Unlocks</h3>
+                                <h3 className="text-2xl font-bold text-white mb-2">Financial Fuel</h3>
                                 <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                                    Annual budget allocation for your events. Stop worrying about prize pools and focus on the experience.
+                                    Access up to 150,000 diamonds per semester, cash grants for major events, and official merchandise loot drops for your community.
                                 </p>
                                 <div className="h-1 w-12 bg-blue-500 rounded-full group-hover:w-full transition-all duration-500"></div>
                             </div>
@@ -278,13 +279,13 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
 
                             <div className="absolute top-6 right-6 p-2 bg-purple-500/20 backdrop-blur-md rounded-lg border border-purple-500/30 text-purple-400">
-                                <Trophy size={20} />
+                                <Gamepad2 size={20} />
                             </div>
 
                             <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black via-black/90 to-transparent">
-                                <h3 className="text-2xl font-bold text-white mb-2">Event Activations</h3>
+                                <h3 className="text-2xl font-bold text-white mb-2">Pro-Tier Ecosystem</h3>
                                 <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                                    Host official qualifiers and watch parties. We bring the national stage to your local campus.
+                                    Unlock the restricted Tournament Lobby client used by pros. Full hero access, spectator tools, and developer-grade support.
                                 </p>
                                 <div className="h-1 w-12 bg-purple-500 rounded-full group-hover:w-full transition-all duration-500"></div>
                             </div>
@@ -297,13 +298,13 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
 
                             <div className="absolute top-6 right-6 p-2 bg-msl-gold/20 backdrop-blur-md rounded-lg border border-msl-gold/30 text-msl-gold">
-                                <TrendingUp size={20} />
+                                <Trophy size={20} />
                             </div>
 
                             <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black via-black/90 to-transparent">
-                                <h3 className="text-2xl font-bold text-white mb-2">Path to Pro</h3>
+                                <h3 className="text-2xl font-bold text-white mb-2">Industry Access</h3>
                                 <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                                    Direct access to industry mentorship, internships, and the career meta for your best players.
+                                    Direct line to Moonton via the MSL Summit. Exclusive masterclasses, internship priority, and official campaign hosting rights.
                                 </p>
                                 <div className="h-1 w-12 bg-msl-gold rounded-full group-hover:w-full transition-all duration-500"></div>
                             </div>
