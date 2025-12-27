@@ -181,7 +181,7 @@ const App = () => {
                   {PROGRAMS_WIDGET_DATA.map((prog, idx) => (
                     <div
                       key={idx}
-                      className={`${prog.colSpan} relative rounded-2xl overflow-hidden group cursor-pointer shadow-md hover:shadow-2xl transition-all duration-300 border border-white/10 h-[280px] md:h-auto`}
+                      className={`${prog.colSpan} relative rounded-2xl overflow-hidden group cursor-pointer shadow-md hover:shadow-2xl transition-all duration-300 border border-white/10 h-[280px] md:h-[320px] lg:h-full`}
                       onClick={() => { setCurrentPage('programs'); window.scrollTo(0, 0); }}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
