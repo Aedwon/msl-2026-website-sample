@@ -38,7 +38,7 @@ const TIERS = [
         borderColor: 'border-white/10',
         bg: 'bg-white/5',
         diamonds: '50,000',
-        reqs: { turnouts: '8 - 15 Teams', members: '< 100', participation: '≤ 5%' },
+        reqs: { turnouts: '8 - 15', members: '< 100', participation: '≤ 5%' },
         compliance: { accreditation: false, endorsement: false, monetary: false },
         perks: { activations: 'Low Priority', creative: 'N/A' }
     },
@@ -50,7 +50,7 @@ const TIERS = [
         borderColor: 'border-blue-500/30',
         bg: 'bg-blue-900/10',
         diamonds: '70,000',
-        reqs: { turnouts: '16 - 31 Teams', members: '100 - 250', participation: '5% - 15%' },
+        reqs: { turnouts: '16 - 31', members: '100 - 250', participation: '5% - 15%' },
         compliance: { accreditation: false, endorsement: false, monetary: false },
         perks: { activations: 'Moderate Priority', creative: 'Basic Access' }
     },
@@ -62,7 +62,7 @@ const TIERS = [
         borderColor: 'border-purple-500/30',
         bg: 'bg-purple-900/10',
         diamonds: '100,000',
-        reqs: { turnouts: '≥ 24 Teams', members: '> 250', participation: '> 15%' },
+        reqs: { turnouts: '≥ 24', members: '> 250', participation: '> 15%' },
         compliance: { accreditation: true, endorsement: true, monetary: true },
         perks: { activations: 'High Priority', creative: 'Full Access' }
     },
@@ -183,7 +183,7 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                     </div>
 
                     <h1 className="text-6xl md:text-7xl font-extrabold text-white leading-[1.1] mb-8 tracking-tight drop-shadow-2xl animate-fade-in-up delay-100">
-                        Turn Your Campus Club <br />
+                        Turn Your Esports Org <br />
                         Into a <span className="text-transparent bg-clip-text bg-gradient-to-r from-msl-gold to-yellow-200 drop-shadow-[0_0_20px_rgba(242,194,26,0.3)]">Powerhouse.</span>
                     </h1>
 
@@ -230,7 +230,7 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
 
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-8">
+                    <div className="flex flex-col sm:flex-row items-center gap-3 mb-8">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-msl-gold text-black text-sm font-black uppercase shadow-[0_0_20px_rgba(242,194,26,0.4)] animate-pulse">
                             <Star size={16} fill="currentColor" /> MVP Spotlight
                         </div>
@@ -535,7 +535,9 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                                 </div>
                                                 <div>
                                                     <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">Team Turnout</p>
-                                                    <p className={`text-xl font-bold whitespace-nowrap ${activeTier.reqs.turnouts === 'Waived' ? 'text-msl-gold' : 'text-white'}`}>{activeTier.reqs.turnouts}</p>
+                                                    <p className={`font-black uppercase tracking-tight ${activeTier.id === 'tier-ss' ? 'text-msl-gold drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]' : 'text-white'} text-lg sm:text-2xl`}>
+                                                        {activeTier.id === 'tier-ss' ? 'Waived' : activeTier.reqs.turnouts}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
