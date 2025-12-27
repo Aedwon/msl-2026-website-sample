@@ -160,11 +160,11 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                         <span className="text-gray-500 font-bold uppercase tracking-widest text-sm">Partner of the Month</span>
                     </div>
 
-                    <div className="grid lg:grid-cols-12 gap-8 items-start">
+                    <div className="grid lg:grid-cols-12 gap-8 items-stretch">
 
                         {/* PRIMARY VISUAL: Event Photo (Prominent) */}
                         <div className="lg:col-span-8 order-2 lg:order-1">
-                            <div className="group relative aspect-video w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                            <div className="group relative aspect-video lg:h-full w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
                                 <img
                                     src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=2000"
                                     alt="Teletigers Event"
@@ -185,10 +185,10 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                         </div>
 
                         {/* SECONDARY INFO: Org Details & Buffs (Sidebar) */}
-                        <div className="lg:col-span-4 order-1 lg:order-2 flex flex-col gap-6">
+                        <div className="lg:col-span-4 order-1 lg:order-2 flex flex-col gap-6 h-full">
 
                             {/* Org Header Card */}
-                            <div className="bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 shadow-xl">
+                            <div className="bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 shadow-xl flex-1 flex flex-col justify-center">
                                 <h2 className="text-4xl font-black text-white leading-none tracking-tighter mb-2">
                                     TELETIGERS
                                 </h2>
@@ -201,7 +201,7 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                             </div>
 
                             {/* Buffs Card */}
-                            <div className="bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 shadow-xl">
+                            <div className="bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 shadow-xl flex-1 flex flex-col justify-center">
                                 <h4 className="text-gray-500 font-bold uppercase tracking-widest text-xs mb-6 flex items-center gap-2">
                                     <Zap size={14} className="text-msl-gold" /> Equipped Buffs
                                 </h4>
