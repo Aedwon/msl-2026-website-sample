@@ -466,10 +466,8 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                                     <div className={`h-2 w-2 rounded-full ${activeTier.perks.creative === 'Full Access' ? 'bg-purple-500 shadow-[0_0_10px_magenta]' : 'bg-gray-600'}`}></div>
                                                     <p className="text-2xl font-black text-white">{activeTier.perks.creative}</p>
                                                 </div>
+                                                <p className="text-[9px] text-gray-600 italic mt-1">* Subject to availability</p>
                                             </div>
-                                        </div>
-                                        <div className="absolute bottom-3 right-4">
-                                            <p className="text-[9px] text-gray-600 italic">* Subject to available slots (Contents & Social Media Dept)</p>
                                         </div>
                                     </div>
 
