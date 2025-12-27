@@ -767,83 +767,98 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                     </div>
 
                     {/* COMMUNITY & INDIVIDUAL SPLIT */}
-                    <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                    {/* COMMUNITY & INDIVIDUAL SPLIT (Row-Aligned Grid) */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
-                        {/* Community Awards */}
-                        <div className="lg:col-span-7 flex flex-col gap-4">
+                        {/* HEADERS */}
+                        {/* Community Header (Mobile Order: 1, Desktop: Row 1 Col 1) */}
+                        <div className="lg:col-span-6 order-1 lg:order-none flex flex-col gap-4">
                             <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
                                 <Users className="text-blue-400" /> Community Awards
                             </h3>
-                            <div className="space-y-4 h-full">
-                                {AWARDS_DATA.community.map((award, i) => (
-                                    <div key={i} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-white/10 transition-all group h-full flex flex-col justify-between">
-                                        <div>
-                                            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
-                                                <div className="flex items-center gap-3">
-                                                    <div className="p-2 rounded-lg bg-blue-900/20 text-blue-400 border border-blue-500/20 shrink-0">{award.icon}</div>
-                                                    <h4 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">{award.title}</h4>
-                                                </div>
-                                                {award.grant && (
-                                                    <span className="px-3 py-1 rounded-xl bg-blue-500/20 text-blue-400 text-xs font-bold border border-blue-500/30 whitespace-nowrap shadow-[0_0_10px_rgba(59,130,246,0.2)]">
-                                                        {award.grant} Grant
-                                                    </span>
-                                                )}
-                                            </div>
-                                            <p className="text-gray-300 text-sm leading-relaxed mb-6 pl-[52px]">{award.desc}</p>
-                                        </div>
-                                        <div className="flex flex-wrap gap-2 pl-[52px]">
-                                            {award.receivables.map((item, idx) => (
-                                                <span key={idx} className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-black/40 text-gray-400 border border-white/5 group-hover:border-white/10 transition-colors">
-                                                    {item}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
                         </div>
 
-                        {/* Individual Awards */}
-                        <div className="lg:col-span-5 flex flex-col gap-4">
+                        {/* Individual Header (Mobile Order: 3, Desktop: Row 1 Col 2) */}
+                        <div className="lg:col-span-6 order-3 lg:order-none flex flex-col gap-4 mt-8 lg:mt-0">
                             <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
                                 <Star className="text-purple-400" /> Individual Awards
                             </h3>
-                            <div className="grid gap-4 h-full">
-                                {AWARDS_DATA.individual.map((award, i) => (
-                                    <div key={i} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/30 hover:bg-white/10 transition-all h-full flex flex-col justify-between">
-                                        <div>
-                                            <div className="flex justify-between items-start mb-4">
-                                                <h4 className="font-bold text-white text-base">{award.title}</h4>
-                                                <span className="text-msl-gold font-bold text-xs bg-msl-gold/10 px-3 py-1 rounded-xl border border-msl-gold/20 shadow-[0_0_10px_rgba(234,179,8,0.1)]">{award.grant}</span>
-                                            </div>
-                                            <p className="text-gray-400 text-xs leading-relaxed mb-6">{award.desc}</p>
-                                        </div>
-                                        <div className="flex flex-wrap gap-2 mt-auto">
-                                            {award.receivables.map((item, idx) => (
-                                                <span key={idx} className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-black/40 text-gray-400 border border-white/5 hover:border-white/10 transition-colors">
-                                                    {item}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ))}
-                                {/* Call to action */}
-                                <button
-                                    onClick={() => onNavigate('nominations')}
-                                    className="p-6 rounded-2xl relative overflow-hidden group cursor-pointer h-full min-h-[160px] flex flex-col items-center justify-center text-center border border-msl-gold/30 hover:border-msl-gold/60 transition-all shadow-[0_0_20px_rgba(234,179,8,0.05)] hover:shadow-[0_0_30px_rgba(234,179,8,0.15)] bg-gradient-to-br from-msl-gold/10 via-black to-black"
-                                >
-                                    <div className="absolute inset-0 bg-msl-gold/5 blur-xl group-hover:bg-msl-gold/10 transition-colors"></div>
-                                    <div className="relative z-10 flex flex-col items-center">
-                                        <div className="p-3 rounded-full bg-msl-gold text-black mb-3 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(234,179,8,0.4)]">
-                                            <ArrowRight size={24} strokeWidth={3} />
-                                        </div>
-                                        <h4 className="text-xl font-black text-white mb-2 uppercase tracking-tight">Make a Nomination</h4>
-                                        <p className="text-msl-gold/80 text-xs font-bold uppercase tracking-widest max-w-[200px]">Season 2026 Entries Open</p>
-                                    </div>
-                                </button>
-                            </div>
                         </div>
 
+                        {/* CARDS LOOP */}
+                        {AWARDS_DATA.community.map((commAward, i) => {
+                            const indivAward = AWARDS_DATA.individual[i];
+                            return (
+                                <React.Fragment key={i}>
+                                    {/* Community Card (Mobile Order: 2, Desktop: Row X Col 1) */}
+                                    <div className="lg:col-span-6 order-2 lg:order-none h-full">
+                                        <div className="p-8 rounded-2xl bg-black/40 border border-white/10 hover:border-blue-500/30 hover:bg-white/10 transition-all group h-full flex flex-col justify-between">
+                                            <div>
+                                                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-2">
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="p-2 rounded-lg bg-blue-900/20 text-blue-400 border border-blue-500/20 shrink-0">{commAward.icon}</div>
+                                                        <h4 className="text-2xl font-black uppercase tracking-tight text-white group-hover:text-blue-400 transition-colors">{commAward.title}</h4>
+                                                    </div>
+                                                    {commAward.grant && (
+                                                        <span className="px-3 py-1 rounded-xl bg-blue-500/20 text-blue-400 text-xs font-bold border border-blue-500/30 whitespace-nowrap shadow-[0_0_10px_rgba(59,130,246,0.2)]">
+                                                            {commAward.grant} Grant
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                <p className="text-gray-400 leading-relaxed mb-8 pl-[52px]">{commAward.desc}</p>
+                                            </div>
+                                            <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-white/5">
+                                                {commAward.receivables.map((item, idx) => (
+                                                    <span key={idx} className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-white/5 text-gray-400 border border-white/5 group-hover:border-white/10 transition-colors">
+                                                        {item}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Individual Card (Mobile Order: 4, Desktop: Row X Col 2) */}
+                                    <div className="lg:col-span-6 order-4 lg:order-none h-full">
+                                        <div className="p-8 rounded-2xl bg-black/40 border border-white/10 hover:border-purple-500/30 hover:bg-white/10 transition-all h-full flex flex-col justify-between">
+                                            <div>
+                                                <div className="flex justify-between items-start mb-2">
+                                                    <h4 className="text-2xl font-black uppercase tracking-tight text-white">{indivAward.title}</h4>
+                                                    {indivAward.grant && (
+                                                        <span className="text-msl-gold font-bold text-xs bg-msl-gold/10 px-3 py-1 rounded-xl border border-msl-gold/20 shadow-[0_0_10px_rgba(234,179,8,0.1)]">{indivAward.grant}</span>
+                                                    )}
+                                                </div>
+                                                <p className="text-gray-400 leading-relaxed mb-8">{indivAward.desc}</p>
+                                            </div>
+                                            <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-white/5">
+                                                {indivAward.receivables.map((item, idx) => (
+                                                    <span key={idx} className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-white/5 text-gray-400 border border-white/5 hover:border-white/10 transition-colors">
+                                                        {item}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </React.Fragment>
+                            );
+                        })}
+
+                    </div>
+
+                    {/* Call to action - Full Width */}
+                    <div className="mt-12 w-full animate-fade-in-up delay-200">
+                        <button
+                            onClick={() => onNavigate('nominations')}
+                            className="w-full p-8 rounded-3xl relative overflow-hidden group cursor-pointer flex flex-col items-center justify-center text-center border border-msl-gold/30 hover:border-msl-gold/60 transition-all shadow-[0_0_20px_rgba(234,179,8,0.05)] hover:shadow-[0_0_30px_rgba(234,179,8,0.15)] bg-gradient-to-br from-msl-gold/10 via-black to-black"
+                        >
+                            <div className="absolute inset-0 bg-msl-gold/5 blur-xl group-hover:bg-msl-gold/10 transition-colors"></div>
+                            <div className="relative z-10 flex flex-col items-center">
+                                <div className="p-4 rounded-full bg-msl-gold text-black mb-4 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(234,179,8,0.4)]">
+                                    <ArrowRight size={28} strokeWidth={3} />
+                                </div>
+                                <h4 className="text-2xl font-black text-white mb-2 uppercase tracking-tight">Make a Nomination</h4>
+                                <p className="text-msl-gold/80 text-sm font-bold uppercase tracking-widest">Season 2026 Entries Open</p>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </section>
