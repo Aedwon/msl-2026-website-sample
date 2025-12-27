@@ -864,12 +864,12 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
             {/* --- MSL NETWORK DISCORD --- */}
             <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#5865F2]/10 border-t border-white/10 relative overflow-hidden">
                 <div className="max-w-5xl mx-auto text-center relative z-10">
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">The Hub of Collegiate Esports</h2>
-                    <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
-                        Join the official MSL Network Discord. Connect with other leaders, get direct support from admins, and find scrim partners instantly.
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Showcase Your Org. Connect with the Nation.</h2>
+                    <p className="text-gray-300 text-lg max-w-3xl mx-auto mb-8">
+                        The official platform for our partners to showcase their organization and connect with the general MLBB community of student-gamers all over the Philippines.
                     </p>
                     <button className="px-10 py-4 bg-[#5865F2] hover:bg-[#4752C4] text-white rounded-xl font-bold text-lg shadow-lg shadow-[#5865F2]/20 hover:shadow-[#5865F2]/40 transition-all flex items-center justify-center gap-3 mx-auto">
-                        <Users size={20} /> Join the Discord
+                        <img src="/discord-white-icon.webp" alt="Discord" className="w-6 h-6" /> Join the Discord Server
                     </button>
                 </div>
             </section>
