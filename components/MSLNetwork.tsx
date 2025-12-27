@@ -498,10 +498,6 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
 
                                         {/* Requirements Summary */}
                                         <div className="flex flex-col items-end gap-6 text-right">
-                                            <div className="hidden md:block">
-                                                <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Entry Gate</div>
-                                                <div className="text-xl font-bold text-white">{activeTier.id === 'tier-ss' ? 'N/A' : activeTier.reqs.turnouts}</div>
-                                            </div>
                                             <div className="w-16 h-16 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center text-gray-400">
                                                 {activeTier.isSpecial ? <Crown size={32} className="text-msl-gold animate-pulse" /> : <Target size={32} />}
                                             </div>
@@ -908,22 +904,29 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
             </section>
 
             {/* --- FOMO CTA (Harmonized) --- */}
-            <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-t from-gray-900 to-black border-t border-white/10 text-center">
-                <div className="max-w-3xl mx-auto">
-                    <h2 className="text-5xl font-black text-white mb-6">Start Your Run.</h2>
-                    <p className="text-xl text-gray-400 mb-10 leading-relaxed">
-                        Slots for <span className="text-msl-gold font-bold">Super School</span> status are limited per region. The sooner you start your journey, the faster you climb the ranks.
+            {/* --- FOMO CTA (Revamped) --- */}
+            <section className="py-32 px-4 sm:px-6 lg:px-8 bg-black border-t border-white/10 relative overflow-hidden text-center">
+                {/* Spotlight Glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-msl-gold/10 blur-[120px] rounded-full pointer-events-none" />
+
+                <div className="relative z-10 max-w-4xl mx-auto">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-msl-gold/10 border border-msl-gold/20 text-msl-gold text-xs font-bold uppercase mb-8 animate-pulse">
+                        <span className="w-2 h-2 rounded-full bg-msl-gold"></span> Applications Open for Season 2026
+                    </div>
+
+                    <h2 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tight">Build A Dynasty.</h2>
+
+                    <p className="text-xl md:text-2xl text-gray-400 mb-12 leading-relaxed max-w-2xl mx-auto">
+                        Join the elite network of student organizations redefining collegiate esports. Secure funding, mentorship, and your legacy.
                     </p>
+
                     <button
                         onClick={() => onNavigate('careers')}
-                        className="px-12 py-6 bg-white text-black hover:bg-msl-gold rounded-full font-black text-xl shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(242,194,26,0.5)] hover:scale-105 transition-all flex items-center gap-3 mx-auto"
+                        className="px-12 py-6 bg-msl-gold hover:bg-yellow-400 text-black rounded-full font-black text-xl shadow-[0_0_30px_rgba(234,179,8,0.3)] hover:shadow-[0_0_50px_rgba(234,179,8,0.5)] hover:scale-105 transition-all flex items-center gap-3 mx-auto"
                     >
-                        Join The Network <ArrowRight size={24} />
+                        Apply for Membership <ArrowRight size={24} />
                     </button>
-                    <div className="mt-10 flex justify-center gap-8 text-gray-500">
-                        <div className="flex items-center gap-2"><CheckCircle size={16} className="text-green-500" /> Fast-Track Review</div>
-                        <div className="flex items-center gap-2"><CheckCircle size={16} className="text-green-500" /> Full Support</div>
-                    </div>
+
                 </div>
             </section>
 
