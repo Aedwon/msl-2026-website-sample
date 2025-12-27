@@ -739,10 +739,10 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                         : 'bg-black/40 border-white/10 hover:border-white/20'}`
                                 }>
                                     <div>
-                                        <div className="flex justify-between items-start mb-6">
-                                            {award.highlight && <Crown size={32} className="text-msl-gold mb-4" />}
+                                        <div className="flex w-full justify-between items-start mb-6">
+                                            {award.highlight ? <Crown size={32} className="text-msl-gold mb-4" /> : <div></div>}
                                             {award.grant && (
-                                                <div className="px-4 py-2 rounded-xl bg-msl-gold text-black font-black text-sm shadow-lg">
+                                                <div className="px-4 py-2 rounded-xl bg-msl-gold text-black font-black text-sm shadow-lg ml-auto">
                                                     {award.grant} Grant
                                                 </div>
                                             )}
@@ -776,22 +776,26 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                             </h3>
                             <div className="space-y-4 h-full">
                                 {AWARDS_DATA.community.map((award, i) => (
-                                    <div key={i} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-white/10 transition-all group h-full flex flex-col justify-center">
-                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
-                                            <div className="flex items-center gap-3">
-                                                <div className="p-2 rounded-lg bg-blue-900/20 text-blue-400 border border-blue-500/20">{award.icon}</div>
-                                                <h4 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">{award.title}</h4>
+                                    <div key={i} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-white/10 transition-all group h-full flex flex-col justify-between">
+                                        <div>
+                                            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="p-2 rounded-lg bg-blue-900/20 text-blue-400 border border-blue-500/20 shrink-0">{award.icon}</div>
+                                                    <h4 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">{award.title}</h4>
+                                                </div>
+                                                {award.grant && (
+                                                    <span className="px-3 py-1 rounded-xl bg-blue-500/20 text-blue-400 text-xs font-bold border border-blue-500/30 whitespace-nowrap shadow-[0_0_10px_rgba(59,130,246,0.2)]">
+                                                        {award.grant} Grant
+                                                    </span>
+                                                )}
                                             </div>
-                                            {award.grant && (
-                                                <span className="px-3 py-1 rounded-lg bg-blue-500/20 text-blue-400 text-xs font-bold border border-blue-500/30 whitespace-nowrap shadow-[0_0_10px_rgba(59,130,246,0.2)]">
-                                                    {award.grant} Grant
-                                                </span>
-                                            )}
+                                            <p className="text-gray-300 text-sm leading-relaxed mb-6 pl-[52px]">{award.desc}</p>
                                         </div>
-                                        <p className="text-gray-300 text-sm leading-relaxed mb-4 pl-[52px]">{award.desc}</p>
-                                        <div className="flex gap-2 pl-[52px]">
+                                        <div className="flex flex-wrap gap-2 pl-[52px]">
                                             {award.receivables.map((item, idx) => (
-                                                <span key={idx} className="text-[10px] uppercase text-gray-400 font-bold tracking-wider">{item}  {idx < award.receivables.length - 1 && <span className="text-gray-600 mx-1">•</span>}</span>
+                                                <span key={idx} className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-black/40 text-gray-400 border border-white/5 group-hover:border-white/10 transition-colors">
+                                                    {item}
+                                                </span>
                                             ))}
                                         </div>
                                     </div>
@@ -806,23 +810,37 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                             </h3>
                             <div className="grid gap-4 h-full">
                                 {AWARDS_DATA.individual.map((award, i) => (
-                                    <div key={i} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/30 hover:bg-white/10 transition-all h-full">
-                                        <div className="flex justify-between items-start mb-3">
-                                            <h4 className="font-bold text-white text-base">{award.title}</h4>
-                                            <span className="text-msl-gold font-bold text-xs bg-msl-gold/10 px-2.5 py-1 rounded-lg border border-msl-gold/20 shadow-[0_0_10px_rgba(234,179,8,0.1)]">{award.grant}</span>
+                                    <div key={i} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/30 hover:bg-white/10 transition-all h-full flex flex-col justify-between">
+                                        <div>
+                                            <div className="flex justify-between items-start mb-4">
+                                                <h4 className="font-bold text-white text-base">{award.title}</h4>
+                                                <span className="text-msl-gold font-bold text-xs bg-msl-gold/10 px-3 py-1 rounded-xl border border-msl-gold/20 shadow-[0_0_10px_rgba(234,179,8,0.1)]">{award.grant}</span>
+                                            </div>
+                                            <p className="text-gray-400 text-xs leading-relaxed mb-6">{award.desc}</p>
                                         </div>
-                                        <p className="text-gray-400 text-xs leading-relaxed mb-3">{award.desc}</p>
                                         <div className="flex flex-wrap gap-2 mt-auto">
                                             {award.receivables.map((item, idx) => (
-                                                <span key={idx} className="text-[10px] font-bold text-gray-500 px-1.5 py-0.5 rounded bg-black/30 border border-white/5">{item}</span>
+                                                <span key={idx} className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-black/40 text-gray-400 border border-white/5 hover:border-white/10 transition-colors">
+                                                    {item}
+                                                </span>
                                             ))}
                                         </div>
                                     </div>
                                 ))}
                                 {/* Call to action */}
-                                <div className="p-6 rounded-2xl border border-dashed border-white/10 flex items-center justify-center text-center hover:bg-white/5 transition-colors cursor-default">
-                                    <p className="text-gray-500 text-sm">Valid for <span className="text-white font-bold">Season 2026</span></p>
-                                </div>
+                                <button
+                                    onClick={() => onNavigate('nominations')}
+                                    className="p-6 rounded-2xl relative overflow-hidden group cursor-pointer h-full min-h-[160px] flex flex-col items-center justify-center text-center border border-msl-gold/30 hover:border-msl-gold/60 transition-all shadow-[0_0_20px_rgba(234,179,8,0.05)] hover:shadow-[0_0_30px_rgba(234,179,8,0.15)] bg-gradient-to-br from-msl-gold/10 via-black to-black"
+                                >
+                                    <div className="absolute inset-0 bg-msl-gold/5 blur-xl group-hover:bg-msl-gold/10 transition-colors"></div>
+                                    <div className="relative z-10 flex flex-col items-center">
+                                        <div className="p-3 rounded-full bg-msl-gold text-black mb-3 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(234,179,8,0.4)]">
+                                            <ArrowRight size={24} strokeWidth={3} />
+                                        </div>
+                                        <h4 className="text-xl font-black text-white mb-2 uppercase tracking-tight">Make a Nomination</h4>
+                                        <p className="text-msl-gold/80 text-xs font-bold uppercase tracking-widest max-w-[200px]">Season 2026 Entries Open</p>
+                                    </div>
+                                </button>
                             </div>
                         </div>
 
