@@ -19,7 +19,8 @@ import {
     MonitorPlay,
     Gift,
     Server,
-    Gamepad2
+    Gamepad2,
+    Medal
 } from 'lucide-react';
 
 interface MSLNetworkProps {
@@ -528,26 +529,108 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                         <h2 className="text-3xl font-bold text-white mb-2">Partner Leaderboard</h2>
                         <p className="text-gray-400">Top performing organizations of Season 2025</p>
                     </div>
-                    {/* Leaderboard Table mockup */}
-                    <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-                        {[
-                            { rank: 1, name: "Teletigers Esports", school: "UST", points: "12,450", trend: "up" },
-                            { rank: 2, name: "LG Esports", school: "Ateneo", points: "11,200", trend: "same" },
-                            { rank: 3, name: "Viridis Arcus", school: "DLSU", points: "10,850", trend: "up" },
-                            { rank: 4, name: "Paradigm", school: "New Era", points: "9,500", trend: "down" },
-                            { rank: 5, name: "Gearharts", school: "TIP", points: "9,100", trend: "same" },
-                        ].map((team, idx) => (
-                            <div key={idx} className="flex items-center p-4 border-b border-white/5 hover:bg-white/5 transition-colors">
-                                <div className="w-12 font-bold text-2xl text-gray-500 font-mono">#{team.rank}</div>
-                                <div className="flex-1">
-                                    <h4 className="font-bold text-white text-lg">{team.name}</h4>
-                                    <p className="text-xs text-gray-400">{team.school}</p>
+                    {/* PODIUM (Top 3) */}
+                    <div className="flex flex-col md:flex-row items-end justify-center gap-4 md:gap-8 mb-12">
+                        {/* Rank 2 */}
+                        <div className="order-2 md:order-1 w-full md:w-1/3 flex flex-col items-center">
+                            <div className="w-full bg-gray-900/80 border border-gray-700/50 rounded-t-2xl p-6 relative group overflow-hidden hover:border-gray-500 transition-all cursor-pointer">
+                                <div className="absolute top-0 left-0 w-full h-1 bg-gray-400 shadow-[0_0_15px_gray]"></div>
+                                <div className="text-center relative z-10">
+                                    <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800 border border-gray-600 text-gray-400 font-bold mb-3 shadow-lg absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">2</div>
+
+                                    {/* Logo Placeholder */}
+                                    <div className="w-16 h-16 rounded-full bg-gray-800 border-2 border-gray-600 mx-auto mb-3 flex items-center justify-center overflow-hidden shadow-lg group-hover:scale-105 transition-transform">
+                                        <span className="text-xl font-bold text-gray-500">LG</span>
+                                    </div>
+
+                                    <h3 className="text-xl font-bold text-white mb-1">LG Esports</h3>
+                                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-4">Ateneo</p>
+                                    <p className="text-2xl font-black text-white">11,200 <span className="text-xs text-gray-600 font-normal">pts</span></p>
                                 </div>
-                                <div className="text-right">
-                                    <div className="font-bold text-msl-gold text-xl">{team.points} pts</div>
+                                <div className="absolute inset-0 bg-gradient-to-b from-gray-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            </div>
+                            <div className="w-full h-24 bg-gradient-to-t from-gray-900 to-gray-800/50 border-x border-gray-800 hidden md:block opacity-50"></div>
+                        </div>
+
+                        {/* Rank 1 (Champion) */}
+                        <div className="order-1 md:order-2 w-full md:w-1/3 flex flex-col items-center z-10 -mt-8 md:mt-0">
+                            <div className="absolute md:relative -top-12 md:top-auto flex flex-col items-center">
+                                <Crown className="text-msl-gold drop-shadow-[0_0_15px_rgba(234,179,8,0.8)] animate-bounce" size={40} />
+                            </div>
+                            <div className="w-full bg-gradient-to-b from-yellow-900/20 to-black border border-msl-gold/30 rounded-t-2xl p-8 relative group overflow-hidden hover:border-msl-gold/60 transition-all cursor-pointer shadow-[0_0_50px_-20px_rgba(234,179,8,0.3)]">
+                                <div className="absolute top-0 left-0 w-full h-1 bg-msl-gold shadow-[0_0_20px_orange]"></div>
+                                <div className="text-center relative z-10">
+                                    <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black border-2 border-msl-gold text-msl-gold font-bold mb-4 shadow-[0_0_20px_rgba(234,179,8,0.3)] text-lg absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">1</div>
+
+                                    {/* Logo Placeholder */}
+                                    <div className="w-24 h-24 rounded-full bg-black border-2 border-msl-gold mx-auto mb-4 flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.2)] group-hover:scale-105 transition-transform">
+                                        <span className="text-3xl font-black text-msl-gold">UST</span>
+                                    </div>
+
+                                    <h3 className="text-2xl font-black text-white mb-1 uppercase tracking-tight">Teletigers Esports</h3>
+                                    <p className="text-sm text-msl-gold uppercase tracking-widest mb-6 font-bold">UST</p>
+                                    <div className="bg-msl-gold/10 border border-msl-gold/20 rounded-xl py-2 px-6 inline-block">
+                                        <p className="text-3xl font-black text-msl-gold">12,450 <span className="text-xs text-yellow-600 font-normal">pts</span></p>
+                                    </div>
+                                </div>
+                                <div className="absolute inset-0 bg-gradient-to-b from-msl-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            </div>
+                            <div className="w-full h-32 bg-gradient-to-t from-yellow-900/10 to-gray-900 border-x border-msl-gold/10 hidden md:block relative overflow-hidden">
+                                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+                            </div>
+                        </div>
+
+                        {/* Rank 3 */}
+                        <div className="order-3 w-full md:w-1/3 flex flex-col items-center">
+                            <div className="w-full bg-gray-900/80 border border-orange-900/30 rounded-t-2xl p-6 relative group overflow-hidden hover:border-orange-700/50 transition-all cursor-pointer">
+                                <div className="absolute top-0 left-0 w-full h-1 bg-orange-700 shadow-[0_0_15px_brown]"></div>
+                                <div className="text-center relative z-10">
+                                    <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800 border border-orange-800 text-orange-700 font-bold mb-3 shadow-lg absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">3</div>
+
+                                    {/* Logo Placeholder */}
+                                    <div className="w-16 h-16 rounded-full bg-gray-800 border-2 border-orange-800 mx-auto mb-3 flex items-center justify-center overflow-hidden shadow-lg group-hover:scale-105 transition-transform">
+                                        <span className="text-xl font-bold text-orange-700">VA</span>
+                                    </div>
+
+                                    <h3 className="text-xl font-bold text-white mb-1">Viridis Arcus</h3>
+                                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-4">DLSU</p>
+                                    <p className="text-2xl font-black text-white">10,850 <span className="text-xs text-gray-600 font-normal">pts</span></p>
+                                </div>
+                                <div className="absolute inset-0 bg-gradient-to-b from-orange-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            </div>
+                            <div className="w-full h-16 bg-gradient-to-t from-gray-900 to-gray-800/50 border-x border-gray-800 hidden md:block opacity-50"></div>
+                        </div>
+                    </div>
+
+                    {/* RUNNERS UP (List) */}
+                    <div className="max-w-2xl mx-auto space-y-3">
+                        {/* Rank 4 */}
+                        <div className="group flex items-center justify-between p-4 bg-white/5 border border-white/5 rounded-xl hover:border-white/10 hover:bg-white/10 transition-all cursor-pointer">
+                            <div className="flex items-center gap-4">
+                                <div className="w-8 h-8 flex items-center justify-center text-sm font-bold text-gray-600 bg-black rounded-lg border border-white/10 group-hover:text-white group-hover:border-white/30 transition-colors">4</div>
+                                {/* Logo Placeholder */}
+                                <div className="w-10 h-10 rounded-full bg-gray-800 border border-white/10 flex items-center justify-center text-xs font-bold text-gray-500">P</div>
+                                <div>
+                                    <h4 className="font-bold text-white text-lg">Paradigm</h4>
+                                    <p className="text-[10px] text-gray-500 uppercase tracking-widest">New Era</p>
                                 </div>
                             </div>
-                        ))}
+                            <p className="font-bold text-gray-400 group-hover:text-white transition-colors">9,500 pts</p>
+                        </div>
+
+                        {/* Rank 5 */}
+                        <div className="group flex items-center justify-between p-4 bg-white/5 border border-white/5 rounded-xl hover:border-white/10 hover:bg-white/10 transition-all cursor-pointer">
+                            <div className="flex items-center gap-4">
+                                <div className="w-8 h-8 flex items-center justify-center text-sm font-bold text-gray-600 bg-black rounded-lg border border-white/10 group-hover:text-white group-hover:border-white/30 transition-colors">5</div>
+                                {/* Logo Placeholder */}
+                                <div className="w-10 h-10 rounded-full bg-gray-800 border border-white/10 flex items-center justify-center text-xs font-bold text-gray-500">G</div>
+                                <div>
+                                    <h4 className="font-bold text-white text-lg">Gearharts</h4>
+                                    <p className="text-[10px] text-gray-500 uppercase tracking-widest">TIP</p>
+                                </div>
+                            </div>
+                            <p className="font-bold text-gray-400 group-hover:text-white transition-colors">9,100 pts</p>
+                        </div>
                     </div>
                 </div>
             </section>
