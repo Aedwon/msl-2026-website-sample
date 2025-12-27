@@ -697,51 +697,122 @@ const Partnerships: React.FC<PartnershipsProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* --- 6. WORK WITH US (Cards) --- */}
+      {/* --- 6. WORK WITH US (Interactive) --- */}
       <section id="contact" className="py-24 bg-msl-card px-4 sm:px-6 lg:px-8 border-t border-white/10">
-        <div className="max-w-4xl mx-auto bg-black border border-white/10 rounded-3xl p-8 md:p-16 shadow-2xl relative overflow-hidden">
+        <div className="max-w-4xl mx-auto bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 md:p-16 shadow-2xl relative overflow-hidden min-h-[500px] flex flex-col justify-center">
           <div className="absolute top-0 right-0 w-64 h-64 bg-msl-gold/5 blur-[80px] pointer-events-none" />
 
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">Work With Us</h2>
-            <p className="text-gray-400">
-              Whether you represent a student organization looking to join The MSL Network or a brand looking to sponsor, drop us a message.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 relative z-10">
-            {/* Card 1: Brand / Corporation */}
-            <div className="bg-[#111] p-8 rounded-3xl border border-white/5 hover:border-msl-gold/30 transition-all group flex flex-col items-start text-left">
-              <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Briefcase className="text-purple-400" size={28} />
+          {/* STATE: SELECTION */}
+          {contactState === 'selection' && (
+            <div className="animate-fade-in">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-white mb-4">Work With Us</h2>
+                <p className="text-gray-400">
+                  Whether you represent a student organization looking to join The MSL Network or a brand looking to sponsor, drop us a message.
+                </p>
               </div>
 
-              <h3 className="text-2xl font-bold text-white mb-3">I am a Brand / Corporation</h3>
-              <p className="text-gray-400 text-sm mb-8 leading-relaxed">
-                Looking to sponsor events, maximize brand visibility, or invest in the collegiate scene.
-              </p>
+              <div className="grid md:grid-cols-2 gap-6 relative z-10">
+                {/* Card 1: Brand / Corporation */}
+                <button
+                  onClick={() => setContactState('brand')}
+                  className="bg-[#111] p-8 rounded-3xl border border-white/5 hover:border-cyan-500/30 transition-all group flex flex-col items-start text-left w-full hover:-translate-y-1"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <Briefcase className="text-cyan-400" size={28} />
+                  </div>
 
-              <button className="mt-auto text-msl-gold font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-                Explore Opportunities <ArrowRight size={16} />
-              </button>
+                  <h3 className="text-2xl font-bold text-white mb-3">I am a Brand / Corporation</h3>
+                  <p className="text-gray-400 text-sm mb-8 leading-relaxed">
+                    Looking to sponsor events, maximize brand visibility, or invest in the collegiate scene.
+                  </p>
+
+                  <div className="mt-auto text-cyan-400 font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Explore Opportunities <ArrowRight size={16} />
+                  </div>
+                </button>
+
+                {/* Card 2: Campus Esports Org */}
+                <button
+                  onClick={() => setContactState('campus')}
+                  className="bg-[#111] p-8 rounded-3xl border border-white/5 hover:border-msl-gold/30 transition-all group flex flex-col items-start text-left w-full hover:-translate-y-1"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-msl-gold/10 border border-msl-gold/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <School className="text-msl-gold" size={28} />
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-white mb-3">I am a Campus Esports Org</h3>
+                  <p className="text-gray-400 text-sm mb-8 leading-relaxed">
+                    Looking to join The MSL Network, get accredited, and receive diamond funding.
+                  </p>
+
+                  <div className="mt-auto text-msl-gold font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Join The Network <ArrowRight size={16} />
+                  </div>
+                </button>
+              </div>
             </div>
+          )}
 
-            {/* Card 2: Campus Esports Org */}
-            <div className="bg-[#111] p-8 rounded-3xl border border-white/5 hover:border-blue-500/30 transition-all group flex flex-col items-start text-left">
-              <div className="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <School className="text-blue-400" size={28} />
+          {/* STATE: BRAND */}
+          {contactState === 'brand' && (
+            <div className="animate-fade-in text-center relative z-10">
+              <button
+                onClick={() => setContactState('selection')}
+                className="mb-8 px-4 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white text-sm font-bold flex items-center gap-2 mx-auto transition-colors"
+              >
+                <ChevronLeft size={14} /> Go Back
+              </button>
+
+              <div className="w-20 h-20 mx-auto rounded-3xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mb-8">
+                <Briefcase className="text-cyan-400" size={40} />
               </div>
 
-              <h3 className="text-2xl font-bold text-white mb-3">I am a Campus Esports Org</h3>
-              <p className="text-gray-400 text-sm mb-8 leading-relaxed">
-                Looking to join The MSL Network, get accredited, and receive diamond funding.
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Let's Build Something Great.</h2>
+              <p className="text-gray-400 max-w-lg mx-auto mb-10 text-lg leading-relaxed">
+                Partner with us to amplify your brand across the collegiate scene. Reach thousands of students and integrated directly into the gaming lifestyle.
               </p>
 
-              <button className="mt-auto text-blue-400 font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-                Join The Network <ArrowRight size={16} />
-              </button>
+              <a
+                href="mailto:business@moonton.com"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-msl-gold hover:bg-msl-goldHover text-black rounded-xl font-bold text-lg shadow-[0_0_20px_rgba(242,194,26,0.3)] hover:scale-105 transition-all"
+              >
+                <Mail size={20} /> Email Us
+              </a>
+
+              <p className="mt-6 text-xs text-gray-500">Direct mail to: business@moonton.com</p>
             </div>
-          </div>
+          )}
+
+          {/* STATE: CAMPUS */}
+          {contactState === 'campus' && (
+            <div className="animate-fade-in text-center relative z-10">
+              <button
+                onClick={() => setContactState('selection')}
+                className="mb-8 px-4 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white text-sm font-bold flex items-center gap-2 mx-auto transition-colors"
+              >
+                <ChevronLeft size={14} /> Go Back
+              </button>
+
+              <div className="w-20 h-20 mx-auto rounded-3xl bg-msl-gold/10 border border-msl-gold/20 flex items-center justify-center mb-8">
+                <Network className="text-msl-gold" size={40} />
+              </div>
+
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Welcome to the Network.</h2>
+              <p className="text-gray-400 max-w-lg mx-auto mb-10 text-lg leading-relaxed">
+                Join the official ecosystem for student-gamers. Get accredited, receive funding support, and connect with other leaders.
+              </p>
+
+              <button
+                onClick={() => { onNavigate('msl-network'); window.scrollTo(0, 0); }}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-msl-gold hover:bg-msl-goldHover text-black rounded-xl font-bold text-lg shadow-[0_0_20px_rgba(242,194,26,0.3)] hover:scale-105 transition-all"
+              >
+                Apply Now <ArrowRight size={20} />
+              </button>
+
+              <p className="mt-6 text-xs text-gray-500">Redirects to The MSL Network programs page</p>
+            </div>
+          )}
 
         </div>
       </section>
