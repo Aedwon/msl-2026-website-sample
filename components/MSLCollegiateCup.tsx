@@ -12,7 +12,8 @@ import {
     Shield,
     FileText,
     Target,
-    Award
+    Award,
+    ExternalLink
 } from 'lucide-react';
 
 interface MSLCollegiateCupProps {
@@ -96,34 +97,42 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
     return (
         <div className="pt-20 min-h-screen bg-msl-black text-white font-sans selection:bg-msl-gold selection:text-black">
 
-            {/* --- HERO SECTION: THE SPECTACLE --- */}
-            <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-                {/* Cinematic Background (Placeholder for Video Loop) */}
-                <div className="absolute inset-0 z-0">
-                    <img
-                        src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=2000"
-                        alt="Grand Finals Stage"
-                        className="w-full h-full object-cover opacity-40"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-msl-black via-msl-black/60 to-transparent"></div>
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20 mix-blend-overlay"></div>
-                </div>
+            {/* --- HERO IMAGE: CHAMPIONS SHOWCASE --- */}
+            <section className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden">
+                <img
+                    src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=2000"
+                    alt="Season 2 Champions"
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-msl-black"></div>
 
-                <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
+                {/* Overlay Text positioned at bottom */}
+                <div className="absolute bottom-0 left-0 w-full p-8 text-center pb-24 md:pb-32">
+                    <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black/80 backdrop-blur-xl border border-msl-gold/50 text-white text-xs font-bold uppercase tracking-widest mb-4 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+                        <Trophy size={14} className="text-msl-gold" />
+                        <span className="text-gray-400">Season 2 Champions:</span>
+                        <span className="text-white">UST Teletigers</span>
+                    </div>
+                </div>
+            </section>
+
+            {/* --- TOURNAMENT TITLE & REGISTRATION --- */}
+            <section className="relative -mt-20 z-10 px-4 pb-20">
+                <div className="max-w-7xl mx-auto text-center">
 
                     {/* Season Badge */}
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-msl-gold/10 border border-msl-gold/30 text-msl-gold text-sm font-bold uppercase tracking-widest mb-8 animate-fade-in-up uppercase">
-                        <Trophy size={14} /> Season 3 (2026)
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-msl-gold/10 border border-msl-gold/30 text-msl-gold text-sm font-bold uppercase tracking-widest mb-8 animate-fade-in-up">
+                        Season 3 (2026)
                     </div>
 
-                    <h1 className="text-5xl md:text-8xl font-black text-white leading-[1] mb-6 tracking-tighter drop-shadow-2xl animate-fade-in-up delay-100 uppercase">
+                    <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.9] mb-6 tracking-tighter drop-shadow-2xl animate-fade-in-up delay-100 uppercase">
                         MSL Collegiate <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-msl-gold via-yellow-200 to-msl-gold">Cup</span>
                     </h1>
 
                     <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-12 animate-fade-in-up delay-200 font-medium">
                         The Philippines' biggest collegiate esports tournament. <br />
-                        <span className="text-msl-gold">300+ Universities. One Champion.</span>
+                        <span className="text-msl-gold">1000+ Teams. One Champion.</span>
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-300">
@@ -135,48 +144,83 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                         </button>
                     </div>
 
-                    {/* Quick Stats Ticker */}
-                    <div className="mt-16 flex flex-wrap justify-center gap-8 md:gap-16 text-gray-500 font-bold uppercase tracking-widest text-xs md:text-sm animate-fade-in-up delay-500 opacity-70">
-                        <div className="flex items-center gap-2"><div className="w-2 h-2 bg-msl-gold rounded-full"></div> ₱1,000,000 Prize Pool</div>
-                        <div className="flex items-center gap-2"><div className="w-2 h-2 bg-blue-500 rounded-full"></div> LAN Finals @ MOA Arena</div>
-                        <div className="flex items-center gap-2"><div className="w-2 h-2 bg-purple-500 rounded-full"></div> Official MPL Pathway</div>
+                    {/* Quick Stats (Redesigned - Frameless/HUD Style) */}
+                    <div className="mt-20 max-w-6xl mx-auto animate-fade-in-up delay-500">
+                        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 relative">
+                            {/* Glow Effect behind stats */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-r from-msl-gold/5 via-blue-500/5 to-purple-500/5 blur-3xl rounded-full pointer-events-none"></div>
+
+                            <div className="pb-8 md:pb-0 md:px-8 text-center relative group">
+                                <div className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-2 flex items-center justify-center gap-2">
+                                    <Trophy size={14} className="text-msl-gold group-hover:scale-110 transition-transform" /> Prize Pool
+                                </div>
+                                <div className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-msl-gold to-yellow-600 drop-shadow-sm">₱500,000</div>
+                                <div className="mt-2 text-xs text-gray-400 font-medium">Season 3 Total Cash Prize</div>
+                            </div>
+
+                            <div className="py-8 md:py-0 md:px-8 text-center relative group">
+                                <div className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-2 flex items-center justify-center gap-2">
+                                    <MapPin size={14} className="text-blue-500 group-hover:scale-110 transition-transform" /> Venue
+                                </div>
+                                <div className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">TBA</div>
+                                <div className="mt-2 text-xs text-gray-400 font-medium">Live LAN Grand Finals</div>
+                            </div>
+
+                            <div className="pt-8 md:pt-0 md:px-8 text-center relative group">
+                                <div className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-2 flex items-center justify-center gap-2">
+                                    <Target size={14} className="text-purple-500 group-hover:scale-110 transition-transform" /> Pathway
+                                </div>
+                                <div className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-purple-400 to-purple-700">MDL PH</div>
+                                <div className="mt-2 text-xs text-gray-400 font-medium">Official Pro League Qualifier</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* --- MATCH CENTER (Horizontal Scroll) --- */}
-            <section className="py-8 bg-black/60 border-y border-white/10 overflow-hidden backdrop-blur-sm sticky top-20 z-40">
-                <div className="max-w-7xl mx-auto px-4">
-                    <div className="flex items-center gap-4 mb-4">
-                        <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                        <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400">Match Center</h3>
+            {/* --- MATCH CENTER (Compact & Sticky) --- */}
+            <section className="py-3 bg-[#050505]/90 border-y border-white/5 overflow-hidden backdrop-blur-xl sticky top-20 z-40 shadow-2xl">
+                <div className="max-w-7xl mx-auto px-4 flex items-center gap-6 overflow-x-auto scrollbar-hide">
+                    {/* Label */}
+                    <div className="hidden md:flex items-center gap-3 shrink-0 pr-6 border-r border-white/10">
+                        <div className="relative">
+                            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse absolute top-0 right-0"></div>
+                            <MonitorPlay size={18} className="text-gray-400" />
+                        </div>
+                        <div>
+                            <h3 className="text-[10px] font-black uppercase tracking-widest text-white leading-tight">Match Center</h3>
+                            <div className="text-[9px] text-gray-500 font-bold uppercase">Live & Upcoming</div>
+                        </div>
                     </div>
 
-                    <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
-                        {/* LIVE MATCH CARD */}
+                    <div className="flex gap-3">
+                        {/* MATCH CARDS */}
                         {UPCOMING_MATCHES.map((match) => (
-                            <div key={match.id} className={`snap-center shrink-0 w-[280px] md:w-[320px] rounded-xl border p-4 relative overflow-hidden group transition-all ${match.isLive ? 'bg-gradient-to-br from-red-900/20 to-black border-red-500/30 shadow-[0_0_20px_rgba(220,38,38,0.2)]' : 'bg-[#121212] border-white/5 hover:border-white/10'}`}>
-                                {match.isLive && (
-                                    <div className="absolute top-3 right-3 px-2 py-0.5 bg-red-600 text-white text-[10px] font-bold uppercase rounded animate-pulse">
-                                        Live
+                            <div key={match.id} className={`shrink-0 w-[260px] rounded-lg border px-3 py-2.5 relative group transition-all flex items-center justify-between gap-3 ${match.isLive ? 'bg-gradient-to-r from-red-900/20 to-black border-red-500/30' : 'bg-[#121212] border-white/5 hover:border-white/10'}`}>
+                                <div className="flex items-center gap-3 flex-1 min-w-0">
+                                    <div className="flex items-center gap-1.5 flex-1 min-w-0">
+                                        <div className={`font-black text-xs truncate ${match.team1.color}`}>{match.team1.code}</div>
+                                        <div className="text-[9px] text-gray-600 font-black">vs</div>
+                                        <div className={`font-black text-xs truncate ${match.team2.color}`}>{match.team2.code}</div>
                                     </div>
-                                )}
-                                <div className="flex justify-between items-center mb-4 mt-2">
-                                    <div className="text-center w-1/3">
-                                        <div className={`w-12 h-12 mx-auto rounded-full bg-gray-800 border flex items-center justify-center font-black ${match.team1.color} text-xl mb-2`}>{match.team1.logo}</div>
-                                        <div className="text-xs font-bold uppercase truncate px-1">{match.team1.code}</div>
-                                    </div>
-                                    <div className="text-center w-1/3">
-                                        <div className="text-xl font-black text-white italic">VS</div>
-                                        <div className="text-[10px] text-gray-500 font-mono mt-1">{match.series}</div>
-                                    </div>
-                                    <div className="text-center w-1/3">
-                                        <div className={`w-12 h-12 mx-auto rounded-full bg-gray-800 border flex items-center justify-center font-black ${match.team2.color} text-xl mb-2`}>{match.team2.logo}</div>
-                                        <div className="text-xs font-bold uppercase truncate px-1">{match.team2.code}</div>
-                                    </div>
-                                </div>
-                                <div className={`text-center py-2 rounded-lg text-xs font-bold uppercase tracking-wider ${match.isLive ? 'bg-red-500/10 text-red-500 border border-red-500/20' : 'bg-white/5 text-gray-500'}`}>
-                                    {match.time}
+                                    {match.isLive ? (
+                                        <div className="flex gap-1 shrink-0">
+                                            {/* Social Mock Icons */}
+                                            <div className="w-5 h-5 rounded bg-[#1877F2] flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" title="Watch on Facebook">
+                                                <svg viewBox="0 0 24 24" fill="white" width="10" height="10"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036c-2.148 0-2.971.742-2.971 2.28v1.692h3.945l-1.008 3.667h-2.937v7.98H9.101z"></path></svg>
+                                            </div>
+                                            <div className="w-5 h-5 rounded bg-[#FF0000] flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" title="Watch on YouTube">
+                                                <svg viewBox="0 0 24 24" fill="white" width="10" height="10"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+                                            </div>
+                                            <div className="w-5 h-5 rounded bg-black border border-white/20 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer" title="Watch on TikTok">
+                                                <svg viewBox="0 0 24 24" fill="white" width="10" height="10"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"></path></svg>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="bg-white/5 border border-white/5 px-2 py-0.5 rounded text-[9px] font-bold text-gray-500 uppercase tracking-wider">
+                                            {match.time}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}
@@ -298,23 +342,26 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
 
                         {/* RULES VIEW */}
                         {activeInfoSection === 'rules' && (
-                            <div className="animate-fade-in grid md:grid-cols-2 gap-6">
-                                <div className="bg-[#121212] p-6 rounded-2xl border border-white/10">
-                                    <h4 className="text-white font-bold text-lg mb-4 flex items-center gap-2"><Shield size={18} className="text-msl-gold" /> Player Eligibility</h4>
-                                    <ul className="space-y-3 text-gray-400 text-sm list-disc pl-5">
-                                        <li>Must be currently enrolled in the representing university.</li>
-                                        <li>No professional players (MPL/MDL) active in the last season.</li>
-                                        <li>Minimum Grade Point Average (GPA) requirements apply.</li>
-                                    </ul>
+                            <div className="animate-fade-in w-full h-[600px] bg-[#121212] rounded-2xl border border-white/10 overflow-hidden relative group">
+                                <div className="absolute top-4 right-4 z-10">
+                                    <a
+                                        href="https://msl-philippines.notion.site/ebd/2a66a35bd22f80ca9183d186718ae814"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-4 py-2 bg-black/80 hover:bg-black text-white text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 flex items-center gap-2 transition-all hover:scale-105 shadow-xl"
+                                    >
+                                        <ExternalLink size={12} /> Open in Notion
+                                    </a>
                                 </div>
-                                <div className="bg-[#121212] p-6 rounded-2xl border border-white/10">
-                                    <h4 className="text-white font-bold text-lg mb-4 flex items-center gap-2"><MonitorPlay size={18} className="text-blue-500" /> Technical Rules</h4>
-                                    <ul className="space-y-3 text-gray-400 text-sm list-disc pl-5">
-                                        <li>Devices restricted to mobile phones only (No Tablets/Emulators).</li>
-                                        <li>Disconnection pause allowance: 5 mins per team/game.</li>
-                                        <li>Draft Mode: Tournament Draft (6 Bans).</li>
-                                    </ul>
-                                </div>
+                                <iframe
+                                    src="https://msl-philippines.notion.site/ebd/2a66a35bd22f80ca9183d186718ae814"
+                                    width="100%"
+                                    height="100%"
+                                    frameBorder="0"
+                                    allowFullScreen
+                                    className="w-full h-full"
+                                    title="Tournament Rules"
+                                />
                             </div>
                         )}
 
