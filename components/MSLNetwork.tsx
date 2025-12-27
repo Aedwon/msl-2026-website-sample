@@ -38,7 +38,7 @@ const TIERS = [
         borderColor: 'border-white/10',
         bg: 'bg-white/5',
         diamonds: '50,000',
-        reqs: { turnouts: '8 - 15', members: '< 100', participation: '≤ 5%' },
+        reqs: { turnouts: '40+', members: '< 100', participation: '≤ 5%' },
         compliance: { accreditation: false, endorsement: false, monetary: false },
         perks: { activations: 'Low Priority', creative: 'N/A' }
     },
@@ -50,7 +50,7 @@ const TIERS = [
         borderColor: 'border-blue-500/30',
         bg: 'bg-blue-900/10',
         diamonds: '70,000',
-        reqs: { turnouts: '16 - 31', members: '100 - 250', participation: '5% - 15%' },
+        reqs: { turnouts: '80+', members: '100+', participation: '5%+' },
         compliance: { accreditation: false, endorsement: false, monetary: false },
         perks: { activations: 'Moderate Priority', creative: 'Basic Access' }
     },
@@ -62,7 +62,7 @@ const TIERS = [
         borderColor: 'border-purple-500/30',
         bg: 'bg-purple-900/10',
         diamonds: '100,000',
-        reqs: { turnouts: '≥ 24', members: '> 250', participation: '> 15%' },
+        reqs: { turnouts: '120+', members: '250+', participation: '15%+' },
         compliance: { accreditation: true, endorsement: true, monetary: true },
         perks: { activations: 'High Priority', creative: 'Full Access' }
     },
@@ -74,7 +74,7 @@ const TIERS = [
         borderColor: 'border-msl-gold/50',
         bg: 'bg-yellow-900/10',
         diamonds: '150,000',
-        reqs: { turnouts: 'Waived', members: 'Waived', participation: 'Waived' },
+        reqs: { turnouts: 'N/A', members: 'N/A', participation: 'N/A' },
         compliance: { accreditation: true, endorsement: true, monetary: true },
         perks: { activations: 'First Priority', creative: 'Full Access' },
         isSpecial: true
@@ -500,7 +500,7 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                         <div className="flex flex-col items-end gap-6 text-right">
                                             <div className="hidden md:block">
                                                 <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Entry Gate</div>
-                                                <div className="text-xl font-bold text-white">{activeTier.id === 'tier-ss' ? 'Waived' : activeTier.reqs.turnouts}</div>
+                                                <div className="text-xl font-bold text-white">{activeTier.id === 'tier-ss' ? 'N/A' : activeTier.reqs.turnouts}</div>
                                             </div>
                                             <div className="w-16 h-16 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center text-gray-400">
                                                 {activeTier.isSpecial ? <Crown size={32} className="text-msl-gold animate-pulse" /> : <Target size={32} />}
@@ -534,9 +534,9 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                                     <p className={`font-black uppercase tracking-tight ${activeTier.id === 'tier-ss' ? 'text-msl-gold drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]' : 'text-white'} text-lg sm:text-2xl`}>{activeTier.reqs.participation}</p>
                                                 </div>
                                                 <div>
-                                                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">Team Turnout</p>
+                                                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">Turnout</p>
                                                     <p className={`font-black uppercase tracking-tight ${activeTier.id === 'tier-ss' ? 'text-msl-gold drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]' : 'text-white'} text-lg sm:text-2xl`}>
-                                                        {activeTier.id === 'tier-ss' ? 'Waived' : activeTier.reqs.turnouts}
+                                                        {activeTier.id === 'tier-ss' ? 'N/A' : activeTier.reqs.turnouts}
                                                     </p>
                                                 </div>
                                             </div>
