@@ -39,8 +39,8 @@ const TIERS = [
         bg: 'bg-white/5',
         diamonds: '50,000',
         reqs: { turnouts: '40+', members: '< 100', participation: '≤ 5%' },
-        compliance: { accreditation: false, endorsement: false, monetary: false },
-        perks: { activations: 'Low Priority', creative: 'N/A' }
+        compliance: { accreditation: false, endorsement: false },
+        perks: { activations: 'Low', creative: 'N/A', monetary: false }
     },
     {
         id: 'tier-b',
@@ -51,8 +51,8 @@ const TIERS = [
         bg: 'bg-blue-900/10',
         diamonds: '70,000',
         reqs: { turnouts: '80+', members: '100+', participation: '5%+' },
-        compliance: { accreditation: false, endorsement: false, monetary: false },
-        perks: { activations: 'Moderate Priority', creative: 'Basic Access' }
+        compliance: { accreditation: false, endorsement: false },
+        perks: { activations: 'Moderate', creative: 'Basic Access', monetary: false }
     },
     {
         id: 'tier-a',
@@ -63,8 +63,8 @@ const TIERS = [
         bg: 'bg-purple-900/10',
         diamonds: '100,000',
         reqs: { turnouts: '120+', members: '250+', participation: '15%+' },
-        compliance: { accreditation: true, endorsement: true, monetary: true },
-        perks: { activations: 'High Priority', creative: 'Full Access' }
+        compliance: { accreditation: true, endorsement: true },
+        perks: { activations: 'High', creative: 'Full Access', monetary: true }
     },
     {
         id: 'tier-ss',
@@ -75,8 +75,8 @@ const TIERS = [
         bg: 'bg-yellow-900/10',
         diamonds: '150,000',
         reqs: { turnouts: 'N/A', members: 'N/A', participation: 'N/A' },
-        compliance: { accreditation: true, endorsement: true, monetary: true },
-        perks: { activations: 'First Priority', creative: 'Full Access' },
+        compliance: { accreditation: true, endorsement: true },
+        perks: { activations: 'First Priority', creative: 'Full Access', monetary: true },
         isSpecial: true
     }
 ];
@@ -439,7 +439,7 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                     <button
                                         key={tier.id}
                                         onClick={() => setActiveTier(tier)}
-                                        className={`relative z-10 group transition-all duration-300 focus:outline-none focus:scale-95 active:scale-90 ${isActive ? 'scale-110' : 'hover:scale-105'}`}
+                                        className={`relative z-10 group transition-all duration-300 outline-none focus:outline-none ring-0 focus:ring-0 focus:scale-95 active:scale-90 ${isActive ? 'scale-110' : 'hover:scale-105'}`}
                                     >
                                         {/* Node Circle */}
                                         <div className={`w-14 h-14 lg:w-20 lg:h-20 rounded-full border-4 flex items-center justify-center transition-all duration-500 bg-[#0a0a0a] relative
@@ -545,23 +545,39 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                             <div className={`p-2 rounded-lg bg-gray-800 ${activeTier.color}`}><Star size={20} /></div>
                                             <p className="text-xs font-bold text-gray-500 uppercase">Perks & Privileges</p>
                                         </div>
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
                                             <div>
                                                 <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2 text-gray-400">Event Activation Priority</p>
                                                 <div className="flex items-center gap-3">
                                                     <div className={`h-2 w-2 rounded-full ${activeTier.perks.activations.includes('High') || activeTier.perks.activations.includes('First') ? 'bg-green-500 shadow-[0_0_10px_lime]' : 'bg-gray-600'}`}></div>
-                                                    <p className="text-2xl font-black text-white">{activeTier.perks.activations}</p>
+                                                    <p className="text-xl md:text-2xl font-black text-white leading-none">{activeTier.perks.activations}</p>
                                                 </div>
                                             </div>
                                             <div>
                                                 <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-1 text-gray-400">
-                                                    Creative Growth Space <span className="text-gray-600">*</span>
+                                                    Creative Space <span className="text-gray-600">*</span>
                                                 </p>
                                                 <div className="flex items-center gap-3">
                                                     <div className={`h-2 w-2 rounded-full ${activeTier.perks.creative === 'Full Access' ? 'bg-purple-500 shadow-[0_0_10px_magenta]' : 'bg-gray-600'}`}></div>
-                                                    <p className="text-2xl font-black text-white">{activeTier.perks.creative}</p>
+                                                    <p className="text-xl md:text-2xl font-black text-white leading-none">{activeTier.perks.creative}</p>
                                                 </div>
                                                 <p className="text-[9px] text-gray-600 italic mt-1">* Subject to availability</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-1 text-gray-400">
+                                                    Monetary Sponsorship {!activeTier.perks.monetary && <span className="text-gray-600">*</span>}
+                                                </p>
+                                                <div className="flex items-center gap-3">
+                                                    <div className={`h-2 w-2 rounded-full ${activeTier.perks.monetary ? 'bg-msl-gold shadow-[0_0_10px_orange]' : 'bg-gray-600'}`}></div>
+                                                    <p className={`text-xl md:text-2xl font-black leading-none ${activeTier.perks.monetary ? 'text-msl-gold' : 'text-gray-500'}`}>
+                                                        {activeTier.perks.monetary ? 'Eligible' : 'Locked'}
+                                                    </p>
+                                                </div>
+                                                {!activeTier.perks.monetary && (
+                                                    <p className="text-[9px] text-gray-600 italic mt-1">
+                                                        * Limited. Pitch Deck required.
+                                                    </p>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -571,18 +587,14 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                         <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 flex items-center gap-2">
                                             <Shield size={14} /> Compliance Gate
                                         </p>
-                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${activeTier.compliance.accreditation ? 'bg-green-500/10 border-green-500/20 text-green-400' : 'bg-white/5 border-white/5 text-gray-600 opacity-60'}`}>
                                                 <CheckCircle size={18} />
-                                                <span className="text-sm font-bold">University Accredited</span>
+                                                <span className="text-sm font-bold">Recognized by School</span>
                                             </div>
                                             <div className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${activeTier.compliance.endorsement ? 'bg-blue-500/10 border-blue-500/20 text-blue-400' : 'bg-white/5 border-white/5 text-gray-600 opacity-60'}`}>
                                                 <CheckCircle size={18} />
-                                                <span className="text-sm font-bold">Org Endorsement</span>
-                                            </div>
-                                            <div className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${activeTier.compliance.monetary ? 'bg-msl-gold/10 border-msl-gold/20 text-msl-gold' : 'bg-white/5 border-white/5 text-gray-600 opacity-60'}`}>
-                                                <CheckCircle size={18} />
-                                                <span className="text-sm font-bold">Cash Eligible</span>
+                                                <span className="text-sm font-bold">Endorsed by Adviser</span>
                                             </div>
                                         </div>
                                     </div>
