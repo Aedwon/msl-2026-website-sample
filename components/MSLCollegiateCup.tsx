@@ -133,29 +133,22 @@ const UPCOMING_MATCHES = [
     }
 ];
 
-const SCHEDULE_WEEKS = [
-    { id: 'w1', label: 'Week 1', date: 'Feb 12-14' },
-    { id: 'w2', label: 'Week 2', date: 'Feb 19-21' },
-    { id: 'w3', label: 'Week 3', date: 'Feb 26-28' },
-    { id: 'po', label: 'Playoffs', date: 'Mar 15-17' },
+// --- CALENDAR DATA (Jan - July 2026) ---
+const CALENDAR_MONTHS = [
+    { id: 0, name: 'January', days: 31, startDay: 4, stages: [{ name: 'Community Rivals Ph1', start: 10, end: 25, color: 'bg-gray-600', textColor: 'text-gray-300' }] },
+    { id: 1, name: 'February', days: 28, startDay: 0, stages: [{ name: 'Community Rivals Ph2', start: 5, end: 20, color: 'bg-gray-600', textColor: 'text-gray-300' }] },
+    { id: 2, name: 'March', days: 31, startDay: 0, stages: [{ name: 'University Rivals', start: 1, end: 15, color: 'bg-indigo-600', textColor: 'text-indigo-200' }, { name: 'Wildcards', start: 20, end: 31, color: 'bg-indigo-900', textColor: 'text-indigo-300' }] },
+    { id: 3, name: 'April', days: 30, startDay: 3, stages: [{ name: 'Group Stage Draw', start: 5, end: 5, color: 'bg-blue-600', textColor: 'text-white' }, { name: 'Media Day', start: 12, end: 12, color: 'bg-blue-500', textColor: 'text-white' }] },
+    { id: 4, name: 'May', days: 31, startDay: 5, stages: [{ name: 'Group Stage: Wk 1', start: 2, end: 3, color: 'bg-blue-600', textColor: 'text-blue-100' }, { name: 'Group Stage: Wk 2', start: 9, end: 10, color: 'bg-blue-600', textColor: 'text-blue-100' }, { name: 'Group Stage: Wk 3', start: 16, end: 17, color: 'bg-blue-600', textColor: 'text-blue-100' }, { name: 'Group Stage: Wk 4', start: 23, end: 24, color: 'bg-blue-600', textColor: 'text-blue-100' }] },
+    { id: 5, name: 'June', days: 30, startDay: 1, stages: [{ name: 'Playoffs', start: 15, end: 20, color: 'bg-purple-600', textColor: 'text-purple-100' }] },
+    { id: 6, name: 'July', days: 31, startDay: 3, stages: [{ name: 'GRAND FINALS', start: 24, end: 26, color: 'bg-msl-gold', textColor: 'text-black font-black' }] },
 ];
 
-const MATCH_SCHEDULE = [
-    {
-        date: 'Wednesday, Feb 12',
-        matches: [
-            { team1: 'UST', team2: 'DLSU', time: '1:00 PM', score: '2 - 1' },
-            { team1: 'ADMU', team2: 'UP', time: '3:30 PM', score: '0 - 2' },
-        ]
-    },
-    {
-        date: 'Thursday, Feb 13',
-        matches: [
-            { team1: 'FEU', team2: 'UE', time: '1:00 PM', score: '-' },
-            { team1: 'NU', team2: 'AdU', time: '3:30 PM', score: '-' },
-        ]
-    }
-];
+const CALENDAR_MATCHES: Record<string, any[]> = {
+    '4-2': [{ team1: 'UST', team2: 'DLSU', time: '1:00 PM' }, { team1: 'ADMU', team2: 'UP', time: '3:30 PM' }],
+    '4-3': [{ team1: 'FEU', team2: 'UE', time: '1:00 PM' }, { team1: 'NU', team2: 'AdU', time: '3:30 PM' }],
+    '6-26': [{ team1: 'TBD', team2: 'TBD', time: '5:00 PM', label: 'Grand Finals' }]
+};
 
 const STANDINGS = [
     { rank: 1, team: 'Teletigers', code: 'UST', w: 3, l: 0, pts: 9 },
@@ -174,6 +167,8 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
     const [activeTab, setActiveTab] = useState<'overview' | 'bracket' | 'teams' | 'schedule'>('overview');
     const [activeInfoSection, setActiveInfoSection] = useState<'format' | 'schedule' | 'prizing' | 'rules'>('format');
     const [selectedStage, setSelectedStage] = useState(TOURNAMENT_STAGES[0]);
+    const [activeMonth, setActiveMonth] = useState(0);
+    const [selectedDate, setSelectedDate] = useState<{ month: number, day: number } | null>(null);
 
     // Scroll to top on mount
     useEffect(() => {
@@ -531,34 +526,147 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                             </div>
                         )}
 
-                        {/* SCHEDULE VIEW */}
+                        {/* SCHEDULE VIEW (CALENDAR) */}
                         {activeInfoSection === 'schedule' && (
                             <div className="animate-fade-in">
-                                {/* Week Toggles */}
-                                <div className="flex overflow-x-auto gap-4 mb-8 pb-2 scrollbar-hide">
-                                    {SCHEDULE_WEEKS.map(week => (
-                                        <button key={week.id} className="px-6 py-2 rounded-full border border-white/10 bg-white/5 hover:border-msl-gold/50 text-gray-300 whitespace-nowrap text-sm font-bold uppercase tracking-wider transition-all">
-                                            {week.label} <span className="opacity-50 text-[10px] ml-1">({week.date})</span>
+                                {/* Month Selector */}
+                                <div className="flex overflow-x-auto gap-2 mb-8 pb-2 scrollbar-hide">
+                                    {CALENDAR_MONTHS.map((month) => (
+                                        <button
+                                            key={month.id}
+                                            onClick={() => { setActiveMonth(month.id); setSelectedDate(null); }}
+                                            className={`px-6 py-3 rounded-xl border whitespace-nowrap text-sm font-bold uppercase tracking-wider transition-all
+                                                ${activeMonth === month.id
+                                                    ? 'bg-white text-black border-white shadow-lg scale-105'
+                                                    : 'bg-[#121212] border-white/10 text-gray-500 hover:text-gray-300 hover:border-white/30'}
+                                            `}
+                                        >
+                                            {month.name} <span className="opacity-40 ml-1">2026</span>
                                         </button>
                                     ))}
                                 </div>
-                                {/* Matches List */}
-                                <div className="space-y-4">
-                                    {MATCH_SCHEDULE.map((day, i) => (
-                                        <div key={i}>
-                                            <h4 className="text-msl-gold font-bold uppercase tracking-widest text-xs mb-4 pl-2 border-l-2 border-msl-gold">{day.date}</h4>
-                                            <div className="grid md:grid-cols-2 gap-4">
-                                                {day.matches.map((match, j) => (
-                                                    <div key={j} className="bg-[#121212] border border-white/5 p-4 rounded-xl flex justify-between items-center hover:border-white/20 transition-all">
-                                                        <div className="font-bold text-white w-24 text-right">{match.team1}</div>
-                                                        <div className="px-4 py-1 bg-white/5 rounded text-sm font-mono text-gray-400">{match.score}</div>
-                                                        <div className="font-bold text-white w-24 text-left">{match.team2}</div>
-                                                        <div className="text-xs text-gray-500 uppercase font-bold ml-4">{match.time}</div>
-                                                    </div>
+
+                                <div className="grid lg:grid-cols-3 gap-8">
+                                    {/* CALENDAR GRID */}
+                                    <div className="lg:col-span-2">
+                                        <div className="bg-[#121212] border border-white/10 rounded-3xl p-6 md:p-8">
+                                            {/* Days Header */}
+                                            <div className="grid grid-cols-7 mb-4">
+                                                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
+                                                    <div key={d} className="text-center text-[10px] uppercase font-bold text-gray-600 tracking-widest">{d}</div>
                                                 ))}
                                             </div>
+
+                                            {/* Days Grid */}
+                                            <div className="grid grid-cols-7 gap-2 md:gap-4">
+                                                {/* Empty Padding Days */}
+                                                {[...Array(CALENDAR_MONTHS[activeMonth].startDay)].map((_, i) => (
+                                                    <div key={`empty-${i}`} className="aspect-square"></div>
+                                                ))}
+
+                                                {/* Actual Days */}
+                                                {[...Array(CALENDAR_MONTHS[activeMonth].days)].map((_, i) => {
+                                                    const day = i + 1;
+                                                    const currentMonth = CALENDAR_MONTHS[activeMonth];
+
+                                                    // Check for events/stages covering this day
+                                                    const activeStage = currentMonth.stages.find(s => day >= s.start && day <= s.end);
+                                                    // Check for matches
+                                                    const hasMatches = CALENDAR_MATCHES[`${activeMonth}-${day}`];
+
+                                                    return (
+                                                        <button
+                                                            key={day}
+                                                            onClick={() => setSelectedDate({ month: activeMonth, day })}
+                                                            className={`aspect-square rounded-xl border relative group transition-all flex flex-col items-center justify-start pt-2
+                                                                ${selectedDate?.day === day && selectedDate?.month === activeMonth
+                                                                    ? 'bg-white/10 border-white text-white z-10 scale-110 shadow-xl'
+                                                                    : hasMatches
+                                                                        ? 'bg-[#1a1a1a] border-white/20 text-gray-300 hover:border-white/50 hover:bg-[#252525]'
+                                                                        : 'bg-[#0a0a0a] border-white/5 text-gray-600 hover:border-white/10'}
+                                                            `}
+                                                        >
+                                                            <div className="text-sm font-bold">{day}</div>
+
+                                                            {/* Stage Indicator Bar */}
+                                                            {activeStage && (
+                                                                <div className={`absolute bottom-2 left-1 right-1 h-1.5 rounded-full ${activeStage.color}`}></div>
+                                                            )}
+
+                                                            {/* Match Dot */}
+                                                            {hasMatches && !activeStage && (
+                                                                <div className="w-1.5 h-1.5 bg-white rounded-full mt-2 animate-pulse"></div>
+                                                            )}
+                                                        </button>
+                                                    );
+                                                })}
+                                            </div>
                                         </div>
-                                    ))}
+                                    </div>
+
+                                    {/* DAY DETAILS / LEGEND */}
+                                    <div className="lg:col-span-1">
+                                        <div className="bg-[#121212] border border-white/10 rounded-3xl p-6 h-full flex flex-col">
+
+                                            {selectedDate ? (
+                                                <div className="animate-fade-in">
+                                                    <div className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1">
+                                                        {CALENDAR_MONTHS[selectedDate.month].name} {selectedDate.day}, 2026
+                                                    </div>
+                                                    <h3 className="text-2xl font-black text-white uppercase mb-6">Events</h3>
+
+                                                    {CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end) && (
+                                                        <div className={`p-4 rounded-xl mb-4 ${CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end)?.color}`}>
+                                                            <div className={`font-black uppercase text-sm ${CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end)?.textColor}`}>
+                                                                {CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end)?.name}
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                    {CALENDAR_MATCHES[`${selectedDate.month}-${selectedDate.day}`] ? (
+                                                        <div className="space-y-3">
+                                                            {CALENDAR_MATCHES[`${selectedDate.month}-${selectedDate.day}`].map((match, idx) => (
+                                                                <div key={idx} className="bg-black/40 border border-white/10 p-3 rounded-lg">
+                                                                    <div className="flex justify-between items-center mb-1">
+                                                                        <div className="text-xs font-bold text-gray-400">{match.time}</div>
+                                                                        {match.label && <div className="text-[9px] font-bold bg-msl-gold text-black px-1.5 py-0.5 rounded">{match.label}</div>}
+                                                                    </div>
+                                                                    <div className="font-bold text-white text-sm">
+                                                                        {match.team1} <span className="text-gray-600 px-1">vs</span> {match.team2}
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    ) : (
+                                                        !CALENDAR_MONTHS[selectedDate.month].stages.find(s => selectedDate.day >= s.start && selectedDate.day <= s.end) && (
+                                                            <div className="text-gray-500 italic text-sm">No matches scheduled.</div>
+                                                        )
+                                                    )}
+                                                </div>
+                                            ) : (
+                                                <div className="flex flex-col h-full justify-center text-center opacity-40">
+                                                    <Calendar size={48} className="mx-auto mb-4 text-gray-600" />
+                                                    <p className="text-sm text-gray-400 font-bold uppercase tracking-wider">Select a date to view details</p>
+                                                </div>
+                                            )}
+
+                                            {/* Legend at bottom */}
+                                            <div className="mt-auto pt-8 border-t border-white/5">
+                                                <div className="text-[10px] font-bold uppercase tracking-widest text-gray-600 mb-3">Legend</div>
+                                                <div className="space-y-2">
+                                                    <div className="flex items-center gap-2">
+                                                        <div className="w-3 h-3 rounded-full bg-gray-600"></div><span className="text-xs text-gray-400">Qualifiers</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-2">
+                                                        <div className="w-3 h-3 rounded-full bg-blue-600"></div><span className="text-xs text-gray-400">Group Stage</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-2">
+                                                        <div className="w-3 h-3 rounded-full bg-msl-gold"></div><span className="text-xs text-gray-400">Championships</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         )}
