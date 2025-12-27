@@ -30,46 +30,46 @@ const TIERS = [
     {
         id: 'tier-c',
         name: 'Tier C',
-        label: 'The Rising Star',
         color: 'text-gray-400',
         borderColor: 'border-white/10',
         bg: 'bg-white/5',
         diamonds: '50,000',
-        reqs: { turnouts: '8 - 15 Teams', members: '≤ 100', participation: '≤ 5%' },
-        compliance: { accreditation: false, adviser: false, monetary: false }
+        reqs: { turnouts: '8 - 15 Teams', members: '< 100', participation: '≤ 5%' },
+        compliance: { accreditation: false, endorsement: false, monetary: false },
+        perks: { activations: 'Low Priority', creative: 'N/A' }
     },
     {
         id: 'tier-b',
         name: 'Tier B',
-        label: 'Community Pillar',
         color: 'text-blue-400',
         borderColor: 'border-blue-500/30',
         bg: 'bg-blue-900/10',
         diamonds: '70,000',
         reqs: { turnouts: '16 - 31 Teams', members: '100 - 250', participation: '5% - 15%' },
-        compliance: { accreditation: false, adviser: false, monetary: false }
+        compliance: { accreditation: false, endorsement: false, monetary: false },
+        perks: { activations: 'Moderate Priority', creative: 'Basic Access' }
     },
     {
         id: 'tier-a',
         name: 'Tier A',
-        label: 'Region Leader',
         color: 'text-purple-400',
         borderColor: 'border-purple-500/30',
         bg: 'bg-purple-900/10',
         diamonds: '100,000',
-        reqs: { turnouts: '> 31 Teams', members: '> 250', participation: '> 15%' },
-        compliance: { accreditation: true, adviser: true, monetary: true }
+        reqs: { turnouts: '≥ 24 Teams', members: '> 250', participation: '> 15%' },
+        compliance: { accreditation: true, endorsement: true, monetary: true },
+        perks: { activations: 'High Priority', creative: 'Full Access' }
     },
     {
         id: 'super-school',
         name: 'Super School',
-        label: 'The Dynasty',
         color: 'text-msl-gold',
         borderColor: 'border-msl-gold/50',
         bg: 'bg-yellow-900/10',
         diamonds: '150,000',
-        reqs: { turnouts: 'Top 1%', members: 'Top 1%', participation: 'Top 1%' },
-        compliance: { accreditation: true, adviser: true, monetary: true },
+        reqs: { turnouts: 'Waived', members: 'Waived', participation: 'Waived' },
+        compliance: { accreditation: true, endorsement: true, monetary: true },
+        perks: { activations: 'First Priority', creative: 'Full Access' },
         isSpecial: true
     }
 ];
@@ -313,116 +313,191 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                 </div>
             </section>
 
-            {/* --- TIER SYSTEMS (Ascension Tiers) --- */}
-            <section className="py-24 px-4 sm:px-6 lg:px-8 bg-msl-surface border-t border-white/10">
-                <div className="max-w-7xl mx-auto">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                        <div>
-                            <h2 className="text-3xl font-bold text-white mb-2">Ascension Tiers</h2>
-                            <p className="text-gray-400 max-w-lg">Scale your organization's support based on your reach and impact.</p>
-                        </div>
-                        {/* Styled Tabs */}
-                        <div className="flex bg-black/40 p-1.5 rounded-xl border border-white/10 backdrop-blur-sm">
-                            {TIERS.map((tier) => (
-                                <button
-                                    key={tier.id}
-                                    onClick={() => setActiveTier(tier)}
-                                    className={`px-4 py-2 rounded-lg font-bold text-sm transition-all ${activeTier.id === tier.id
-                                        ? `bg-white/10 text-white shadow-sm border border-white/10`
-                                        : 'text-gray-500 hover:text-white'
-                                        }`}
-                                >
-                                    {tier.name}
-                                </button>
-                            ))}
-                        </div>
+            {/* --- TIER SYSTEMS (Ladder of Ascension) --- */}
+            <section className="py-24 px-4 sm:px-6 lg:px-8 bg-msl-surface border-t border-white/10 relative overflow-hidden transition-colors duration-1000"
+                style={{
+                    boxShadow: `inset 0 0 100px ${activeTier.isSpecial ? 'rgba(234, 179, 8, 0.1)' : 'rgba(0,0,0,0)'}`
+                }}
+            >
+                {/* Dynamic Background Element */}
+                <div className={`absolute inset-0 transition-opacity duration-1000 ${activeTier.isSpecial ? 'opacity-100' : 'opacity-30'}`}>
+                    <div className={`absolute -top-[20%] -right-[10%] w-[800px] h-[800px] rounded-full blur-[120px] mix-blend-screen transition-colors duration-1000 ${activeTier.bg.replace('bg-', 'bg-').replace('/10', '/20')}`}></div>
+                    <div className={`absolute -bottom-[20%] -left-[10%] w-[600px] h-[600px] rounded-full blur-[100px] mix-blend-screen transition-colors duration-1000 ${activeTier.bg.replace('bg-', 'bg-').replace('/10', '/10')}`}></div>
+                </div>
+
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay pointer-events-none"></div>
+
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Ascension Protocol</h2>
+                        <p className="text-gray-400 max-w-xl mx-auto text-lg leading-relaxed">
+                            Start your journey. Prove your worth. <br />
+                            <span className="text-msl-gold">Climb the ranks</span> to unlock greater power.
+                        </p>
                     </div>
 
-                    {/* Active Tier Dashboard (Configurator Style) */}
-                    <div className="bg-msl-card border border-white/5 rounded-3xl overflow-hidden shadow-2xl relative transition-all duration-500 min-h-[400px]">
-                        {/* Header Bar */}
-                        <div className={`p-1 w-full ${activeTier.bg} border-b ${activeTier.borderColor}`}></div>
+                    <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
 
-                        <div className="p-8 md:p-12 grid md:grid-cols-12 gap-12">
+                        {/* LEFT: THE LADDER (Navigation) */}
+                        <div className="lg:col-span-3 flex lg:flex-col-reverse justify-between items-center lg:items-end relative py-4 lg:py-0 lg:h-[600px]">
+                            {/* Connecting Line - Fixed to reach centers - Right Aligned for Desktop */}
+                            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-gray-800 lg:left-auto lg:right-10 lg:top-10 lg:bottom-10 lg:w-1 lg:h-auto lg:translate-x-1/2 lg:translate-y-0 z-0"></div>
 
-                            {/* Left: Identity */}
-                            <div className="md:col-span-12 lg:col-span-5 flex flex-col justify-center">
-                                <div className={`inline-block px-3 py-1 rounded-lg border ${activeTier.borderColor} ${activeTier.color} ${activeTier.bg} text-xs font-bold uppercase tracking-wider mb-6 w-fit`}>
-                                    {activeTier.label}
-                                </div>
-                                <h3 className={`text-6xl font-black text-white mb-6 tracking-tight ${activeTier.isSpecial ? 'text-transparent bg-clip-text bg-gradient-to-r from-msl-gold to-yellow-200' : ''}`}>
-                                    {activeTier.name}
-                                </h3>
-                                <p className="text-gray-400 text-lg mb-8">
-                                    The standard for {activeTier.label} organizations. Unlock specific resource allocations designed for your scale.
-                                </p>
-
-                                {/* MOA & Application Check (Constant for all) */}
-                                <div className="flex flex-wrap gap-4 text-xs font-bold text-gray-500 uppercase tracking-wider">
-                                    <div className="flex items-center gap-2"><CheckCircle size={14} className="text-green-500" /> Signed MOU</div>
-                                    <div className="flex items-center gap-2"><CheckCircle size={14} className="text-green-500" /> Application</div>
-                                </div>
-                            </div>
-
-                            {/* Right: Specs Matrix (Grid) */}
-                            <div className="md:col-span-12 lg:col-span-7 grid sm:grid-cols-2 gap-4">
-                                {/* Diamonds Card */}
-                                <div className="bg-black/40 border border-white/5 rounded-2xl p-6 hover:border-white/10 transition-colors">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className={`p-2 rounded-lg bg-gray-800 ${activeTier.color}`}><Gem size={20} /></div>
-                                        <p className="text-xs font-bold text-gray-500 uppercase">Max Gold Cap</p>
-                                    </div>
-                                    <p className="text-3xl font-bold text-white mb-1">{activeTier.diamonds}</p>
-                                    <p className="text-sm text-gray-500">Diamonds per Semester</p>
-                                </div>
-
-                                {/* Requirements Card (Table B) */}
-                                <div className="bg-black/40 border border-white/5 rounded-2xl p-6 hover:border-white/10 transition-colors">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className={`p-2 rounded-lg bg-gray-800 ${activeTier.color}`}><Target size={20} /></div>
-                                        <p className="text-xs font-bold text-gray-500 uppercase">Stat Requirements</p>
-                                    </div>
-                                    <div className="space-y-3">
-                                        <div className="flex justify-between text-sm border-b border-white/5 pb-2">
-                                            <span className="text-gray-400">Turnout</span>
-                                            <span className="text-white font-bold">{activeTier.reqs.turnouts}</span>
+                            {TIERS.map((tier) => {
+                                const isActive = activeTier.id === tier.id;
+                                return (
+                                    <button
+                                        key={tier.id}
+                                        onClick={() => setActiveTier(tier)}
+                                        className={`relative z-10 group transition-all duration-300 focus:outline-none ${isActive ? 'scale-110' : 'hover:scale-105'}`}
+                                    >
+                                        {/* Node Circle */}
+                                        <div className={`w-14 h-14 lg:w-20 lg:h-20 rounded-full border-4 flex items-center justify-center transition-all duration-500 bg-[#0a0a0a]
+                                            ${isActive
+                                                ? `${tier.borderColor} shadow-[0_0_30px_-5px_currentColor] text-white`
+                                                : 'border-gray-800 text-gray-700 hover:border-gray-600 hover:text-gray-500'}
+                                            ${isActive ? tier.color : ''}
+                                        `}>
+                                            <div className={`w-4 h-4 lg:w-6 lg:h-6 rounded-full transition-all duration-500
+                                                ${isActive ? 'bg-current shadow-[0_0_10px_currentColor] scale-100' : 'bg-gray-800 scale-75'}
+                                            `}></div>
                                         </div>
-                                        <div className="flex justify-between text-sm border-b border-white/5 pb-2">
-                                            <span className="text-gray-400">Members</span>
-                                            <span className="text-white font-bold">{activeTier.reqs.members}</span>
-                                        </div>
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-gray-400">Participation</span>
-                                            <span className="text-white font-bold">{activeTier.reqs.participation}</span>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                {/* Compliance Card (Table C - New) */}
-                                <div className="bg-black/40 border border-white/5 rounded-2xl p-6 hover:border-white/10 transition-colors sm:col-span-2">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className={`p-2 rounded-lg bg-gray-800 ${activeTier.color}`}><Shield size={20} /></div>
-                                        <p className="text-xs font-bold text-gray-500 uppercase">Compliance Gate</p>
-                                    </div>
-                                    <div className="grid grid-cols-3 gap-4">
-                                        <div className={`p-3 rounded-xl border text-center transition-colors ${activeTier.compliance.accreditation ? 'bg-green-500/10 border-green-500/30' : 'bg-gray-800/50 border-white/5 opacity-50'}`}>
-                                            <div className="text-xs font-bold text-gray-400 uppercase mb-1">Accredited</div>
-                                            {activeTier.compliance.accreditation ? <CheckCircle size={16} className="text-green-400 mx-auto" /> : <span className="text-xs text-gray-600">Not Required</span>}
+                                        {/* Label (Desktop Only - Moved to Left to prevent overlap) */}
+                                        <div className={`absolute right-full mr-8 top-1/2 -translate-y-1/2 w-48 text-right hidden lg:block transition-all duration-500
+                                            ${isActive ? 'opacity-100 translate-x-0' : 'opacity-30 translate-x-4 group-hover:opacity-60 group-hover:translate-x-2'}
+                                        `}>
+                                            <div className={`text-lg font-black uppercase tracking-wider leading-none mb-1 ${isActive ? 'text-white' : 'text-gray-600'}`}>
+                                                {tier.name}
+                                            </div>
                                         </div>
-                                        <div className={`p-3 rounded-xl border text-center transition-colors ${activeTier.compliance.adviser ? 'bg-blue-500/10 border-blue-500/30' : 'bg-gray-800/50 border-white/5 opacity-50'}`}>
-                                            <div className="text-xs font-bold text-gray-400 uppercase mb-1">Faculty Adv.</div>
-                                            {activeTier.compliance.adviser ? <CheckCircle size={16} className="text-blue-400 mx-auto" /> : <span className="text-xs text-gray-600">Not Required</span>}
-                                        </div>
-                                        <div className={`p-3 rounded-xl border text-center transition-colors ${activeTier.compliance.monetary ? 'bg-msl-gold/10 border-msl-gold/30' : 'bg-gray-800/50 border-white/5 opacity-50'}`}>
-                                            <div className="text-xs font-bold text-gray-400 uppercase mb-1">Cash Eligible</div>
-                                            {activeTier.compliance.monetary ? <CheckCircle size={16} className="text-msl-gold mx-auto" /> : <span className="text-xs text-gray-600">No</span>}
-                                        </div>
-                                    </div>
-                                </div>
 
-                            </div>
-
+                                        {/* Mobile Label (Active Only) */}
+                                        <div className={`absolute top-full mt-3 left-1/2 -translate-x-1/2 whitespace-nowrap lg:hidden transition-all duration-300
+                                            ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}
+                                        `}>
+                                            <div className={`text-[10px] font-bold uppercase tracking-widest ${tier.color}`}>{tier.name}</div>
+                                        </div>
+                                    </button>
+                                );
+                            })}
                         </div>
+
+                        {/* RIGHT: THE DASHBOARD (Content) */}
+                        <div className="lg:col-span-9">
+                            <div className="bg-msl-card border border-white/5 rounded-3xl overflow-hidden shadow-2xl relative transition-all duration-500 min-h-[500px] flex flex-col">
+                                {/* Header Bar */}
+                                <div className={`p-1.5 w-full ${activeTier.bg} border-b ${activeTier.borderColor} transition-colors duration-500`}></div>
+
+                                <div className="p-8 md:p-12 flex-grow flex flex-col">
+                                    {/* Tier Identity */}
+                                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
+                                        <div>
+
+                                            <h3 className={`text-5xl md:text-7xl font-black text-white tracking-tighter ${activeTier.isSpecial ? 'text-transparent bg-clip-text bg-gradient-to-r from-msl-gold to-yellow-200 drop-shadow-[0_0_25px_rgba(242,194,26,0.3)]' : ''}`}>
+                                                {activeTier.name}
+                                            </h3>
+                                        </div>
+
+                                        {/* Requirements Summary */}
+                                        <div className="flex items-center gap-6 text-right">
+                                            <div className="hidden md:block">
+                                                <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Entry Gate</div>
+                                                <div className="text-xl font-bold text-white">{activeTier.reqs.turnouts}</div>
+                                            </div>
+                                            <div className="w-16 h-16 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center text-gray-400">
+                                                {activeTier.isSpecial ? <Crown size={32} className="text-msl-gold animate-pulse" /> : <Target size={32} />}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Row 1: Stats & Requirements */}
+                                    <div className="grid md:grid-cols-12 gap-6 mb-6">
+                                        {/* Big Diamond Stat */}
+                                        <div className="md:col-span-5 bg-black/40 border border-white/5 rounded-2xl p-8 flex flex-col justify-center relative overflow-hidden group">
+                                            <div className={`absolute top-0 right-0 p-3 opacity-20 ${activeTier.color}`}><Gem size={64} /></div>
+                                            <p className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Max Allocation</p>
+                                            <p className="text-4xl md:text-5xl font-black text-white">{activeTier.diamonds}</p>
+                                            <p className="text-xs text-gray-500 mt-2 font-mono">Diamonds / Sem</p>
+                                        </div>
+
+                                        {/* Community Requirements Detail */}
+                                        <div className="md:col-span-7 bg-black/40 border border-white/5 rounded-2xl p-8 flex flex-col justify-center">
+                                            <div className="flex items-center justify-between mb-4">
+                                                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Community Requirements</p>
+                                                <div className="px-2 py-0.5 rounded bg-white/5 border border-white/5 text-[10px] text-gray-400">via Campus Dept</div>
+                                            </div>
+                                            <div className="grid grid-cols-3 gap-4 text-center">
+                                                <div>
+                                                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">Members</p>
+                                                    <p className={`text-xl font-bold whitespace-nowrap ${activeTier.reqs.members === 'Waived' ? 'text-msl-gold' : 'text-white'}`}>{activeTier.reqs.members}</p>
+                                                </div>
+                                                <div className="border-x border-white/5">
+                                                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">Active %</p>
+                                                    <p className={`text-xl font-bold whitespace-nowrap ${activeTier.reqs.participation === 'Waived' ? 'text-msl-gold' : 'text-white'}`}>{activeTier.reqs.participation}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">Team Turnout</p>
+                                                    <p className={`text-xl font-bold whitespace-nowrap ${activeTier.reqs.turnouts === 'Waived' ? 'text-msl-gold' : 'text-white'}`}>{activeTier.reqs.turnouts}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Row 2: Perks & Privileges (NEW) */}
+                                    <div className="bg-black/40 border border-white/5 rounded-2xl p-6 hover:border-white/10 transition-colors mb-8 relative overflow-hidden">
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <div className={`p-2 rounded-lg bg-gray-800 ${activeTier.color}`}><Star size={20} /></div>
+                                            <p className="text-xs font-bold text-gray-500 uppercase">Perks & Privileges</p>
+                                        </div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                                            <div>
+                                                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2 text-gray-400">Event Activation Priority</p>
+                                                <div className="flex items-center gap-3">
+                                                    <div className={`h-2 w-2 rounded-full ${activeTier.perks.activations.includes('High') || activeTier.perks.activations.includes('First') ? 'bg-green-500 shadow-[0_0_10px_lime]' : 'bg-gray-600'}`}></div>
+                                                    <p className="text-2xl font-black text-white">{activeTier.perks.activations}</p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-1 text-gray-400">
+                                                    Creative Growth Space <span className="text-gray-600">*</span>
+                                                </p>
+                                                <div className="flex items-center gap-3">
+                                                    <div className={`h-2 w-2 rounded-full ${activeTier.perks.creative === 'Full Access' ? 'bg-purple-500 shadow-[0_0_10px_magenta]' : 'bg-gray-600'}`}></div>
+                                                    <p className="text-2xl font-black text-white">{activeTier.perks.creative}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="absolute bottom-3 right-4">
+                                            <p className="text-[9px] text-gray-600 italic">* Subject to available slots (Contents & Social Media Dept)</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Compliance Footer */}
+                                    <div className="mt-auto pt-6 border-t border-white/5">
+                                        <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                                            <Shield size={14} /> Compliance Gate
+                                        </p>
+                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                            <div className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${activeTier.compliance.accreditation ? 'bg-green-500/10 border-green-500/20 text-green-400' : 'bg-white/5 border-white/5 text-gray-600 opacity-60'}`}>
+                                                <CheckCircle size={18} />
+                                                <span className="text-sm font-bold">University Accredited</span>
+                                            </div>
+                                            <div className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${activeTier.compliance.endorsement ? 'bg-blue-500/10 border-blue-500/20 text-blue-400' : 'bg-white/5 border-white/5 text-gray-600 opacity-60'}`}>
+                                                <CheckCircle size={18} />
+                                                <span className="text-sm font-bold">Org Endorsement</span>
+                                            </div>
+                                            <div className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${activeTier.compliance.monetary ? 'bg-msl-gold/10 border-msl-gold/20 text-msl-gold' : 'bg-white/5 border-white/5 text-gray-600 opacity-60'}`}>
+                                                <CheckCircle size={18} />
+                                                <span className="text-sm font-bold">Cash Eligible</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
