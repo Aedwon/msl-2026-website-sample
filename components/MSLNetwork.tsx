@@ -341,25 +341,46 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                         {/* LEFT: THE LADDER (Navigation) */}
                         <div className="lg:col-span-3 flex lg:flex-col-reverse justify-between items-center lg:items-end relative py-4 lg:py-0 lg:h-[600px]">
                             {/* Connecting Line - Fixed to reach centers - Right Aligned for Desktop */}
-                            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-gray-800 lg:left-auto lg:right-10 lg:top-10 lg:bottom-10 lg:w-1 lg:h-auto lg:translate-x-1/2 lg:translate-y-0 z-0"></div>
+                            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-gray-800 lg:left-auto lg:right-10 lg:top-10 lg:bottom-10 lg:w-1 lg:h-auto lg:translate-x-1/2 lg:translate-y-0 z-0 rounded-full overflow-hidden">
+                                {/* Progress Line Overlay */}
+                                <div
+                                    className="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-blue-600 via-purple-500 to-msl-gold transition-all duration-1000 ease-in-out"
+                                    style={{
+                                        height: `${(TIERS.findIndex(t => t.id === activeTier.id) / (TIERS.length - 1)) * 100}%`
+                                    }}
+                                >
+                                    {/* Moving Glow Head */}
+                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rounded-full blur-md shadow-[0_0_20px_white]"></div>
+                                </div>
+                            </div>
 
-                            {TIERS.map((tier) => {
+                            {TIERS.map((tier, index) => {
                                 const isActive = activeTier.id === tier.id;
+                                const activeIndex = TIERS.findIndex(t => t.id === activeTier.id);
+                                const isPassed = index <= activeIndex;
+
                                 return (
                                     <button
                                         key={tier.id}
                                         onClick={() => setActiveTier(tier)}
-                                        className={`relative z-10 group transition-all duration-300 focus:outline-none ${isActive ? 'scale-110' : 'hover:scale-105'}`}
+                                        className={`relative z-10 group transition-all duration-300 focus:outline-none focus:scale-95 active:scale-90 ${isActive ? 'scale-110' : 'hover:scale-105'}`}
                                     >
                                         {/* Node Circle */}
-                                        <div className={`w-14 h-14 lg:w-20 lg:h-20 rounded-full border-4 flex items-center justify-center transition-all duration-500 bg-[#0a0a0a]
+                                        <div className={`w-14 h-14 lg:w-20 lg:h-20 rounded-full border-4 flex items-center justify-center transition-all duration-500 bg-[#0a0a0a] relative
                                             ${isActive
                                                 ? `${tier.borderColor} shadow-[0_0_30px_-5px_currentColor] text-white`
-                                                : 'border-gray-800 text-gray-700 hover:border-gray-600 hover:text-gray-500'}
+                                                : isPassed
+                                                    ? 'border-gray-700 text-gray-500 shadow-[0_0_15px_-5px_rgba(255,255,255,0.1)]' // Subtly lit path
+                                                    : 'border-gray-800 text-gray-700 hover:border-gray-600 hover:text-gray-500'}
                                             ${isActive ? tier.color : ''}
                                         `}>
+                                            {/* Solar Pulse Effect for Active */}
+                                            {isActive && (
+                                                <div className={`absolute -inset-1 rounded-full border-2 ${tier.borderColor} opacity-40 animate-ping`}></div>
+                                            )}
+
                                             <div className={`w-4 h-4 lg:w-6 lg:h-6 rounded-full transition-all duration-500
-                                                ${isActive ? 'bg-current shadow-[0_0_10px_currentColor] scale-100' : 'bg-gray-800 scale-75'}
+                                                ${isActive ? 'bg-current shadow-[0_0_10px_currentColor] scale-100' : isPassed ? 'bg-gray-600 scale-90' : 'bg-gray-800 scale-75'}
                                             `}></div>
                                         </div>
 
