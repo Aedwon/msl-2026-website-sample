@@ -40,7 +40,8 @@ const TIERS = [
         diamonds: '50,000',
         reqs: { turnouts: '40+', members: '< 100', participation: '≤ 5%' },
         compliance: { accreditation: false, endorsement: false },
-        perks: { activations: 'Low', creative: 'N/A', monetary: false }
+        perks: { activations: 'Low', creative: 'N/A', monetary: false },
+        pulsePattern: { count: 0, interval: 0 } // No pulse
     },
     {
         id: 'tier-b',
@@ -52,7 +53,8 @@ const TIERS = [
         diamonds: '70,000',
         reqs: { turnouts: '80+', members: '100+', participation: '5%+' },
         compliance: { accreditation: false, endorsement: false },
-        perks: { activations: 'Moderate', creative: 'Basic Access', monetary: false }
+        perks: { activations: 'Moderate', creative: 'Basic Access', monetary: false },
+        pulsePattern: { count: 1, interval: 0 } // Single Beat: Dun ... Dun
     },
     {
         id: 'tier-a',
@@ -64,7 +66,8 @@ const TIERS = [
         diamonds: '100,000',
         reqs: { turnouts: '120+', members: '250+', participation: '15%+' },
         compliance: { accreditation: true, endorsement: true },
-        perks: { activations: 'High', creative: 'Full Access', monetary: true }
+        perks: { activations: 'High', creative: 'Full Access', monetary: true },
+        pulsePattern: { count: 2, interval: 300 } // Double Beat: Dun-Dun ... Dun-Dun
     },
     {
         id: 'tier-ss',
@@ -77,7 +80,8 @@ const TIERS = [
         reqs: { turnouts: 'N/A', members: 'N/A', participation: 'N/A' },
         compliance: { accreditation: true, endorsement: true },
         perks: { activations: 'First Priority', creative: 'Full Access', monetary: true },
-        isSpecial: true
+        isSpecial: true,
+        pulsePattern: { count: 3, interval: 200 } // Triple Beat: Dun-Dun-Dun ...
     }
 ];
 
@@ -444,19 +448,23 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                         {/* Node Circle */}
                                         <div className={`w-14 h-14 lg:w-20 lg:h-20 rounded-full border-4 flex items-center justify-center transition-all duration-500 bg-[#0a0a0a] relative
                                             ${isActive
-                                                ? `${tier.borderColor} shadow-[0_0_30px_-5px_currentColor] text-white`
+                                                ? `${tier.borderColor} shadow-[0_0_30px_-5px_currentColor]`
                                                 : isPassed
                                                     ? 'border-gray-700 text-gray-500 shadow-[0_0_15px_-5px_rgba(255,255,255,0.1)]' // Subtly lit path
                                                     : 'border-gray-800 text-gray-700 hover:border-gray-600 hover:text-gray-500'}
                                             ${isActive ? tier.color : ''}
                                         `}>
-                                            {/* Solar Pulse Effect for Active */}
-                                            {isActive && (
-                                                <div className={`absolute -inset-1 rounded-full border-2 ${tier.borderColor} opacity-40 animate-ping`}></div>
-                                            )}
+                                            {/* Rhythmic Pulse Effect (Variable Beats) */}
+                                            {isActive && tier.pulsePattern && tier.pulsePattern.count > 0 && [...Array(tier.pulsePattern.count)].map((_, i) => (
+                                                <div
+                                                    key={i}
+                                                    className={`absolute -inset-1 rounded-full border-2 ${tier.borderColor} opacity-40 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]`}
+                                                    style={{ animationDelay: `${i * tier.pulsePattern.interval}ms` }}
+                                                ></div>
+                                            ))}
 
                                             <div className={`w-4 h-4 lg:w-6 lg:h-6 rounded-full transition-all duration-500
-                                                ${isActive ? 'bg-current shadow-[0_0_10px_currentColor] scale-100' : isPassed ? 'bg-gray-600 scale-90' : 'bg-gray-800 scale-75'}
+                                                ${isActive ? 'bg-white shadow-[0_0_15px_white] scale-100' : isPassed ? 'bg-gray-600 scale-90' : 'bg-gray-800 scale-75'}
                                             `}></div>
                                         </div>
 
