@@ -39,10 +39,16 @@ const TOURNAMENT_STAGES = [
         date: 'Month 1',
         format: 'Open Qualifier',
         eligibility: 'All Amateur Teams',
-        prize: 'Diamonds Pool',
+        prize: 'Diamonds',
         desc: 'The first wave of challengers. Open to all aspiring amateur teams across the 4 major regions.',
         progression: '4 Winners (1 per Region) advance to Group Stage',
-        brackets: ['Luzon A', 'Luzon B', 'Visayas', 'Mindanao']
+        brackets: ['Luzon A', 'Luzon B', 'Visayas', 'Mindanao'],
+        winners: [
+            { region: 'Luzon A', team: 'Tigers Esports', code: 'UST', logo: '🐯' },
+            { region: 'Luzon B', team: 'Bravehearts', code: 'LPU', logo: '⚔️' },
+            { region: 'Visayas', team: 'Cebu Tamaraws', code: 'USC', logo: '🐂' },
+            { region: 'Mindanao', team: 'Davao Eagles', code: 'AdDU', logo: '🦅' }
+        ]
     },
     {
         id: 'stage-2',
@@ -51,10 +57,16 @@ const TOURNAMENT_STAGES = [
         date: 'Month 2',
         format: 'Open Qualifier',
         eligibility: 'All Amateur Teams',
-        prize: 'Diamonds Pool',
+        prize: 'Diamonds',
         desc: 'A second chance for glory. Another set of qualifiers for those who missed the first cut.',
         progression: '4 Winners (1 per Region) advance to Group Stage',
-        brackets: ['Luzon A', 'Luzon B', 'Visayas', 'Mindanao']
+        brackets: ['Luzon A', 'Luzon B', 'Visayas', 'Mindanao'],
+        winners: [
+            { region: 'Luzon A', team: 'Spartans Main', code: 'AU', logo: '🛡️' },
+            { region: 'Luzon B', team: 'Iron Legion', code: 'MAPUA', logo: '⛪' },
+            { region: 'Visayas', team: 'Iloilo Warriors', code: 'CPU', logo: '⚔️' },
+            { region: 'Mindanao', team: 'Gensan Generals', code: 'MSU', logo: '⭐' }
+        ]
     },
     {
         id: 'stage-3',
@@ -63,10 +75,16 @@ const TOURNAMENT_STAGES = [
         date: 'Month 3',
         format: 'Inter-School Qualifier',
         eligibility: 'University Representative Teams',
-        prize: 'Diamonds Pool',
+        prize: 'Diamonds',
         desc: 'Battle for campus supremacy. Only officially endorsed university teams may enter.',
         progression: '4 Winners (1 per Region) advance to Group Stage',
-        brackets: ['Luzon A', 'Luzon B', 'Visayas', 'Mindanao']
+        brackets: ['Luzon A', 'Luzon B', 'Visayas', 'Mindanao'],
+        winners: [
+            { region: 'Luzon A', team: 'Ateneo Blue Eagles', code: 'ADMU', logo: '🦅' },
+            { region: 'Luzon B', team: 'DLSU Archers', code: 'DLSU', logo: '🏹' },
+            { region: 'Visayas', team: 'USC Warriors', code: 'USC', logo: '⚔️' },
+            { region: 'Mindanao', team: 'MSU Titans', code: 'MSU', logo: '⚡' }
+        ]
     },
     {
         id: 'stage-4',
@@ -75,7 +93,7 @@ const TOURNAMENT_STAGES = [
         date: 'Month 3',
         format: 'Invitational / Qualifier',
         eligibility: 'Runner-ups & Invited Teams',
-        prize: 'Diamonds Pool',
+        prize: 'Diamonds',
         desc: 'The Battle of the Greats. The final 4 slots are filled by the best of the rest.',
         progression: '4 Winners (1 per Region) advance to Group Stage',
         brackets: ['Luzon A', 'Luzon B', 'Visayas', 'Mindanao']
@@ -684,13 +702,43 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                 activeTab === 'overview' && (
                     <div className="animate-fade-in">
                         {/* --- THE TOURNAMENT BRAIN (Robust Toggles) --- */}
-                        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-msl-black relative">
-                            <div className="max-w-7xl mx-auto">
+                        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-msl-black relative overflow-hidden transition-all duration-1000"
+                            style={{
+                                boxShadow: selectedStage.id.includes('stage-6')
+                                    ? 'inset 0 0 150px rgba(234, 179, 8, 0.15)' // Gold Inset
+                                    : selectedStage.id.includes('stage-5')
+                                        ? 'inset 0 0 100px rgba(168, 85, 247, 0.1)' // Purple Inset
+                                        : 'none'
+                            }}
+                        >
+                            {/* Global Ambient Effects (The "Vibe" Shift) */}
+                            <div className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${selectedStage.id.includes('stage-6') ? 'opacity-100' : 'opacity-0'}`}>
+                                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-msl-gold/10 blur-[150px] rounded-full mix-blend-screen"></div>
+                                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30 mix-blend-overlay animate-pulse"></div>
+                            </div>
+
+                            <div className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${selectedStage.id.includes('stage-5') ? 'opacity-100' : 'opacity-0'}`}>
+                                <div className="absolute top-0 right-0 w-[800px] h-[600px] bg-purple-900/20 blur-[150px] rounded-full mix-blend-screen"></div>
+                                <div className="absolute bottom-0 left-0 w-[800px] h-[600px] bg-blue-900/10 blur-[150px] rounded-full mix-blend-screen"></div>
+                            </div>
+
+                            <div className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${!selectedStage.id.includes('stage-5') && !selectedStage.id.includes('stage-6') ? 'opacity-100' : 'opacity-0'}`}>
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-900/5 blur-[120px] rounded-full mix-blend-screen"></div>
+                            </div>
+
+                            <div className="max-w-7xl mx-auto relative z-10">
 
                                 {/* Section Header */}
                                 <div className="text-center mb-12">
-                                    <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Tournament Info</h2>
-                                    <div className="w-24 h-1 bg-msl-gold mx-auto rounded-full"></div>
+                                    <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight relative inline-block">
+                                        Tournament Info
+                                        {/* Header Accent Line that changes color */}
+                                        <div className={`absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 rounded-full transition-colors duration-500
+                                            ${selectedStage.id.includes('stage-6') ? 'bg-msl-gold shadow-[0_0_10px_#eab308]'
+                                                : selectedStage.id.includes('stage-5') ? 'bg-purple-500 shadow-[0_0_10px_#a855f7]'
+                                                    : 'bg-blue-500 shadow-[0_0_10px_#3b82f6]'}
+                                        `}></div>
+                                    </h2>
                                 </div>
 
                                 {/* TOGGLE NAVIGATION (Segmented Control) */}
@@ -723,87 +771,66 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                                         <div className="animate-fade-in flex flex-col lg:flex-row gap-8">
 
                                             {/* THE FUNNEL (Visual Selection) */}
-                                            <div className="lg:w-1/2 flex flex-col items-center gap-4 py-8">
+                                            <div className="lg:w-1/2 flex flex-col items-center py-8">
 
-                                                {/* Layer 1: The Qualifiers (THE FORGE - Gritty/Industrial) */}
-                                                <div className="w-full relative group">
-                                                    <div className="absolute -inset-2 bg-gradient-to-b from-gray-700 to-transparent opacity-20 blur-xl rounded-full"></div>
-                                                    <div className="grid grid-cols-2 gap-3 relative z-10">
-                                                        {TOURNAMENT_STAGES.slice(0, 4).map((stage) => (
-                                                            <button
-                                                                key={stage.id}
-                                                                onClick={() => setSelectedStage(stage)}
-                                                                className={`p-4 rounded-lg border-2 relative overflow-hidden transition-all text-left h-28 flex flex-col justify-end
-                                                        ${selectedStage.id === stage.id
-                                                                        ? 'bg-[#2a2a2a] border-gray-400 text-white shadow-[0_0_30px_rgba(0,0,0,0.8)] scale-[1.03] z-20'
-                                                                        : 'bg-[#151515] border-[#333] text-gray-500 hover:border-gray-500 hover:text-gray-300 hover:bg-[#1a1a1a]'}
-                                                    `}
-                                                            >
-                                                                {/* Industrial Texture */}
-                                                                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-30 mix-blend-overlay"></div>
-                                                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-
-                                                                {selectedStage.id === stage.id && (
-                                                                    <div className="absolute top-0 right-0 p-2 opacity-50"><Svgs.Gear size={24} className="animate-spin-slow text-gray-400" /></div>
-                                                                )}
-
-
-                                                                <div className="relative z-10">
-                                                                    <div className="text-[9px] font-black uppercase tracking-[0.2em] mb-1 opacity-60 text-gray-400">{stage.subtitle}</div>
-                                                                    <div className="font-black text-sm md:text-base leading-tight uppercase font-mono">{stage.title}</div>
-                                                                </div>
-                                                            </button>
-                                                        ))}
-                                                    </div>
+                                                {/* Layer 1: Qualifiers (THE FORGE - Blue/Tech) */}
+                                                <div className="w-full grid grid-cols-2 gap-2">
+                                                    {TOURNAMENT_STAGES.slice(0, 4).map((stage) => (
+                                                        <button
+                                                            key={stage.id}
+                                                            onClick={() => setSelectedStage(stage)}
+                                                            className={`
+                                                    bg-[#0a0f1c] border rounded-lg p-3 flex flex-col items-center justify-center text-center transition-all relative overflow-hidden group h-20
+                                                    ${selectedStage.id === stage.id ? 'border-cyan-400 text-cyan-100 shadow-[0_0_20px_rgba(34,211,238,0.2)]' : 'border-blue-900/30 text-blue-400/60 hover:border-cyan-500/50 hover:text-cyan-200'}
+                                                `}
+                                                        >
+                                                            {selectedStage.id === stage.id && (
+                                                                <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-50"></div>
+                                                            )}
+                                                            <div className="relative z-10">
+                                                                <div className="font-black text-xs md:text-sm leading-tight uppercase font-mono">{stage.title}</div>
+                                                            </div>
+                                                        </button>
+                                                    ))}
                                                 </div>
 
-                                                {/* Connector: Forged Pipe */}
-                                                <div className="h-12 w-2 bg-gradient-to-b from-gray-800 via-gray-600 to-gray-800 rounded-full border-x border-[#333] relative">
-                                                    <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-50"></div>
-                                                </div>
+                                                {/* Connector: Blue to Purple */}
+                                                <div className="h-6 w-1 bg-gradient-to-b from-cyan-900 to-purple-900 shadow-[0_0_10px_rgba(59,130,246,0.4)] relative z-0"></div>
 
-                                                {/* Layer 2: Group Stage (THE MATRIX - Cyber/Holo) */}
-                                                <div className="w-4/5 relative group">
-                                                    {/* Holographic Glow */}
-                                                    <div className="absolute -inset-4 bg-blue-500/20 blur-2xl rounded-full animate-pulse-slow"></div>
+                                                {/* Layer 2: Group Stage (THE MATRIX - Purple/Neon) */}
+                                                <div className="w-11/12 md:w-5/6 relative group z-10">
+                                                    {/* Purple Glow */}
+                                                    <div className="absolute -inset-4 bg-purple-600/10 blur-2xl rounded-full"></div>
 
                                                     {TOURNAMENT_STAGES.slice(4, 5).map((stage) => (
                                                         <button
                                                             key={stage.id}
                                                             onClick={() => setSelectedStage(stage)}
-                                                            className={`w-full p-1 rounded-xl relative overflow-hidden transition-all group-hover:scale-[1.01]
-                                                    ${selectedStage.id === stage.id ? 'scale-[1.05]' : ''}
+                                                            className={`w-full p-[1px] rounded-xl relative overflow-hidden transition-all group-hover:scale-[1.01]
+                                                    ${selectedStage.id === stage.id ? 'scale-[1.02]' : ''}
                                                 `}
                                                         >
-                                                            <div className={`absolute inset-0 bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-600 animate-border-flow ${selectedStage.id === stage.id ? 'opacity-100' : 'opacity-30'}`}></div>
-                                                            <div className="bg-[#050a14] relative rounded-lg p-6 flex flex-col items-center justify-center h-40 border border-blue-500/30 overflow-hidden">
+                                                            {/* Thinner Border Gradient */}
+                                                            <div className={`absolute inset-0 bg-gradient-to-r from-purple-900 via-purple-500 to-purple-900 ${selectedStage.id === stage.id ? 'opacity-100' : 'opacity-40'}`}></div>
 
-                                                                {/* Tech Grid Background */}
-                                                                <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-                                                                <div className="absolute inset-0 bg-gradient-to-t from-[#050a14] via-transparent to-[#050a14]"></div>
-
-                                                                {/* Scanning Line */}
-                                                                {selectedStage.id === stage.id && (
-                                                                    <div className="absolute w-full h-1 bg-cyan-400/50 blur-sm top-0 animate-scan"></div>
-                                                                )}
+                                                            <div className="bg-[#0f0518] relative rounded-[11px] p-4 flex flex-col items-center justify-center h-20 overflow-hidden">
+                                                                {/* Grid Background */}
+                                                                <div className="absolute inset-0 bg-[linear-gradient(rgba(147,51,234,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(147,51,234,0.1)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                                                                <div className="absolute inset-0 bg-gradient-to-t from-[#0f0518] via-transparent to-[#0f0518]"></div>
 
                                                                 <div className="relative z-10 text-center">
-                                                                    <div className={`text-[10px] font-bold uppercase tracking-[0.3em] mb-2 ${selectedStage.id === stage.id ? 'text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]' : 'text-blue-900'}`}>{stage.subtitle}</div>
-                                                                    <div className={`font-black text-2xl md:text-3xl uppercase tracking-tighter ${selectedStage.id === stage.id ? 'text-white' : 'text-gray-600'}`}>{stage.title}</div>
-                                                                    <div className="mt-3 flex gap-1 justify-center">
-                                                                        {[...Array(4)].map((_, i) => <div key={i} className={`w-1.5 h-1.5 rounded-sm ${selectedStage.id === stage.id ? 'bg-cyan-500 animate-ping' : 'bg-blue-900'}`} style={{ animationDelay: `${i * 100}ms` }}></div>)}
-                                                                    </div>
+                                                                    <div className={`font-black text-xl md:text-2xl uppercase tracking-tighter ${selectedStage.id === stage.id ? 'text-white drop-shadow-[0_0_10px_rgba(168,85,247,0.8)]' : 'text-purple-400/60'}`}>{stage.title}</div>
                                                                 </div>
                                                             </div>
                                                         </button>
                                                     ))}
                                                 </div>
 
-                                                {/* Connector: Energy Beam */}
-                                                <div className="h-12 w-1 bg-gradient-to-b from-blue-500 to-msl-gold shadow-[0_0_15px_rgba(59,130,246,0.6)]"></div>
+                                                {/* Connector: Purple to Gold */}
+                                                <div className="h-6 w-1.5 bg-gradient-to-b from-purple-600 to-msl-gold shadow-[0_0_15px_rgba(147,51,234,0.6)] relative z-0"></div>
 
-                                                {/* Layer 3: Championship (THE THRONE - Legendary/Gold) */}
-                                                <div className="w-3/5 relative group">
+                                                {/* Layer 3: Championship (THE THRONE - Prestige Gold) */}
+                                                <div className="w-4/5 md:w-3/4 relative group z-20">
                                                     <div className="absolute -inset-10 bg-msl-gold/10 blur-3xl rounded-full"></div>
 
                                                     {TOURNAMENT_STAGES.slice(5, 6).map((stage) => (
@@ -811,23 +838,23 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                                                             key={stage.id}
                                                             onClick={() => setSelectedStage(stage)}
                                                             className={`w-full p-0.5 rounded-2xl relative overflow-hidden transition-all
-                                                    ${selectedStage.id === stage.id ? 'scale-[1.1] z-30 shadow-[0_0_50px_rgba(234,179,8,0.4)]' : 'hover:scale-105'}
+                                                    ${selectedStage.id === stage.id ? 'scale-[1.05] shadow-[0_0_50px_rgba(234,179,8,0.3)]' : 'hover:scale-105'}
                                                 `}
                                                         >
                                                             {/* Gold Border Gradient */}
-                                                            <div className="absolute inset-0 bg-gradient-to-tr from-[#8B6F20] via-[#FDE047] to-[#8B6F20] animate-shine"></div>
+                                                            <div className="absolute inset-0 bg-gradient-to-tr from-[#685214] via-[#FDE047] to-[#685214] animate-shine"></div>
 
-                                                            <div className="bg-gradient-to-b from-[#1a1200] to-black rounded-[14px] p-6 h-48 flex flex-col items-center justify-center relative overflow-hidden">
+                                                            <div className="bg-gradient-to-b from-[#1a1200] to-black rounded-[14px] px-6 h-24 flex flex-row items-center justify-center gap-4 relative overflow-hidden">
 
-                                                                {/* Gold Dust Particles (Simulated) */}
+                                                                {/* Gold Dust Particles */}
                                                                 <div className="absolute inset-0 opacity-30 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
 
                                                                 {/* Radial Burst */}
-                                                                <div className="absolute inset-0 bg-gradient-to-t from-msl-gold/20 via-transparent to-transparent opacity-50"></div>
+                                                                <div className="absolute inset-0 bg-gradient-to-t from-msl-gold/10 via-transparent to-transparent opacity-50"></div>
 
-                                                                <Trophy size={40} className={`mb-3 ${selectedStage.id === stage.id ? 'text-msl-gold drop-shadow-[0_0_15px_rgba(234,179,8,0.8)] animate-bounce-subtle' : 'text-yellow-900'}`} />
+                                                                <Trophy size={28} className={`${selectedStage.id === stage.id ? 'text-msl-gold drop-shadow-[0_0_15px_rgba(234,179,8,0.8)]' : 'text-yellow-800'}`} />
 
-                                                                <div className={`font-black text-xl md:text-3xl uppercase tracking-widest leading-none text-center ${selectedStage.id === stage.id ? 'text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 via-msl-gold to-yellow-800' : 'text-yellow-900'}`}>
+                                                                <div className={`font-black text-xl md:text-2xl uppercase tracking-widest leading-none ${selectedStage.id === stage.id ? 'text-transparent bg-clip-text bg-gradient-to-b from-yellow-100 via-msl-gold to-yellow-700' : 'text-yellow-900'}`}>
                                                                     {stage.title}
                                                                 </div>
                                                             </div>
@@ -841,28 +868,39 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                                             <div className="lg:w-1/2 flex items-center">
                                                 <div className={`w-full border rounded-3xl p-8 relative overflow-hidden transition-all duration-500
                                         ${selectedStage.id.includes('stage-6')
-                                                        ? 'bg-gradient-to-br from-[#1a1200] to-black border-msl-gold/30 shadow-[0_0_30px_rgba(234,179,8,0.1)]'
+                                                        ? 'bg-gradient-to-br from-[#1a1200] to-black border-msl-gold/30 shadow-[0_0_50px_rgba(234,179,8,0.15)] ring-1 ring-msl-gold/20'
                                                         : selectedStage.id.includes('stage-5')
-                                                            ? 'bg-[#050a14] border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.1)]'
-                                                            : 'bg-[#121212] border-white/10'
+                                                            ? 'bg-[#0f0518] border-purple-500/30 shadow-[0_0_40px_rgba(168,85,247,0.15)] ring-1 ring-purple-500/20'
+                                                            : 'bg-[#0a0f1c] border-cyan-800/30 shadow-[0_0_30px_rgba(34,211,238,0.1)]'
                                                     }
                                     `}>
-                                                    {/* Dynamic Backgrounds */}
-                                                    {selectedStage.id.includes('stage-6') && <div className="absolute -top-20 -right-20 w-80 h-80 bg-msl-gold/20 blur-[100px] rounded-full pointer-events-none"></div>}
-                                                    {selectedStage.id.includes('stage-5') && <div className="absolute -top-20 -right-20 w-80 h-80 bg-blue-600/20 blur-[100px] rounded-full pointer-events-none"></div>}
+                                                    {/* Dynamic Backgrounds & Grandeur Effects */}
+                                                    {/* Championships: Gold Glow + Stars */}
+                                                    {selectedStage.id.includes('stage-6') && (
+                                                        <>
+                                                            <div className="absolute -top-32 -right-32 w-96 h-96 bg-msl-gold/20 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
+                                                            <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 mix-blend-overlay"></div>
+                                                        </>
+                                                    )}
+
+                                                    {/* Group Stage: Purple Glow + Cyber Grid */}
+                                                    {selectedStage.id.includes('stage-5') && (
+                                                        <>
+                                                            <div className="absolute -top-32 -right-32 w-96 h-96 bg-purple-600/20 blur-[120px] rounded-full pointer-events-none"></div>
+                                                            <div className="absolute inset-0 bg-[linear-gradient(rgba(147,51,234,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(147,51,234,0.05)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+                                                        </>
+                                                    )}
+
+                                                    {/* Qualifiers: Cyan Glow */}
+                                                    {!selectedStage.id.includes('stage-5') && !selectedStage.id.includes('stage-6') && (
+                                                        <div className="absolute -top-40 -right-40 w-80 h-80 bg-cyan-900/20 blur-[100px] rounded-full pointer-events-none"></div>
+                                                    )}
 
                                                     <div className="relative z-10">
-                                                        <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
+                                                        <div className="mb-8 pb-6 border-b border-white/5">
                                                             <div>
                                                                 <div className={`text-xs font-bold uppercase tracking-widest mb-2 ${selectedStage.id.includes('stage-5') ? 'text-cyan-400' : 'text-gray-500'}`}>{selectedStage.date}</div>
-                                                                <h3 className="text-4xl md:text-5xl font-black text-white uppercase leading-[0.9]">{selectedStage.title}</h3>
-                                                            </div>
-                                                            <div className={`p-4 rounded-2xl border bg-white/5
-                                                    ${selectedStage.id.includes('stage-6') ? 'text-msl-gold border-msl-gold/30 shadow-[0_0_15px_rgba(234,179,8,0.2)]'
-                                                                    : selectedStage.id.includes('stage-5') ? 'text-cyan-400 border-cyan-500/30 shadow-[0_0_15px_rgba(34,211,238,0.2)]'
-                                                                        : 'text-gray-400 border-white/5'}
-                                                 `}>
-                                                                {selectedStage.id.includes('stage-6') ? <Trophy size={32} /> : <Swords size={32} />}
+                                                                <h3 className="text-2xl md:text-5xl font-black text-white uppercase leading-[0.9]">{selectedStage.title}</h3>
                                                             </div>
                                                         </div>
 
@@ -879,6 +917,31 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                                                                 <div className="text-[10px] uppercase font-bold text-gray-600 mb-2">Description</div>
                                                                 <p className="text-gray-300 text-base leading-relaxed">{selectedStage.desc}</p>
                                                             </div>
+
+                                                            {/* Regional Winners Section */}
+                                                            {selectedStage.winners ? (
+                                                                <div className="col-span-2 bg-white/5 rounded-xl p-4 border border-white/5">
+                                                                    <div className="text-[10px] uppercase font-bold text-gray-500 mb-3 flex items-center gap-2">
+                                                                        <Award size={12} className="text-msl-gold" /> Regional Winners
+                                                                    </div>
+                                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                                                        {selectedStage.winners.map((w: any) => (
+                                                                            <div key={w.region} className="bg-black/20 rounded p-3 border border-white/5 flex items-center gap-3">
+                                                                                <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-lg shrink-0">{w.logo || '🏆'}</div>
+                                                                                <div className="min-w-0 flex-1">
+                                                                                    <div className="text-[10px] uppercase font-bold text-gray-500 mb-0.5">{w.region}</div>
+                                                                                    <div className="text-sm font-bold text-white leading-tight truncate">{w.team}</div>
+                                                                                    {w.code && <div className="text-[10px] uppercase font-bold text-msl-gold mt-1 bg-white/5 inline-block px-1.5 py-0.5 rounded border border-white/5">{w.code}</div>}
+                                                                                </div>
+                                                                            </div>
+                                                                        ))}
+                                                                    </div>
+                                                                </div>
+                                                            ) : (
+                                                                <div className="col-span-2 bg-white/5 rounded-xl p-4 border border-white/5 border-dashed flex items-center justify-center">
+                                                                    <div className="text-xs font-bold text-gray-500 uppercase tracking-widest">Winners To Be Determined</div>
+                                                                </div>
+                                                            )}
                                                         </div>
 
                                                         <div className={`p-4 rounded-xl border flex items-center gap-4
@@ -1073,26 +1136,26 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
 
                                     {/* RULES VIEW */}
                                     {activeInfoSection === 'rules' && (
-                                        <div className="animate-fade-in w-full h-[600px] bg-[#121212] rounded-2xl border border-white/10 overflow-hidden relative group">
-                                            <div className="absolute top-4 right-4 z-10">
-                                                <a
-                                                    href="https://msl-philippines.notion.site/ebd/2a66a35bd22f80ca9183d186718ae814"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="px-4 py-2 bg-black/80 hover:bg-black text-white text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 flex items-center gap-2 transition-all hover:scale-105 shadow-xl"
-                                                >
-                                                    <ExternalLink size={12} /> Open in Notion
-                                                </a>
-                                            </div>
+                                        <div className="animate-fade-in w-full h-[600px] bg-[#121212] rounded-2xl border border-white/10 overflow-hidden relative group flex flex-col">
                                             <iframe
                                                 src="https://msl-philippines.notion.site/ebd/2a66a35bd22f80ca9183d186718ae814"
                                                 width="100%"
                                                 height="100%"
                                                 frameBorder="0"
                                                 allowFullScreen
-                                                className="w-full h-full"
+                                                className="w-full flex-1"
                                                 title="Tournament Rules"
                                             />
+                                            <div className="p-4 bg-[#0a0a0a] border-t border-white/10 flex justify-end">
+                                                <a
+                                                    href="https://msl-philippines.notion.site/ebd/2a66a35bd22f80ca9183d186718ae814"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="px-4 py-2 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white text-xs font-bold uppercase tracking-wider rounded-lg border border-white/10 flex items-center gap-2 transition-all hover:scale-105"
+                                                >
+                                                    <ExternalLink size={14} /> Open in Notion
+                                                </a>
+                                            </div>
                                         </div>
                                     )}
 
@@ -1103,7 +1166,7 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                         {/* --- STANDINGS --- */}
                         <section className="py-24 bg-[#0a0a0a] border-t border-white/5">
                             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                                <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                                <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-8 md:mb-12 gap-6 text-center md:text-left">
                                     <div>
                                         <h2 className="text-3xl font-black text-white mb-2 uppercase">Group Standings</h2>
                                         <p className="text-gray-400 text-sm">Top 2 from each group advance to Playoffs.</p>
@@ -1123,18 +1186,18 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                                         <table className="w-full text-left border-collapse">
                                             <thead>
                                                 <tr className="border-b border-white/5 text-[10px] uppercase tracking-widest text-gray-500 bg-white/[0.02]">
-                                                    <th className="p-6 font-bold w-16">#</th>
-                                                    <th className="p-6 font-bold">Team</th>
-                                                    <th className="p-6 font-bold text-center">W</th>
-                                                    <th className="p-6 font-bold text-center">L</th>
-                                                    <th className="p-6 font-bold text-center">Pts</th>
+                                                    <th className="p-3 md:p-6 font-bold w-12 md:w-16">#</th>
+                                                    <th className="p-3 md:p-6 font-bold">Team</th>
+                                                    <th className="p-3 md:p-6 font-bold text-center">W</th>
+                                                    <th className="p-3 md:p-6 font-bold text-center">L</th>
+                                                    <th className="p-3 md:p-6 font-bold text-center">Pts</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {STANDINGS.map((row) => (
                                                     <tr key={row.code} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors group">
-                                                        <td className="p-6 font-bold text-gray-600 group-hover:text-white">{row.rank}</td>
-                                                        <td className="p-6">
+                                                        <td className="p-3 md:p-6 font-bold text-gray-600 group-hover:text-white">{row.rank}</td>
+                                                        <td className="p-3 md:p-6">
                                                             <div className="flex items-center gap-4">
                                                                 <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-gray-400">
                                                                     {row.code[0]}
@@ -1156,7 +1219,7 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                                 </div>
                             </div>
                         </section>
-                    </div>
+                    </div >
                 )
             }
 
