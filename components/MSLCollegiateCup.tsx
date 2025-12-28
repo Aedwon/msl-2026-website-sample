@@ -15,7 +15,9 @@ import {
     Award,
     ExternalLink,
     Settings,
-    Play
+    Play,
+    ArrowRight,
+    Crown
 } from 'lucide-react';
 
 const Svgs = {
@@ -120,7 +122,7 @@ const TOURNAMENT_STAGES = [
         eligibility: 'Top 8 Teams',
         prize: '₱500,000 + MDL Slot',
         desc: 'The ultimate showdown. 8 Teams battle on the main stage for the title of National Champion.',
-        progression: 'Champion crowned as Kings of Collegiate MLBB',
+        progression: 'Crown the One True Champion of Philippine Collegiate MLBB',
         brackets: ['Quarterfinals', 'Semifinals', 'Grand Finals']
     }
 ];
@@ -289,7 +291,7 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                                 Register Now
                             </button>
                             <button className="w-full sm:w-auto px-10 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl font-bold text-xl uppercase tracking-wider transition-all backdrop-blur-md flex items-center justify-center gap-2">
-                                <Info size={20} /> Learn More
+                                About MCC <ArrowRight size={20} />
                             </button>
                         </div>
 
@@ -733,7 +735,14 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                             {/* Global Ambient Effects (The "Vibe" Shift) */}
                             <div className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${selectedStage.id.includes('stage-6') ? 'opacity-100' : 'opacity-0'}`}>
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-msl-gold/10 blur-[150px] rounded-full mix-blend-screen"></div>
-                                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30 mix-blend-overlay animate-pulse"></div>
+                                {/* Global Golden Aurora (Smoother Radial Gradients - No Edges) */}
+                                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                                    <div className="absolute top-[-20%] left-[20%] w-[1200px] h-[1200px] bg-[radial-gradient(circle_farthest-side,rgba(234,179,8,0.08),transparent)] mix-blend-screen animate-[pulse_10s_ease-in-out_infinite]"></div>
+                                    <div className="absolute bottom-[-20%] right-[20%] w-[1000px] h-[1000px] bg-[radial-gradient(circle_farthest-side,rgba(113,63,18,0.15),transparent)] mix-blend-screen animate-[pulse_15s_ease-in-out_infinite]"></div>
+
+                                    {/* Central Pillar of Light (Softened) */}
+                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full bg-gradient-to-b from-msl-gold/5 via-transparent to-transparent opacity-40 blur-xl"></div>
+                                </div>
                             </div>
 
                             <div className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${selectedStage.id.includes('stage-5') ? 'opacity-100' : 'opacity-0'}`}>
@@ -894,11 +903,14 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                                                     }
                                     `}>
                                                     {/* Dynamic Backgrounds & Grandeur Effects */}
-                                                    {/* Championships: Gold Glow + Stars */}
+                                                    {/* Championships: Gold Glow + Rotating Sheen */}
                                                     {selectedStage.id.includes('stage-6') && (
                                                         <>
-                                                            <div className="absolute -top-32 -right-32 w-96 h-96 bg-msl-gold/20 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
-                                                            <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 mix-blend-overlay"></div>
+                                                            {/* Golden Aurora Background (Smooth Radial) */}
+                                                            <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[radial-gradient(circle_farthest-side,rgba(234,179,8,0.15),transparent)] opacity-60"></div>
+
+                                                            {/* Spotlight Effect (Softer) */}
+                                                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-msl-gold/5 opacity-40 mix-blend-overlay"></div>
                                                         </>
                                                     )}
 
@@ -968,10 +980,14 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                                                                 : selectedStage.id.includes('stage-5') ? 'bg-blue-900/20 border-blue-500/30'
                                                                     : 'bg-white/5 border-white/5'}
                                             `}>
-                                                            <div className="shrink-0 p-2 bg-white/5 rounded-lg"><Target size={16} className="text-white" /></div>
+                                                            <div className="shrink-0 p-2 bg-white/5 rounded-lg">
+                                                                {selectedStage.id.includes('stage-6') ? <Crown size={16} className="text-msl-gold" /> : <Target size={16} className="text-white" />}
+                                                            </div>
                                                             <div>
-                                                                <div className="text-[10px] uppercase font-bold text-gray-500 mb-0.5">Progression</div>
-                                                                <div className={`font-bold text-sm ${selectedStage.id.includes('stage-6') ? 'text-msl-gold' : 'text-white'}`}>
+                                                                <div className="text-[10px] uppercase font-bold text-gray-500 mb-0.5">
+                                                                    {selectedStage.id.includes('stage-6') ? 'Ultimate Glory' : 'Progression'}
+                                                                </div>
+                                                                <div className={`font-bold text-sm ${selectedStage.id.includes('stage-6') ? 'text-msl-gold text-base tracking-wide' : 'text-white'}`}>
                                                                     {selectedStage.progression}
                                                                 </div>
                                                             </div>
@@ -986,7 +1002,7 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                                     {activeInfoSection === 'schedule' && (
                                         <div className="animate-fade-in">
                                             {/* Month Selector */}
-                                            <div className="flex overflow-x-auto gap-2 mb-8 pb-2 scrollbar-hide">
+                                            <div className="flex overflow-x-auto gap-2 mb-8 pb-2 scrollbar-hide px-1">
                                                 {CALENDAR_MONTHS.map((month) => (
                                                     <button
                                                         key={month.id}
@@ -1045,9 +1061,12 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                                                                     >
                                                                         <div className="text-sm font-bold">{day}</div>
 
-                                                                        {/* Stage Indicator Bar */}
+                                                                        {/* Stage Indicator Bar (Dot on Mobile, Bar on Desktop) */}
                                                                         {activeStage && (
-                                                                            <div className={`absolute bottom-2 left-1 right-1 h-1.5 rounded-full ${activeStage.color}`}></div>
+                                                                            <div className={`absolute bottom-1 rounded-full ${activeStage.color}
+                                                                                w-1 h-1 left-1/2 -translate-x-1/2
+                                                                                md:w-auto md:h-1.5 md:left-1 md:right-1 md:translate-x-0 md:bottom-2
+                                                                            `}></div>
                                                                         )}
 
                                                                         {/* Match Dot */}
