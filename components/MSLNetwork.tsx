@@ -518,7 +518,10 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                         {/* Requirements Summary */}
                                         <div className="flex flex-col items-end gap-6 text-right">
                                             <div className="w-16 h-16 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center text-gray-400">
-                                                {activeTier.isSpecial ? <Crown size={32} className="text-msl-gold animate-pulse" /> : <Target size={32} />}
+                                                {activeTier.id === 'tier-ss' && <Crown size={32} className="text-msl-gold animate-pulse" />}
+                                                {activeTier.id === 'tier-a' && <Star size={32} className="text-purple-400" />}
+                                                {activeTier.id === 'tier-b' && <TrendingUp size={32} className="text-blue-400" />}
+                                                {activeTier.id === 'tier-c' && <Target size={32} className="text-gray-400" />}
                                             </div>
                                         </div>
                                     </div>
@@ -568,7 +571,11 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                             <div>
                                                 <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2 text-gray-400">Event Activation Priority</p>
                                                 <div className="flex items-center gap-3">
-                                                    <div className={`h-2 w-2 rounded-full ${activeTier.perks.activations.includes('High') || activeTier.perks.activations.includes('First') ? 'bg-green-500 shadow-[0_0_10px_lime]' : 'bg-gray-600'}`}></div>
+                                                    <div className={`h-2 w-2 rounded-full ${activeTier.perks.activations.includes('First') ? 'bg-msl-gold shadow-[0_0_10px_orange]' :
+                                                        activeTier.perks.activations === 'High' ? 'bg-green-500 shadow-[0_0_10px_lime]' :
+                                                            activeTier.perks.activations === 'Moderate' ? 'bg-blue-500 shadow-[0_0_10px_cyan]' :
+                                                                'bg-gray-600'
+                                                        }`}></div>
                                                     <p className="text-xl md:text-2xl font-black text-white leading-none">{activeTier.perks.activations}</p>
                                                 </div>
                                             </div>
@@ -577,7 +584,10 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                                     Creative Space <span className="text-gray-600">*</span>
                                                 </p>
                                                 <div className="flex items-center gap-3">
-                                                    <div className={`h-2 w-2 rounded-full ${activeTier.perks.creative === 'Full Access' ? 'bg-purple-500 shadow-[0_0_10px_magenta]' : 'bg-gray-600'}`}></div>
+                                                    <div className={`h-2 w-2 rounded-full ${activeTier.perks.creative === 'Full Access' ? 'bg-green-500 shadow-[0_0_10px_lime]' :
+                                                        activeTier.perks.creative === 'Basic Access' ? 'bg-blue-500 shadow-[0_0_10px_cyan]' :
+                                                            'bg-gray-600'
+                                                        }`}></div>
                                                     <p className="text-xl md:text-2xl font-black text-white leading-none">{activeTier.perks.creative}</p>
                                                 </div>
                                                 <p className="text-[9px] text-gray-600 italic mt-1">* Subject to availability</p>
