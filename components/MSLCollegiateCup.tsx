@@ -14,7 +14,8 @@ import {
     Target,
     Award,
     ExternalLink,
-    Settings
+    Settings,
+    Play
 } from 'lucide-react';
 
 const Svgs = {
@@ -238,26 +239,34 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
         <div className="pt-20 min-h-screen bg-msl-black text-white font-sans selection:bg-msl-gold selection:text-black">
 
             {/* --- HERO IMAGE: CHAMPIONS SHOWCASE --- */}
-            <section className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden">
+            {/* --- HERO IMAGE: CHAMPIONS SHOWCASE (The Past) --- */}
+            <section className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden border-b border-white/10 group">
                 <img
                     src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=2000"
                     alt="Season 2 Champions"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-msl-black"></div>
+                <div className="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all duration-700"></div>
 
-                {/* Overlay Text positioned at bottom */}
-                <div className="absolute bottom-0 left-0 w-full p-8 text-center pb-24 md:pb-32">
-                    <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black/80 backdrop-blur-xl border border-msl-gold/50 text-white text-xs font-bold uppercase tracking-widest mb-4 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-                        <Trophy size={14} className="text-msl-gold" />
-                        <span className="text-gray-400">Season 2 Champions:</span>
-                        <span className="text-white">UST Teletigers</span>
+                {/* Hall of Fame Label */}
+                <div className="absolute bottom-0 left-0 w-full bg-black/90 backdrop-blur-md border-t border-white/10 py-6">
+                    <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                            <div className="p-2 bg-msl-gold/10 rounded-lg border border-msl-gold/20">
+                                <Trophy size={20} className="text-msl-gold" />
+                            </div>
+                            <div>
+                                <div className="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Reigning Champions (Season 2)</div>
+                                <div className="text-xl font-black text-white uppercase tracking-tight">UST Teletigers</div>
+                            </div>
+                        </div>
+                        <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest hidden md:block">Defending the Throne</div>
                     </div>
                 </div>
             </section>
 
-            {/* --- TOURNAMENT TITLE & REGISTRATION --- */}
-            <section className="relative -mt-20 z-10 px-4 pb-20">
+            {/* --- TOURNAMENT TITLE & REGISTRATION (The Future) --- */}
+            <section className="relative z-10 px-4 py-24 md:py-32">
                 <div className="max-w-7xl mx-auto text-center">
 
                     {/* Season Badge */}
@@ -265,30 +274,40 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                         Season 3 (2026)
                     </div>
 
-                    <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.9] mb-6 tracking-tighter drop-shadow-2xl animate-fade-in-up delay-100 uppercase">
-                        MSL Collegiate <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-msl-gold via-yellow-200 to-msl-gold">Cup</span>
+                    <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#ffeebb] via-[#eab308] to-[#a16207] leading-[0.9] mb-6 tracking-tighter drop-shadow-2xl animate-fade-in-up delay-100 uppercase whitespace-nowrap">
+                        MSL Collegiate Cup
                     </h1>
 
-                    <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-12 animate-fade-in-up delay-200 font-medium">
-                        The Philippines' biggest collegiate esports tournament. <br />
+                    <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 animate-fade-in-up delay-200 font-medium">
+                        The Official Collegiate League of MLBB in the Philippines. <br />
                         <span className="text-msl-gold">1000+ Teams. One Champion.</span>
                     </p>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-300">
-                        <button className="w-full sm:w-auto px-10 py-4 bg-msl-gold hover:bg-yellow-400 text-black rounded-xl font-black text-xl uppercase tracking-wider transition-all shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_50px_rgba(234,179,8,0.6)] hover:-translate-y-1">
-                            Register Now
-                        </button>
-                        <button className="w-full sm:w-auto px-10 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl font-bold text-xl uppercase tracking-wider transition-all backdrop-blur-md flex items-center justify-center gap-2">
-                            <MonitorPlay size={20} /> Watch Trailer
+                    <div className="flex flex-col items-center gap-6 animate-fade-in-up delay-300">
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                            <button className="w-full sm:w-auto px-10 py-4 bg-msl-gold hover:bg-yellow-400 text-black rounded-xl font-black text-xl uppercase tracking-wider transition-all shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_50px_rgba(234,179,8,0.6)] hover:-translate-y-1">
+                                Register Now
+                            </button>
+                            <button className="w-full sm:w-auto px-10 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl font-bold text-xl uppercase tracking-wider transition-all backdrop-blur-md flex items-center justify-center gap-2">
+                                <Info size={20} /> Learn More
+                            </button>
+                        </div>
+
+                        {/* Tertiary Action: Watch Trailer */}
+                        <button className="group flex items-center gap-3 text-white/50 hover:text-white transition-colors uppercase tracking-widest text-sm font-bold">
+                            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-msl-gold group-hover:text-black group-hover:border-msl-gold transition-all duration-300">
+                                <Play size={14} className="ml-0.5 fill-current" />
+                            </div>
+                            <span>Watch Trailer</span>
                         </button>
                     </div>
 
                     {/* Quick Stats (Redesigned - Frameless/HUD Style) */}
-                    <div className="mt-20 max-w-6xl mx-auto animate-fade-in-up delay-500">
-                        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 relative">
-                            {/* Glow Effect behind stats */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-r from-msl-gold/5 via-blue-500/5 to-purple-500/5 blur-3xl rounded-full pointer-events-none"></div>
+                    <div className="mt-20 max-w-6xl mx-auto animate-fade-in-up delay-500 relative">
+                        {/* Glow Effect behind stats */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-r from-msl-gold/5 via-blue-500/5 to-purple-500/5 blur-3xl rounded-full pointer-events-none"></div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/20 relative z-10">
 
                             <div className="pb-8 md:pb-0 md:px-8 text-center relative group">
                                 <div className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-2 flex items-center justify-center gap-2">
