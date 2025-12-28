@@ -40,7 +40,7 @@ const TIERS = [
         diamonds: '50,000',
         reqs: { turnouts: '40+', members: '< 100', participation: '≤ 5%' },
         compliance: { accreditation: false, endorsement: false },
-        perks: { activations: 'Low', creative: 'N/A', monetary: false },
+        perks: { activations: 'Low', creative: 'N/A', monetary: { label: 'Locked', footnote: '* Ascend to Tier B to unlock', isActive: false } },
         pulsePattern: { count: 0, interval: 0 } // No pulse
     },
     {
@@ -53,7 +53,7 @@ const TIERS = [
         diamonds: '70,000',
         reqs: { turnouts: '80+', members: '100+', participation: '5%+' },
         compliance: { accreditation: false, endorsement: false },
-        perks: { activations: 'Moderate', creative: 'Basic Access', monetary: false },
+        perks: { activations: 'Moderate', creative: 'Basic Access', monetary: { label: 'Limited', footnote: '* First come, first served', isActive: true, dotColor: 'bg-yellow-500 shadow-[0_0_10px_yellow]' } },
         pulsePattern: { count: 1, interval: 0 } // Single Beat: Dun ... Dun
     },
     {
@@ -66,7 +66,7 @@ const TIERS = [
         diamonds: '100,000',
         reqs: { turnouts: '120+', members: '250+', participation: '15%+' },
         compliance: { accreditation: true, endorsement: true },
-        perks: { activations: 'High', creative: 'Full Access', monetary: true },
+        perks: { activations: 'High', creative: 'Full Access', monetary: { label: 'Eligible', footnote: null, isActive: true, dotColor: 'bg-green-500 shadow-[0_0_10px_lime]' } },
         pulsePattern: { count: 2, interval: 300 } // Double Beat: Dun-Dun ... Dun-Dun
     },
     {
@@ -79,7 +79,7 @@ const TIERS = [
         diamonds: '150,000',
         reqs: { turnouts: 'N/A', members: 'N/A', participation: 'N/A' },
         compliance: { accreditation: true, endorsement: true },
-        perks: { activations: 'First Priority', creative: 'Full Access', monetary: true },
+        perks: { activations: 'First Priority', creative: 'Full Access', monetary: { label: 'Eligible', footnote: null, isActive: true, dotColor: 'bg-msl-gold shadow-[0_0_10px_orange]' } },
         isSpecial: true,
         pulsePattern: { count: 3, interval: 200 } // Triple Beat: Dun-Dun-Dun ...
     }
@@ -155,7 +155,7 @@ const AWARDS_DATA = {
 };
 
 const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
-    const [activeTier, setActiveTier] = useState(TIERS[3]); // Default to Super School
+    const [activeTier, setActiveTier] = useState(TIERS[0]); // Default to Tier C
 
     // Scroll to top on mount
     useEffect(() => {
@@ -409,28 +409,39 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
 
                 <div className="max-w-7xl mx-auto relative z-10">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Ascension Protocol</h2>
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">The Ascension</h2>
                         <p className="text-gray-400 max-w-xl mx-auto text-lg leading-relaxed">
                             Start your journey. Prove your worth. <br />
                             <span className="text-msl-gold">Climb the ranks</span> to unlock greater power.
                         </p>
                     </div>
 
-                    <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+                    <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
                         {/* LEFT: THE LADDER (Navigation) */}
                         <div className="lg:col-span-3 flex lg:flex-col-reverse justify-between items-center lg:items-end relative py-4 lg:py-0 lg:h-[600px]">
                             {/* Connecting Line - Fixed to reach centers - Right Aligned for Desktop */}
-                            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-gray-800 lg:left-auto lg:right-10 lg:top-10 lg:bottom-10 lg:w-1 lg:h-auto lg:translate-x-1/2 lg:translate-y-0 z-0 rounded-full overflow-hidden">
-                                {/* Progress Line Overlay */}
+                            <div className="absolute left-7 right-7 top-1/2 -translate-y-1/2 h-1 bg-gray-800 lg:left-auto lg:right-10 lg:top-10 lg:bottom-10 lg:w-1 lg:h-auto lg:translate-x-1/2 lg:translate-y-0 z-0 rounded-full overflow-hidden">
+                                {/* Desktop Progress Line (Vertical: Height) */}
                                 <div
-                                    className="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-blue-600 via-purple-500 to-msl-gold transition-all duration-1000 ease-in-out"
+                                    className="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-blue-600 via-purple-500 to-msl-gold transition-all duration-1000 ease-in-out hidden lg:block"
                                     style={{
                                         height: `${(TIERS.findIndex(t => t.id === activeTier.id) / (TIERS.length - 1)) * 100}%`
                                     }}
                                 >
-                                    {/* Moving Glow Head */}
+                                    {/* Moving Glow Head (Desktop) */}
                                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rounded-full blur-md shadow-[0_0_20px_white]"></div>
+                                </div>
+
+                                {/* Mobile Progress Line (Horizontal: Width) */}
+                                <div
+                                    className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-blue-600 via-purple-500 to-msl-gold transition-all duration-1000 ease-in-out lg:hidden"
+                                    style={{
+                                        width: `${(TIERS.findIndex(t => t.id === activeTier.id) / (TIERS.length - 1)) * 100}%`
+                                    }}
+                                >
+                                    {/* Moving Glow Head (Mobile) */}
+                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full blur-md shadow-[0_0_20px_white]"></div>
                                 </div>
                             </div>
 
@@ -499,7 +510,7 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
                                         <div>
 
-                                            <h3 className={`text-5xl md:text-7xl font-black text-white tracking-tighter ${activeTier.isSpecial ? 'text-transparent bg-clip-text bg-gradient-to-r from-msl-gold to-yellow-200 drop-shadow-[0_0_25px_rgba(242,194,26,0.3)]' : ''}`}>
+                                            <h3 className={`text-4xl md:text-6xl font-black text-white tracking-tighter ${activeTier.isSpecial ? 'text-transparent bg-clip-text bg-gradient-to-r from-msl-gold to-yellow-200 drop-shadow-[0_0_25px_rgba(242,194,26,0.3)]' : ''}`}>
                                                 {activeTier.name}
                                             </h3>
                                         </div>
@@ -573,17 +584,17 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                                             </div>
                                             <div>
                                                 <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-1 text-gray-400">
-                                                    Monetary Sponsorship {!activeTier.perks.monetary && <span className="text-gray-600">*</span>}
+                                                    Monetary Sponsorship {activeTier.perks.monetary.footnote && <span className="text-gray-600">*</span>}
                                                 </p>
                                                 <div className="flex items-center gap-3">
-                                                    <div className={`h-2 w-2 rounded-full ${activeTier.perks.monetary ? 'bg-msl-gold shadow-[0_0_10px_orange]' : 'bg-gray-600'}`}></div>
-                                                    <p className={`text-xl md:text-2xl font-black leading-none ${activeTier.perks.monetary ? 'text-msl-gold' : 'text-gray-500'}`}>
-                                                        {activeTier.perks.monetary ? 'Eligible' : 'Locked'}
+                                                    <div className={`h-2 w-2 rounded-full ${activeTier.perks.monetary.isActive ? (activeTier.perks.monetary.dotColor || 'bg-white') : 'bg-gray-600'}`}></div>
+                                                    <p className={`text-xl md:text-2xl font-black leading-none ${activeTier.perks.monetary.isActive ? 'text-white' : 'text-gray-500'}`}>
+                                                        {activeTier.perks.monetary.label}
                                                     </p>
                                                 </div>
-                                                {!activeTier.perks.monetary && (
+                                                {activeTier.perks.monetary.footnote && (
                                                     <p className="text-[9px] text-gray-600 italic mt-1">
-                                                        * Limited. Pitch Deck required.
+                                                        {activeTier.perks.monetary.footnote}
                                                     </p>
                                                 )}
                                             </div>
@@ -626,47 +637,57 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
                     <div className="flex flex-col md:flex-row items-end justify-center gap-4 md:gap-8 mb-12">
                         {/* Rank 2 */}
                         <div className="order-2 md:order-1 w-full md:w-1/3 flex flex-col items-center">
-                            <div className="w-full bg-gray-900/80 border border-gray-700/50 rounded-t-2xl p-6 relative group overflow-hidden hover:border-gray-500 transition-all cursor-pointer">
-                                <div className="absolute top-0 left-0 w-full h-1 bg-gray-400 shadow-[0_0_15px_gray]"></div>
-                                <div className="text-center relative z-10">
-                                    <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800 border border-gray-600 text-gray-400 font-bold mb-3 shadow-lg absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">2</div>
+                            <div className="relative w-full">
+                                <div className="w-full bg-gray-900/80 border border-gray-700/50 rounded-t-2xl p-6 relative group overflow-hidden hover:border-gray-500 transition-all cursor-pointer">
+                                    <div className="absolute top-0 left-0 w-full h-1 bg-gray-400 shadow-[0_0_15px_gray]"></div>
 
-                                    {/* Logo Placeholder */}
-                                    <div className="w-16 h-16 rounded-full bg-gray-800 border-2 border-gray-600 mx-auto mb-3 flex items-center justify-center overflow-hidden shadow-lg group-hover:scale-105 transition-transform">
-                                        <span className="text-xl font-bold text-gray-500">LG</span>
+                                    {/* Large Background Number */}
+                                    <div className="absolute top-16 left-1/2 -translate-x-1/2 text-[120px] leading-none font-black text-white/5 select-none pointer-events-none z-0">2</div>
+
+                                    <div className="text-center relative z-10 pt-4">
+
+                                        {/* Logo Placeholder */}
+                                        <div className="w-16 h-16 rounded-full bg-gray-800 border-2 border-gray-600 mx-auto mb-3 flex items-center justify-center overflow-hidden shadow-lg group-hover:scale-105 transition-transform">
+                                            <span className="text-xl font-bold text-gray-500">LG</span>
+                                        </div>
+
+                                        <h3 className="text-xl font-bold text-white mb-1">LG Esports</h3>
+                                        <p className="text-xs text-gray-500 uppercase tracking-widest mb-4">Ateneo</p>
+                                        <p className="text-2xl font-black text-white">11,200 <span className="text-xs text-gray-600 font-normal">pts</span></p>
                                     </div>
-
-                                    <h3 className="text-xl font-bold text-white mb-1">LG Esports</h3>
-                                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-4">Ateneo</p>
-                                    <p className="text-2xl font-black text-white">11,200 <span className="text-xs text-gray-600 font-normal">pts</span></p>
+                                    <div className="absolute inset-0 bg-gradient-to-b from-gray-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 </div>
-                                <div className="absolute inset-0 bg-gradient-to-b from-gray-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             </div>
                             <div className="w-full h-24 bg-gradient-to-t from-gray-900 to-gray-800/50 border-x border-gray-800 hidden md:block opacity-50"></div>
                         </div>
 
                         {/* Rank 1 (Champion) */}
                         <div className="order-1 md:order-2 w-full md:w-1/3 flex flex-col items-center z-10 -mt-8 md:mt-0">
-                            <div className="absolute md:relative -top-12 md:top-auto flex flex-col items-center">
+                            <div className="absolute md:relative -top-12 md:top-auto flex flex-col items-center z-30">
                                 <Crown className="text-msl-gold drop-shadow-[0_0_15px_rgba(234,179,8,0.8)] animate-bounce" size={40} />
                             </div>
-                            <div className="w-full bg-gradient-to-b from-yellow-900/20 to-black border border-msl-gold/30 rounded-t-2xl p-8 relative group overflow-hidden hover:border-msl-gold/60 transition-all cursor-pointer shadow-[0_0_50px_-20px_rgba(234,179,8,0.3)]">
-                                <div className="absolute top-0 left-0 w-full h-1 bg-msl-gold shadow-[0_0_20px_orange]"></div>
-                                <div className="text-center relative z-10">
-                                    <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black border-2 border-msl-gold text-msl-gold font-bold mb-4 shadow-[0_0_20px_rgba(234,179,8,0.3)] text-lg absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">1</div>
+                            <div className="relative w-full">
+                                <div className="w-full bg-gradient-to-b from-yellow-900/20 to-black border border-msl-gold/30 rounded-t-2xl p-8 relative group overflow-hidden hover:border-msl-gold/60 transition-all cursor-pointer shadow-[0_0_50px_-20px_rgba(234,179,8,0.3)]">
+                                    <div className="absolute top-0 left-0 w-full h-1 bg-msl-gold shadow-[0_0_20px_orange]"></div>
 
-                                    {/* Logo Placeholder */}
-                                    <div className="w-24 h-24 rounded-full bg-black border-2 border-msl-gold mx-auto mb-4 flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.2)] group-hover:scale-105 transition-transform">
-                                        <span className="text-3xl font-black text-msl-gold">UST</span>
-                                    </div>
+                                    {/* Large Background Number */}
+                                    <div className="absolute top-20 left-1/2 -translate-x-1/2 text-[140px] leading-none font-black text-msl-gold/10 select-none pointer-events-none z-0">1</div>
 
-                                    <h3 className="text-2xl font-black text-white mb-1 uppercase tracking-tight">Teletigers Esports</h3>
-                                    <p className="text-sm text-msl-gold uppercase tracking-widest mb-6 font-bold">UST</p>
-                                    <div className="bg-msl-gold/10 border border-msl-gold/20 rounded-xl py-2 px-6 inline-block">
-                                        <p className="text-3xl font-black text-msl-gold">12,450 <span className="text-xs text-yellow-600 font-normal">pts</span></p>
+                                    <div className="text-center relative z-10 pt-4">
+
+                                        {/* Logo Placeholder */}
+                                        <div className="w-24 h-24 rounded-full bg-black border-2 border-msl-gold mx-auto mb-4 flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.2)] group-hover:scale-105 transition-transform">
+                                            <span className="text-3xl font-black text-msl-gold">UST</span>
+                                        </div>
+
+                                        <h3 className="text-2xl font-black text-white mb-1 uppercase tracking-tight">Teletigers Esports</h3>
+                                        <p className="text-sm text-msl-gold uppercase tracking-widest mb-6 font-bold">UST</p>
+                                        <div className="bg-msl-gold/10 border border-msl-gold/20 rounded-xl py-2 px-6 inline-block">
+                                            <p className="text-3xl font-black text-msl-gold">12,450 <span className="text-xs text-yellow-600 font-normal">pts</span></p>
+                                        </div>
                                     </div>
+                                    <div className="absolute inset-0 bg-gradient-to-b from-msl-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 </div>
-                                <div className="absolute inset-0 bg-gradient-to-b from-msl-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             </div>
                             <div className="w-full h-32 bg-gradient-to-t from-yellow-900/10 to-gray-900 border-x border-msl-gold/10 hidden md:block relative overflow-hidden">
                                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
@@ -675,23 +696,28 @@ const MSLNetwork: React.FC<MSLNetworkProps> = ({ onNavigate }) => {
 
                         {/* Rank 3 */}
                         <div className="order-3 w-full md:w-1/3 flex flex-col items-center">
-                            <div className="w-full bg-gray-900/80 border border-orange-900/30 rounded-t-2xl p-6 relative group overflow-hidden hover:border-orange-700/50 transition-all cursor-pointer">
-                                <div className="absolute top-0 left-0 w-full h-1 bg-orange-700 shadow-[0_0_15px_brown]"></div>
-                                <div className="text-center relative z-10">
-                                    <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800 border border-orange-800 text-orange-700 font-bold mb-3 shadow-lg absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">3</div>
+                            <div className="relative w-full">
+                                <div className="w-full bg-gray-900/80 border border-orange-900/30 rounded-t-2xl p-6 relative group overflow-hidden hover:border-orange-700/50 transition-all cursor-pointer">
+                                    <div className="absolute top-0 left-0 w-full h-1 bg-orange-700 shadow-[0_0_15px_brown]"></div>
 
-                                    {/* Logo Placeholder */}
-                                    <div className="w-16 h-16 rounded-full bg-gray-800 border-2 border-orange-800 mx-auto mb-3 flex items-center justify-center overflow-hidden shadow-lg group-hover:scale-105 transition-transform">
-                                        <span className="text-xl font-bold text-orange-700">VA</span>
+                                    {/* Large Background Number */}
+                                    <div className="absolute top-16 left-1/2 -translate-x-1/2 text-[120px] leading-none font-black text-white/5 select-none pointer-events-none z-0">3</div>
+
+                                    <div className="text-center relative z-10 pt-4">
+
+                                        {/* Logo Placeholder */}
+                                        <div className="w-16 h-16 rounded-full bg-gray-800 border-2 border-orange-800 mx-auto mb-3 flex items-center justify-center overflow-hidden shadow-lg group-hover:scale-105 transition-transform">
+                                            <span className="text-xl font-bold text-orange-700">VA</span>
+                                        </div>
+
+                                        <h3 className="text-xl font-bold text-white mb-1">Viridis Arcus</h3>
+                                        <p className="text-xs text-gray-500 uppercase tracking-widest mb-4">DLSU</p>
+                                        <p className="text-2xl font-black text-white">10,850 <span className="text-xs text-gray-600 font-normal">pts</span></p>
                                     </div>
-
-                                    <h3 className="text-xl font-bold text-white mb-1">Viridis Arcus</h3>
-                                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-4">DLSU</p>
-                                    <p className="text-2xl font-black text-white">10,850 <span className="text-xs text-gray-600 font-normal">pts</span></p>
+                                    <div className="absolute inset-0 bg-gradient-to-b from-orange-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 </div>
-                                <div className="absolute inset-0 bg-gradient-to-b from-orange-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             </div>
-                            <div className="w-full h-16 bg-gradient-to-t from-gray-900 to-gray-800/50 border-x border-gray-800 hidden md:block opacity-50"></div>
+                            <div className="w-full h-24 bg-gradient-to-t from-gray-900 to-gray-800/50 border-x border-gray-800 hidden md:block opacity-50"></div>
                         </div>
                     </div>
 
