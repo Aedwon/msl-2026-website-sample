@@ -267,73 +267,154 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                 </div>
             </section>
 
-            {/* --- TOURNAMENT TITLE & REGISTRATION (The Future) --- */}
-            <section className="relative z-10 px-4 py-24 md:py-32">
-                <div className="max-w-7xl mx-auto text-center">
+            {/* --- TOURNAMENT TITLE & REGISTRATION (Hero Redesign: Neon Coliseum) --- */}
+            <section className="relative z-10 min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#050505]">
+                {/* Background Layer: Cyberpunk Grid + Atmosphere */}
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                    <img
+                        src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=2000"
+                        alt="Esports Arena"
+                        className="w-full h-full object-cover opacity-20 grayscale mix-blend-luminosity"
+                    />
+                    {/* Scanlines */}
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-20 bg-[length:100%_2px,3px_100%] pointer-events-none"></div>
+
+                    {/* Subtle Flag Atmosphere: Blue Left, Red Right */}
+                    <div className="absolute top-0 left-0 w-[60vw] h-[60vw] bg-blue-900/20 rounded-full blur-[120px] mix-blend-screen animate-pulse"></div>
+                    <div className="absolute bottom-0 right-0 w-[60vw] h-[60vw] bg-red-900/20 rounded-full blur-[120px] mix-blend-screen animate-pulse delay-700"></div>
+
+                    {/* Tech Grid */}
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+                </div>
+
+                <div className="relative z-30 max-w-7xl mx-auto px-4 w-full text-center flex flex-col items-center">
+
+                    {/* HUD Elements: Corners */}
+                    <div className="absolute top-10 left-10 w-8 h-8 border-l-2 border-t-2 border-cyan-500 hidden md:block"></div>
+                    <div className="absolute top-10 right-10 w-8 h-8 border-r-2 border-t-2 border-red-500 hidden md:block"></div>
+                    <div className="absolute bottom-10 left-10 w-8 h-8 border-l-2 border-b-2 border-cyan-500 hidden md:block"></div>
+                    <div className="absolute bottom-10 right-10 w-8 h-8 border-r-2 border-b-2 border-red-500 hidden md:block"></div>
 
                     {/* Season Badge */}
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-msl-gold/10 border border-msl-gold/30 text-msl-gold text-sm font-bold uppercase tracking-widest mb-8 animate-fade-in-up">
-                        Season 3 (2026)
+                    <div className="relative inline-flex items-center gap-2 mb-8 group cursor-default">
+                        <div className="absolute inset-0 bg-yellow-500/10 skew-x-12 border border-yellow-500/30"></div>
+                        <div className="relative px-6 py-2 text-yellow-400 text-xs font-mono font-bold uppercase tracking-[0.2em] flex items-center gap-2">
+                            <span className="w-2 h-2 bg-yellow-400 animate-ping rounded-full"></span>
+                            SEASON 3
+                        </div>
                     </div>
 
-                    <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#ffeebb] via-[#eab308] to-[#a16207] leading-[0.9] mb-6 tracking-tighter drop-shadow-2xl animate-fade-in-up delay-100 uppercase whitespace-nowrap">
-                        MSL Collegiate Cup
-                    </h1>
+                    {/* Main Title: Cyberpunk Neon - Per-Letter Flicker */}
+                    <style jsx>{`
+                        @keyframes cyber-glitch {
+                            0%, 98% { text-shadow: none; }
+                            98.1% { text-shadow: 4px 0px 0px #ff0055, -4px 0px 0px #00eaff; }
+                            98.3% { text-shadow: -4px 0px 0px #ff0055, 4px 0px 0px #00eaff; }
+                            98.5% { text-shadow: none; }
+                        }
+                        @keyframes neon-flicker {
+                            0%, 49.8%, 50.2%, 100% { opacity: 1; }
+                            50% { opacity: 0.3; }
+                        }
+                        .cyber-glitch-container {
+                            animation: cyber-glitch 5s infinite linear;
+                        }
+                        .flicker-char {
+                            animation: neon-flicker 60s infinite linear;
+                        }
+                        
+                        /* Spread 60s duration to approx 1 flicker every 3s across ~20 chars */
+                        .flicker-char:nth-child(2n) { animation-delay: 1.5s; }
+                        .flicker-char:nth-child(3n) { animation-delay: 13s; }
+                        .flicker-char:nth-child(4n) { animation-delay: 28s; }
+                        .flicker-char:nth-child(5n) { animation-delay: 42s; }
+                        .flicker-char:nth-child(7n) { animation-delay: 7s; }
+                        .flicker-char:nth-child(3n+1) { animation-delay: 21s; }
+                        .flicker-char:nth-child(4n+1) { animation-delay: 35s; }
+                        .flicker-char:nth-child(5n+2) { animation-delay: 55s; }
+                    `}</style>
+                    <div className="relative mb-6 overflow-visible cyber-glitch-container flex flex-col items-center justify-center">
+                        <h1 className="flex flex-col items-center justify-center text-3xl sm:text-6xl md:text-8xl font-cyber font-black italic tracking-wider uppercase leading-tight text-white overflow-visible text-center gap-4">
 
-                    <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 animate-fade-in-up delay-200 font-medium">
-                        The Official Collegiate League of MLBB in the Philippines. <br />
-                        <span className="text-msl-gold">1000+ Teams. One Champion.</span>
+                            {/* MSL */}
+                            <span className="inline-block">
+                                {"MSL".split('').map((char, i) => (
+                                    <span key={i} className="flicker-char inline-block">{char}</span>
+                                ))}
+                            </span>
+
+                            {/* COLLEGIATE CUP */}
+                            <span className="inline-block whitespace-normal break-words max-w-full">
+                                {"COLLEGIATE CUP".split('').map((char, i) => (
+                                    char === ' '
+                                        ? <span key={i} className="inline-block w-[0.4em]"> </span>
+                                        : <span key={i} className="flicker-char inline-block">{char}</span>
+                                ))}
+                            </span>
+                        </h1>
+                    </div>
+
+                    <p className="text-lg md:text-2xl text-gray-200 max-w-3xl mx-auto mb-12 font-medium tracking-wide">
+                        The official collegiate league of MLBB in the Philippines. <br />
+                        <span className="text-white font-bold">1,000+ Teams. One Champion.</span>
                     </p>
 
-                    <div className="flex flex-col items-center gap-6 animate-fade-in-up delay-300">
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-                            <button className="w-full sm:w-auto px-10 py-4 bg-msl-gold hover:bg-yellow-400 text-black rounded-xl font-black text-xl uppercase tracking-wider transition-all shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_50px_rgba(234,179,8,0.6)] hover:-translate-y-1">
-                                Register Now
+                    {/* Actions: Angled Buttons */}
+                    <div className="flex flex-col items-center gap-8 mb-20 animate-fade-in-up delay-300">
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto">
+
+                            {/* Primary CTA (Angled Yellow) */}
+                            <button className="relative group px-12 py-5 bg-msl-gold text-black font-black text-xl uppercase tracking-wider transition-all hover:bg-yellow-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(234,179,8,0.6)]"
+                                style={{ clipPath: 'polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%)' }}
+                            >
+                                <span className="relative z-10">REGISTER NOW</span>
                             </button>
-                            <button className="w-full sm:w-auto px-10 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl font-bold text-xl uppercase tracking-wider transition-all backdrop-blur-md flex items-center justify-center gap-2">
-                                About MCC <ArrowRight size={20} />
+
+                            {/* Secondary CTA (Angled Outline) */}
+                            <button className="relative group px-12 py-5 bg-transparent border border-white/20 text-white font-bold text-lg uppercase tracking-wider transition-all hover:border-yellow-400 hover:text-yellow-400 hover:bg-yellow-900/10"
+                                style={{ clipPath: 'polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%)' }}
+                            >
+                                <span className="flex items-center gap-2">
+                                    LEARN MORE <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                </span>
                             </button>
                         </div>
-
-                        {/* Tertiary Action: Watch Trailer */}
-                        <button className="group flex items-center gap-3 text-white/50 hover:text-white transition-colors uppercase tracking-widest text-sm font-bold">
-                            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-msl-gold group-hover:text-black group-hover:border-msl-gold transition-all duration-300">
-                                <Play size={14} className="ml-0.5 fill-current" />
-                            </div>
-                            <span>Watch Trailer</span>
-                        </button>
                     </div>
 
-                    {/* Quick Stats (Redesigned - Frameless/HUD Style) */}
-                    <div className="mt-20 max-w-6xl mx-auto animate-fade-in-up delay-500 relative">
-                        {/* Glow Effect behind stats */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-r from-msl-gold/5 via-blue-500/5 to-purple-500/5 blur-3xl rounded-full pointer-events-none"></div>
+                    {/* Cyberpunk Stats HUD */}
+                    <div className="w-full max-w-6xl mx-auto animate-fade-in-up delay-500 relative">
+                        {/* Background Panel */}
+                        <div className="absolute inset-0 bg-white/5 border-y border-white/10 backdrop-blur-sm -skew-x-12 transform origin-center"></div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/20 relative z-10">
+                        <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 py-6">
 
-                            <div className="pb-8 md:pb-0 md:px-8 text-center relative group">
-                                <div className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-2 flex items-center justify-center gap-2">
-                                    <Trophy size={14} className="text-msl-gold group-hover:scale-110 transition-transform" /> Prize Pool
+                            {/* Prize Pool */}
+                            <div className="px-8 flex flex-col items-center justify-center gap-2 group cursor-default">
+                                <div className="text-yellow-500 font-mono text-[10px] uppercase tracking-[0.2em] flex items-center gap-2 transition-all group-hover:text-yellow-400 group-hover:drop-shadow-[0_0_8px_rgba(234,179,8,0.8)]">
+                                    <Trophy size={14} className="text-yellow-400 transition-transform group-hover:scale-110" /> PRIZE POOL
                                 </div>
-                                <div className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-msl-gold to-yellow-600 drop-shadow-sm">₱500,000</div>
-                                <div className="mt-2 text-xs text-gray-400 font-medium">Season 3 Total Cash Prize</div>
+                                <div className="text-4xl md:text-5xl font-black text-white tracking-tighter drop-shadow-[0_0_10px_rgba(234,179,8,0.5)] transition-all group-hover:text-yellow-100">₱500,000</div>
+                                <div className="h-0.5 w-12 bg-yellow-500/50 mt-2 transition-all group-hover:w-24 group-hover:bg-yellow-400"></div>
                             </div>
 
-                            <div className="py-8 md:py-0 md:px-8 text-center relative group">
-                                <div className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-2 flex items-center justify-center gap-2">
-                                    <MapPin size={14} className="text-blue-500 group-hover:scale-110 transition-transform" /> Venue
+                            {/* Venue */}
+                            <div className="px-8 flex flex-col items-center justify-center gap-2 group cursor-default">
+                                <div className="text-cyan-500 font-mono text-[10px] uppercase tracking-[0.2em] flex items-center gap-2 transition-all group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]">
+                                    <MapPin size={14} className="text-cyan-400 transition-transform group-hover:scale-110" /> ONSITE VENUE
                                 </div>
-                                <div className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">TBA</div>
-                                <div className="mt-2 text-xs text-gray-400 font-medium">Live LAN Grand Finals</div>
+                                <div className="text-4xl md:text-5xl font-black text-white tracking-tighter drop-shadow-[0_0_10px_rgba(6,182,212,0.5)] transition-all group-hover:text-cyan-100">TBA</div>
+                                <div className="h-0.5 w-12 bg-cyan-500/50 mt-2 transition-all group-hover:w-24 group-hover:bg-cyan-400"></div>
                             </div>
 
-                            <div className="pt-8 md:pt-0 md:px-8 text-center relative group">
-                                <div className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-2 flex items-center justify-center gap-2">
-                                    <Target size={14} className="text-purple-500 group-hover:scale-110 transition-transform" /> Pathway
+                            {/* Pathway */}
+                            <div className="px-8 flex flex-col items-center justify-center gap-2 group cursor-default">
+                                <div className="text-pink-500 font-mono text-[10px] uppercase tracking-[0.2em] flex items-center gap-2 transition-all group-hover:text-pink-400 group-hover:drop-shadow-[0_0_8px_rgba(244,114,182,0.8)]">
+                                    <Target size={14} className="text-pink-400 transition-transform group-hover:scale-110" /> PATHWAY TO PRO
                                 </div>
-                                <div className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-purple-400 to-purple-700">MDL PH</div>
-                                <div className="mt-2 text-xs text-gray-400 font-medium">Official Pro League Qualifier</div>
+                                <div className="text-4xl md:text-5xl font-black text-white tracking-tighter drop-shadow-[0_0_10px_rgba(236,72,153,0.5)] transition-all group-hover:text-pink-100">MDL PH</div>
+                                <div className="h-0.5 w-12 bg-pink-500/50 mt-2 transition-all group-hover:w-24 group-hover:bg-pink-400"></div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -407,240 +488,242 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* --- STATS HUB (DEEP DIVE) --- */}
-            {activeTab === 'stats' && (
-                <section className="py-24 px-4 bg-msl-black min-h-screen">
-                    <div className="max-w-7xl mx-auto">
-                        <div className="text-center mb-12">
-                            <h2 className="text-3xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter">Tournament Data</h2>
-                            <div className="inline-flex bg-white/5 rounded-full p-1 border border-white/10">
-                                {['overall', 'teams', 'players'].map(t => (
-                                    <button
-                                        key={t}
-                                        onClick={() => setStatsTab(t as any)}
-                                        className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${statsTab === t ? 'bg-white text-black shadow-lg shadow-white/10' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
-                                    >
-                                        {t}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* OVERALL STATS */}
-                        {statsTab === 'overall' && (
-                            <div className="animate-fade-in space-y-6">
-                                {/* Sub Toggles */}
-                                <div className="flex justify-center gap-4 mb-8">
-                                    {['picks', 'blue', 'red', 'bans'].map(t => (
+            {
+                activeTab === 'stats' && (
+                    <section className="py-24 px-4 bg-msl-black min-h-screen">
+                        <div className="max-w-7xl mx-auto">
+                            <div className="text-center mb-12">
+                                <h2 className="text-3xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter">Tournament Data</h2>
+                                <div className="inline-flex bg-white/5 rounded-full p-1 border border-white/10">
+                                    {['overall', 'teams', 'players'].map(t => (
                                         <button
                                             key={t}
-                                            onClick={() => setOverallSubTab(t as any)}
-                                            className={`text-xs font-bold uppercase tracking-widest py-1 border-b-2 transition-all ${overallSubTab === t ? 'text-msl-gold border-msl-gold' : 'text-gray-600 border-transparent hover:text-white'}`}
+                                            onClick={() => setStatsTab(t as any)}
+                                            className={`px-8 py-3 rounded-full text-sm font-black uppercase tracking-widest transition-all ${statsTab === t ? 'bg-white text-black shadow-lg shadow-white/10' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
                                         >
-                                            {t === 'blue' ? 'Blue Side' : t === 'red' ? 'Red Side' : t}
+                                            {t}
                                         </button>
                                     ))}
-                                </div>
-
-                                {/* Deep Stats Table */}
-                                <div className="bg-[#121212] border border-white/10 rounded-3xl overflow-hidden overflow-x-auto">
-                                    <table className="w-full text-left text-sm whitespace-nowrap">
-                                        <thead>
-                                            <tr className="bg-white/[0.03] text-[10px] uppercase font-bold text-gray-500 tracking-wider">
-                                                <th className="p-4 pl-6">#</th>
-                                                <th className="p-4">Hero</th>
-                                                <th className="p-4 text-center">Matches</th>
-                                                <th className="p-4 text-center">Win Rate</th>
-                                                <th className="p-4 text-center">Pick Rate</th>
-                                                <th className="p-4 text-center border-l border-white/5 text-blue-400">Blue WR</th>
-                                                <th className="p-4 text-center border-r border-white/5 text-red-400">Red WR</th>
-                                                <th className="p-4 text-center">Ban Rate</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="divide-y divide-white/5">
-                                            {HERO_STATS.map((stat, idx) => (
-                                                <tr key={stat.hero} className="hover:bg-white/[0.02] transition-colors">
-                                                    <td className="p-4 pl-6 font-mono text-gray-600">{(idx + 1).toString().padStart(2, '0')}</td>
-                                                    <td className="p-4 font-bold text-white text-base">{stat.hero}</td>
-                                                    <td className="p-4 text-center font-mono text-white">{stat.matches}</td>
-                                                    <td className="p-4 text-center font-black text-msl-gold">{stat.winRate}</td>
-                                                    <td className="p-4 text-center font-mono text-gray-400">{stat.pickRate}</td>
-                                                    <td className="p-4 text-center border-l border-white/5 font-mono text-blue-400">{stat.blue.wr}</td>
-                                                    <td className="p-4 text-center border-r border-white/5 font-mono text-red-400">{stat.red.wr}</td>
-                                                    <td className="p-4 text-center font-mono text-gray-500">{stat.banRate}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
-                        )}
 
-                        {/* TEAM STATS */}
-                        {statsTab === 'teams' && (
-                            <div className="animate-fade-in space-y-8">
-                                <div className="flex flex-wrap items-center justify-center gap-4">
-                                    <button
-                                        onClick={() => setStatsTeamFilter('all')}
-                                        className={`px-4 py-2 rounded-lg border text-xs font-bold uppercase transition-all ${statsTeamFilter === 'all' ? 'bg-white text-black border-white' : 'bg-transparent text-gray-500 border-white/10 hover:border-white/30'}`}
-                                    >
-                                        All Teams
-                                    </button>
-                                    {TEAMS_DATA.filter(t => t.isFinalist).map(team => (
-                                        <button
-                                            key={team.id}
-                                            onClick={() => setStatsTeamFilter(team.id)}
-                                            className={`px-4 py-2 rounded-lg border text-xs font-bold uppercase transition-all flex items-center gap-2 ${statsTeamFilter === team.id ? 'bg-white text-black border-white' : 'bg-transparent text-gray-500 border-white/10 hover:border-white/30'}`}
-                                        >
-                                            <span>{team.logo}</span> {team.code}
-                                        </button>
-                                    ))}
-                                </div>
+                            {/* OVERALL STATS */}
+                            {statsTab === 'overall' && (
+                                <div className="animate-fade-in space-y-6">
+                                    {/* Sub Toggles */}
+                                    <div className="flex justify-center gap-4 mb-8">
+                                        {['picks', 'blue', 'red', 'bans'].map(t => (
+                                            <button
+                                                key={t}
+                                                onClick={() => setOverallSubTab(t as any)}
+                                                className={`text-xs font-bold uppercase tracking-widest py-1 border-b-2 transition-all ${overallSubTab === t ? 'text-msl-gold border-msl-gold' : 'text-gray-600 border-transparent hover:text-white'}`}
+                                            >
+                                                {t === 'blue' ? 'Blue Side' : t === 'red' ? 'Red Side' : t}
+                                            </button>
+                                        ))}
+                                    </div>
 
-                                {statsTeamFilter === 'all' ? (
+                                    {/* Deep Stats Table */}
                                     <div className="bg-[#121212] border border-white/10 rounded-3xl overflow-hidden overflow-x-auto">
-                                        <table className="w-full text-left border-collapse">
+                                        <table className="w-full text-left text-sm whitespace-nowrap">
                                             <thead>
-                                                <tr className="border-b border-white/5 text-[10px] uppercase tracking-widest text-gray-500 bg-white/[0.02]">
-                                                    <th className="p-4 font-bold pl-8">Team</th>
-                                                    <th className="p-4 font-bold text-center">Win Rate</th>
-                                                    <th className="p-4 font-bold text-center">KDA</th>
-                                                    <th className="p-4 font-bold text-center">Wins</th>
-                                                    <th className="p-4 font-bold text-center">Losses</th>
-                                                    <th className="p-4 font-bold text-left pl-8">Signature Picks</th>
+                                                <tr className="bg-white/[0.03] text-[10px] uppercase font-bold text-gray-500 tracking-wider">
+                                                    <th className="p-4 pl-6">#</th>
+                                                    <th className="p-4">Hero</th>
+                                                    <th className="p-4 text-center">Matches</th>
+                                                    <th className="p-4 text-center">Win Rate</th>
+                                                    <th className="p-4 text-center">Pick Rate</th>
+                                                    <th className="p-4 text-center border-l border-white/5 text-blue-400">Blue WR</th>
+                                                    <th className="p-4 text-center border-r border-white/5 text-red-400">Red WR</th>
+                                                    <th className="p-4 text-center">Ban Rate</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                {TEAMS_DATA.slice(0, 8).sort((a, b) => parseFloat(b.stats.winRate) - parseFloat(a.stats.winRate)).map((team) => (
-                                                    <tr key={team.id} className="border-b border-white/5 hover:bg-white/[0.02]">
-                                                        <td className="p-4 pl-8 flex items-center gap-3">
-                                                            <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${team.color} flex items-center justify-center text-lg shadow-lg`}>
-                                                                {team.logo}
-                                                            </div>
-                                                            <div>
-                                                                <div className="font-bold text-white text-sm">{team.name}</div>
-                                                                <div className="text-[9px] font-bold text-gray-500">{team.code}</div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="p-4 text-center font-black text-msl-gold text-lg">{team.stats.winRate}</td>
-                                                        <td className="p-4 text-center font-mono text-gray-400">{team.stats.kda}</td>
-                                                        <td className="p-4 text-center font-bold text-green-400">{team.stats.wins}</td>
-                                                        <td className="p-4 text-center font-bold text-red-400">{team.stats.losses}</td>
-                                                        <td className="p-4 pl-8">
-                                                            <div className="flex gap-1.5">
-                                                                {team.stats.heroes.map(h => (
-                                                                    <span key={h} className="px-2 py-0.5 bg-white/5 rounded text-[9px] uppercase font-bold text-gray-400 border border-white/5">{h}</span>
-                                                                ))}
-                                                            </div>
-                                                        </td>
+                                            <tbody className="divide-y divide-white/5">
+                                                {HERO_STATS.map((stat, idx) => (
+                                                    <tr key={stat.hero} className="hover:bg-white/[0.02] transition-colors">
+                                                        <td className="p-4 pl-6 font-mono text-gray-600">{(idx + 1).toString().padStart(2, '0')}</td>
+                                                        <td className="p-4 font-bold text-white text-base">{stat.hero}</td>
+                                                        <td className="p-4 text-center font-mono text-white">{stat.matches}</td>
+                                                        <td className="p-4 text-center font-black text-msl-gold">{stat.winRate}</td>
+                                                        <td className="p-4 text-center font-mono text-gray-400">{stat.pickRate}</td>
+                                                        <td className="p-4 text-center border-l border-white/5 font-mono text-blue-400">{stat.blue.wr}</td>
+                                                        <td className="p-4 text-center border-r border-white/5 font-mono text-red-400">{stat.red.wr}</td>
+                                                        <td className="p-4 text-center font-mono text-gray-500">{stat.banRate}</td>
                                                     </tr>
                                                 ))}
                                             </tbody>
                                         </table>
                                     </div>
-                                ) : (
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                        {/* Team Specific Dashboard Mockup */}
-                                        <div className="md:col-span-1 bg-[#121212] border border-white/10 rounded-3xl p-8 flex flex-col items-center justify-center text-center">
-                                            {(() => {
-                                                const t = TEAMS_DATA.find(x => x.id === statsTeamFilter);
-                                                return t ? (
-                                                    <>
-                                                        <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${t.color} flex items-center justify-center text-6xl shadow-2xl mb-6`}>
-                                                            {t.logo}
-                                                        </div>
-                                                        <h3 className="text-3xl font-black text-white uppercase leading-none">{t.name}</h3>
-                                                        <div className="text-xl font-bold text-gray-500 mb-8">{t.code}</div>
-                                                        <div className="grid grid-cols-2 gap-4 w-full">
-                                                            <div className="p-4 bg-white/5 rounded-xl">
-                                                                <div className="text-2xl font-black text-green-400">{t.stats.wins}</div>
-                                                                <div className="text-[9px] uppercase font-bold text-gray-500">Wins</div>
-                                                            </div>
-                                                            <div className="p-4 bg-white/5 rounded-xl">
-                                                                <div className="text-2xl font-black text-red-500">{t.stats.losses}</div>
-                                                                <div className="text-[9px] uppercase font-bold text-gray-500">Losses</div>
-                                                            </div>
-                                                        </div>
-                                                    </>
-                                                ) : null;
-                                            })()}
-                                        </div>
-                                        <div className="md:col-span-2 bg-[#121212] border border-white/10 rounded-3xl p-8">
-                                            <h4 className="text-lg font-bold text-white uppercase mb-6 flex items-center gap-2"><Trophy size={18} className="text-msl-gold" /> Performance Metrics</h4>
-                                            <div className="space-y-4">
-                                                {/* Mock Metrics */}
-                                                <div>
-                                                    <div className="flex justify-between text-xs font-bold uppercase text-gray-500 mb-2"><span>Team Fight Participation</span> <span className="text-white">78%</span></div>
-                                                    <div className="h-2 bg-white/5 rounded-full overflow-hidden"><div className="h-full w-[78%] bg-blue-500"></div></div>
-                                                </div>
-                                                <div>
-                                                    <div className="flex justify-between text-xs font-bold uppercase text-gray-500 mb-2"><span>Major Objective Control</span> <span className="text-white">65%</span></div>
-                                                    <div className="h-2 bg-white/5 rounded-full overflow-hidden"><div className="h-full w-[65%] bg-purple-500"></div></div>
-                                                </div>
-                                                <div>
-                                                    <div className="flex justify-between text-xs font-bold uppercase text-gray-500 mb-2"><span>First Blood Rate</span> <span className="text-white">45%</span></div>
-                                                    <div className="h-2 bg-white/5 rounded-full overflow-hidden"><div className="h-full w-[45%] bg-red-500"></div></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                </div>
+                            )}
+
+                            {/* TEAM STATS */}
+                            {statsTab === 'teams' && (
+                                <div className="animate-fade-in space-y-8">
+                                    <div className="flex flex-wrap items-center justify-center gap-4">
+                                        <button
+                                            onClick={() => setStatsTeamFilter('all')}
+                                            className={`px-4 py-2 rounded-lg border text-xs font-bold uppercase transition-all ${statsTeamFilter === 'all' ? 'bg-white text-black border-white' : 'bg-transparent text-gray-500 border-white/10 hover:border-white/30'}`}
+                                        >
+                                            All Teams
+                                        </button>
+                                        {TEAMS_DATA.filter(t => t.isFinalist).map(team => (
+                                            <button
+                                                key={team.id}
+                                                onClick={() => setStatsTeamFilter(team.id)}
+                                                className={`px-4 py-2 rounded-lg border text-xs font-bold uppercase transition-all flex items-center gap-2 ${statsTeamFilter === team.id ? 'bg-white text-black border-white' : 'bg-transparent text-gray-500 border-white/10 hover:border-white/30'}`}
+                                            >
+                                                <span>{team.logo}</span> {team.code}
+                                            </button>
+                                        ))}
                                     </div>
-                                )}
-                            </div>
-                        )}
 
-                        {/* PLAYER STATS */}
-                        {statsTab === 'players' && (
-                            <div className="animate-fade-in space-y-8">
-                                <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-                                    <select
-                                        className="bg-[#121212] border border-white/10 rounded-lg px-4 py-2 text-sm font-bold text-white focus:outline-none focus:border-msl-gold uppercase"
-                                        value={statsPlayerTeamFilter}
-                                        onChange={(e) => setStatsPlayerTeamFilter(e.target.value)}
-                                    >
-                                        <option value="all">All Teams</option>
-                                        {TEAMS_DATA.filter(t => t.isFinalist).map(t => <option key={t.id} value={t.id}>{t.code}</option>)}
-                                    </select>
-                                </div>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                                    {(statsPlayerTeamFilter === 'all' ? PLAYER_STATS : PLAYER_STATS.filter(p => p.teamId === statsPlayerTeamFilter)).map(player => (
-                                        <div key={player.id} className="bg-[#121212] border border-white/10 rounded-2xl p-6 hover:border-msl-gold/50 transition-colors group cursor-pointer">
-                                            <div className="flex items-center gap-4 mb-4">
-                                                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-xl">👤</div>
-                                                <div>
-                                                    <div className="font-black text-white text-lg leading-none group-hover:text-msl-gold transition-colors">{player.name}</div>
-                                                    <div className="text-[10px] uppercase font-bold text-gray-500">{player.role}</div>
-                                                </div>
+                                    {statsTeamFilter === 'all' ? (
+                                        <div className="bg-[#121212] border border-white/10 rounded-3xl overflow-hidden overflow-x-auto">
+                                            <table className="w-full text-left border-collapse">
+                                                <thead>
+                                                    <tr className="border-b border-white/5 text-[10px] uppercase tracking-widest text-gray-500 bg-white/[0.02]">
+                                                        <th className="p-4 font-bold pl-8">Team</th>
+                                                        <th className="p-4 font-bold text-center">Win Rate</th>
+                                                        <th className="p-4 font-bold text-center">KDA</th>
+                                                        <th className="p-4 font-bold text-center">Wins</th>
+                                                        <th className="p-4 font-bold text-center">Losses</th>
+                                                        <th className="p-4 font-bold text-left pl-8">Signature Picks</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {TEAMS_DATA.slice(0, 8).sort((a, b) => parseFloat(b.stats.winRate) - parseFloat(a.stats.winRate)).map((team) => (
+                                                        <tr key={team.id} className="border-b border-white/5 hover:bg-white/[0.02]">
+                                                            <td className="p-4 pl-8 flex items-center gap-3">
+                                                                <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${team.color} flex items-center justify-center text-lg shadow-lg`}>
+                                                                    {team.logo}
+                                                                </div>
+                                                                <div>
+                                                                    <div className="font-bold text-white text-sm">{team.name}</div>
+                                                                    <div className="text-[9px] font-bold text-gray-500">{team.code}</div>
+                                                                </div>
+                                                            </td>
+                                                            <td className="p-4 text-center font-black text-msl-gold text-lg">{team.stats.winRate}</td>
+                                                            <td className="p-4 text-center font-mono text-gray-400">{team.stats.kda}</td>
+                                                            <td className="p-4 text-center font-bold text-green-400">{team.stats.wins}</td>
+                                                            <td className="p-4 text-center font-bold text-red-400">{team.stats.losses}</td>
+                                                            <td className="p-4 pl-8">
+                                                                <div className="flex gap-1.5">
+                                                                    {team.stats.heroes.map(h => (
+                                                                        <span key={h} className="px-2 py-0.5 bg-white/5 rounded text-[9px] uppercase font-bold text-gray-400 border border-white/5">{h}</span>
+                                                                    ))}
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    ) : (
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                            {/* Team Specific Dashboard Mockup */}
+                                            <div className="md:col-span-1 bg-[#121212] border border-white/10 rounded-3xl p-8 flex flex-col items-center justify-center text-center">
+                                                {(() => {
+                                                    const t = TEAMS_DATA.find(x => x.id === statsTeamFilter);
+                                                    return t ? (
+                                                        <>
+                                                            <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${t.color} flex items-center justify-center text-6xl shadow-2xl mb-6`}>
+                                                                {t.logo}
+                                                            </div>
+                                                            <h3 className="text-3xl font-black text-white uppercase leading-none">{t.name}</h3>
+                                                            <div className="text-xl font-bold text-gray-500 mb-8">{t.code}</div>
+                                                            <div className="grid grid-cols-2 gap-4 w-full">
+                                                                <div className="p-4 bg-white/5 rounded-xl">
+                                                                    <div className="text-2xl font-black text-green-400">{t.stats.wins}</div>
+                                                                    <div className="text-[9px] uppercase font-bold text-gray-500">Wins</div>
+                                                                </div>
+                                                                <div className="p-4 bg-white/5 rounded-xl">
+                                                                    <div className="text-2xl font-black text-red-500">{t.stats.losses}</div>
+                                                                    <div className="text-[9px] uppercase font-bold text-gray-500">Losses</div>
+                                                                </div>
+                                                            </div>
+                                                        </>
+                                                    ) : null;
+                                                })()}
                                             </div>
-                                            <div className="grid grid-cols-3 gap-2 mb-4">
-                                                <div className="text-center p-2 bg-white/5 rounded-lg">
-                                                    <div className="text-xs font-black text-white">{player.kda}</div>
-                                                    <div className="text-[8px] uppercase font-bold text-gray-600">KDA</div>
+                                            <div className="md:col-span-2 bg-[#121212] border border-white/10 rounded-3xl p-8">
+                                                <h4 className="text-lg font-bold text-white uppercase mb-6 flex items-center gap-2"><Trophy size={18} className="text-msl-gold" /> Performance Metrics</h4>
+                                                <div className="space-y-4">
+                                                    {/* Mock Metrics */}
+                                                    <div>
+                                                        <div className="flex justify-between text-xs font-bold uppercase text-gray-500 mb-2"><span>Team Fight Participation</span> <span className="text-white">78%</span></div>
+                                                        <div className="h-2 bg-white/5 rounded-full overflow-hidden"><div className="h-full w-[78%] bg-blue-500"></div></div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="flex justify-between text-xs font-bold uppercase text-gray-500 mb-2"><span>Major Objective Control</span> <span className="text-white">65%</span></div>
+                                                        <div className="h-2 bg-white/5 rounded-full overflow-hidden"><div className="h-full w-[65%] bg-purple-500"></div></div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="flex justify-between text-xs font-bold uppercase text-gray-500 mb-2"><span>First Blood Rate</span> <span className="text-white">45%</span></div>
+                                                        <div className="h-2 bg-white/5 rounded-full overflow-hidden"><div className="h-full w-[45%] bg-red-500"></div></div>
+                                                    </div>
                                                 </div>
-                                                <div className="text-center p-2 bg-white/5 rounded-lg">
-                                                    <div className="text-xs font-black text-msl-gold">{player.gold}</div>
-                                                    <div className="text-[8px] uppercase font-bold text-gray-600">GPM</div>
-                                                </div>
-                                                <div className="text-center p-2 bg-white/5 rounded-lg">
-                                                    <div className="text-xs font-black text-red-500">{player.dmg}</div>
-                                                    <div className="text-[8px] uppercase font-bold text-gray-600">DPM</div>
-                                                </div>
-                                            </div>
-                                            <div className="flex gap-1 justify-center">
-                                                {player.heroes.map(h => (
-                                                    <span key={h} className="text-[9px] px-1.5 py-0.5 bg-white/5 rounded text-gray-500">{h}</span>
-                                                ))}
                                             </div>
                                         </div>
-                                    ))}
+                                    )}
                                 </div>
-                            </div>
-                        )}
-                    </div >
-                </section >
-            )}
+                            )}
+
+                            {/* PLAYER STATS */}
+                            {statsTab === 'players' && (
+                                <div className="animate-fade-in space-y-8">
+                                    <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+                                        <select
+                                            className="bg-[#121212] border border-white/10 rounded-lg px-4 py-2 text-sm font-bold text-white focus:outline-none focus:border-msl-gold uppercase"
+                                            value={statsPlayerTeamFilter}
+                                            onChange={(e) => setStatsPlayerTeamFilter(e.target.value)}
+                                        >
+                                            <option value="all">All Teams</option>
+                                            {TEAMS_DATA.filter(t => t.isFinalist).map(t => <option key={t.id} value={t.id}>{t.code}</option>)}
+                                        </select>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        {(statsPlayerTeamFilter === 'all' ? PLAYER_STATS : PLAYER_STATS.filter(p => p.teamId === statsPlayerTeamFilter)).map(player => (
+                                            <div key={player.id} className="bg-[#121212] border border-white/10 rounded-2xl p-6 hover:border-msl-gold/50 transition-colors group cursor-pointer">
+                                                <div className="flex items-center gap-4 mb-4">
+                                                    <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-xl">👤</div>
+                                                    <div>
+                                                        <div className="font-black text-white text-lg leading-none group-hover:text-msl-gold transition-colors">{player.name}</div>
+                                                        <div className="text-[10px] uppercase font-bold text-gray-500">{player.role}</div>
+                                                    </div>
+                                                </div>
+                                                <div className="grid grid-cols-3 gap-2 mb-4">
+                                                    <div className="text-center p-2 bg-white/5 rounded-lg">
+                                                        <div className="text-xs font-black text-white">{player.kda}</div>
+                                                        <div className="text-[8px] uppercase font-bold text-gray-600">KDA</div>
+                                                    </div>
+                                                    <div className="text-center p-2 bg-white/5 rounded-lg">
+                                                        <div className="text-xs font-black text-msl-gold">{player.gold}</div>
+                                                        <div className="text-[8px] uppercase font-bold text-gray-600">GPM</div>
+                                                    </div>
+                                                    <div className="text-center p-2 bg-white/5 rounded-lg">
+                                                        <div className="text-xs font-black text-red-500">{player.dmg}</div>
+                                                        <div className="text-[8px] uppercase font-bold text-gray-600">DPM</div>
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-1 justify-center">
+                                                    {player.heroes.map(h => (
+                                                        <span key={h} className="text-[9px] px-1.5 py-0.5 bg-white/5 rounded text-gray-500">{h}</span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div >
+                    </section >
+                )
+            }
 
             {/* --- VS MODE --- */}
             {
