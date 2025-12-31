@@ -19,6 +19,7 @@ import {
     ArrowRight,
     Crown
 } from 'lucide-react';
+import './MSLCollegiateCup.css';
 
 const Svgs = {
     Gear: ({ className, size }: { className?: string, size?: number }) => (
@@ -305,34 +306,7 @@ const MSLCollegiateCup: React.FC<MSLCollegiateCupProps> = ({ onNavigate }) => {
                     </div>
 
                     {/* Main Title: Cyberpunk Neon - Per-Letter Flicker */}
-                    <style jsx>{`
-                        @keyframes cyber-glitch {
-                            0%, 98% { text-shadow: none; }
-                            98.1% { text-shadow: 4px 0px 0px #ff0055, -4px 0px 0px #00eaff; }
-                            98.3% { text-shadow: -4px 0px 0px #ff0055, 4px 0px 0px #00eaff; }
-                            98.5% { text-shadow: none; }
-                        }
-                        @keyframes neon-flicker {
-                            0%, 49.8%, 50.2%, 100% { opacity: 1; }
-                            50% { opacity: 0.3; }
-                        }
-                        .cyber-glitch-container {
-                            animation: cyber-glitch 5s infinite linear;
-                        }
-                        .flicker-char {
-                            animation: neon-flicker 60s infinite linear;
-                        }
-                        
-                        /* Spread 60s duration to approx 1 flicker every 3s across ~20 chars */
-                        .flicker-char:nth-child(2n) { animation-delay: 1.5s; }
-                        .flicker-char:nth-child(3n) { animation-delay: 13s; }
-                        .flicker-char:nth-child(4n) { animation-delay: 28s; }
-                        .flicker-char:nth-child(5n) { animation-delay: 42s; }
-                        .flicker-char:nth-child(7n) { animation-delay: 7s; }
-                        .flicker-char:nth-child(3n+1) { animation-delay: 21s; }
-                        .flicker-char:nth-child(4n+1) { animation-delay: 35s; }
-                        .flicker-char:nth-child(5n+2) { animation-delay: 55s; }
-                    `}</style>
+
                     <div className="relative mb-6 overflow-visible cyber-glitch-container flex flex-col items-center justify-center">
                         <h1 className="flex flex-col items-center justify-center text-3xl sm:text-6xl md:text-8xl font-cyber font-black italic tracking-wider uppercase leading-tight text-white overflow-visible text-center gap-4">
 
