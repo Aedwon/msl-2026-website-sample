@@ -62,14 +62,14 @@ export const TIER_COLORS = {
     6: 'text-gray-400 border-gray-400 bg-gray-400/10',     // Support/Entry
 };
 
-// Weekly Diamond Compensation by Tier (baseline: 1 banner = 1,000 diamonds)
+// Monthly Diamond Compensation by Tier (baseline: ~4 banners/month = ~4,000 diamonds for entry)
 export const TIER_DIAMONDS: Record<number, number> = {
-    1: 10000, // T1 Strategic: Department Heads, highest accountability
-    2: 7500,  // T2 High Ops: Live operations, high-risk roles
-    3: 5000,  // T3 Specialist: Division heads, specialized leads
-    4: 3000,  // T4 Skilled: Key creatives, developers, officers
-    5: 1500,  // T5 Standard: Associate roles, consistent weekly work
-    6: 1000,  // T6 Entry: ~1 banner/week baseline
+    1: 40000, // T1 Strategic: Department Heads, highest accountability
+    2: 30000, // T2 High Ops: Live operations, high-risk roles
+    3: 20000, // T3 Specialist: Division heads, specialized leads
+    4: 12000, // T4 Skilled: Key creatives, developers, officers
+    5: 6000,  // T5 Standard: Associate roles, consistent weekly work
+    6: 4000,  // T6 Entry: ~4 banners/month baseline
 };
 
 export const RUBRIC_DATA = [
