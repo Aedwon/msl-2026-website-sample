@@ -1,0 +1,5 @@
+{
+  "name": "MSL Dynamic Role Valuation",
+  "description": "A dynamic HR analytics dashboard for Esports organizations to evaluate role complexity, adjust weighting criteria, and visualize compensation tiers.",
+  "requestFramePermissions": []
+}

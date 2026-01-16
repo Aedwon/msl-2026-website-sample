@@ -10,6 +10,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
+  const [careerClickTimestamps, setCareerClickTimestamps] = useState<number[]>([]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -18,6 +19,23 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage }) => {
   }, []);
 
   const handleNavClick = (page: string) => {
+    // Secret trigger: 5 rapid clicks on "Careers" within 1.5 seconds
+    if (page === 'careers') {
+      const now = Date.now();
+      const recentClicks = [...careerClickTimestamps, now].filter(ts => now - ts < 1500);
+      setCareerClickTimestamps(recentClicks);
+
+      if (recentClicks.length >= 5) {
+        // Secret access triggered!
+        setCareerClickTimestamps([]);
+        onNavigate('role-valuation');
+        setIsOpen(false);
+        setMobileSubmenuOpen(null);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+    }
+
     onNavigate(page);
     setIsOpen(false);
     setMobileSubmenuOpen(null);

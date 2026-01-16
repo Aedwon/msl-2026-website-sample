@@ -39,6 +39,7 @@ import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import ComplianceBanner from './components/ComplianceBanner'; // Import Compliance Banner
+import RoleValuation from './components/RoleValuation'; // Import Role Valuation (Secret Page)
 
 // --- DATA MOCKS ---
 
@@ -121,6 +122,8 @@ const App = () => {
         return <Legal type="tos" onBack={() => setCurrentPage('home')} />;
       case 'accessibility':
         return <Legal type="accessibility" onBack={() => setCurrentPage('home')} />;
+      case 'role-valuation':
+        return <RoleValuation onNavigate={setCurrentPage} />;
       case 'home':
       default:
         return (
