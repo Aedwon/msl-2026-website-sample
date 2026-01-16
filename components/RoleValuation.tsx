@@ -29,7 +29,6 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
     const [isSyncing, setIsSyncing] = useState(false);
     const [lastSynced, setLastSynced] = useState<Date | null>(null);
     const [syncError, setSyncError] = useState(false);
-    const [syncError, setSyncError] = useState(false);
     const [isInitialLoad, setIsInitialLoad] = useState(true);
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
