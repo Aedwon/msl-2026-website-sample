@@ -38,7 +38,9 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
         const fetchData = async () => {
             try {
                 const res = await fetch('/api/valuation-data');
-                if (res.ok) {
+                const contentType = res.headers.get("content-type");
+
+                if (res.ok && contentType && contentType.includes("application/json")) {
                     const data: ValuationData | null = await res.json();
                     if (data) {
                         if (data.weights) setWeights(data.weights);
@@ -46,6 +48,9 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
                         if (data.tierDiamonds) setTierDiamonds(data.tierDiamonds);
                         setLastSynced(new Date());
                     }
+                } else {
+                    // If we get HTML (404/SPA fallback) or non-200, assume backend missing
+                    throw new Error("Backend not available");
                 }
             } catch (error) {
                 console.error('Failed to load valuation data:', error);
@@ -228,10 +233,10 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
                                             <span className="text-xs text-msl-gold">Syncing...</span>
                                         </>
                                     ) : syncError ? (
-                                        <>
+                                        <div className="flex items-center gap-1.5" title="Backend connection failed. Refer to VERCEL_SETUP.md to enable persistence.">
                                             <AlertTriangle className="w-3 h-3 text-red-400" />
                                             <span className="text-xs text-red-400">Sync Error</span>
-                                        </>
+                                        </div>
                                     ) : (
                                         <>
                                             <Cloud className="w-3 h-3 text-gray-500" />
