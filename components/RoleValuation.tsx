@@ -29,7 +29,9 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
     const [isSyncing, setIsSyncing] = useState(false);
     const [lastSynced, setLastSynced] = useState<Date | null>(null);
     const [syncError, setSyncError] = useState(false);
+    const [syncError, setSyncError] = useState(false);
     const [isInitialLoad, setIsInitialLoad] = useState(true);
+    const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
     const saveTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
@@ -61,6 +63,10 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
             }
         };
         fetchData();
+
+        // Safety fallback: Force initial load to false after 5s if fetch hangs
+        const safetyTimeout = setTimeout(() => setIsInitialLoad(false), 5000);
+        return () => clearTimeout(safetyTimeout);
     }, []);
 
     // Debounced Save
@@ -75,6 +81,7 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
             });
             if (!res.ok) throw new Error('Failed to save');
             setLastSynced(new Date());
+            setHasUnsavedChanges(false); // Clear dirty state on success
         } catch (error) {
             console.error('Save failed:', error);
             setSyncError(true);
@@ -87,13 +94,16 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
     useEffect(() => {
         if (isInitialLoad) return;
 
+        // Visual feedback immediately
+        setHasUnsavedChanges(true);
+
         if (saveTimeoutRef.current) {
             clearTimeout(saveTimeoutRef.current);
         }
 
         saveTimeoutRef.current = setTimeout(() => {
             saveData({ weights, roles, tierDiamonds });
-        }, 2000); // 2s debounce
+        }, 1000); // Reduced to 1s for snappier response
 
         return () => {
             if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
@@ -240,9 +250,9 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
                                         </div>
                                     ) : (
                                         <>
-                                            <Cloud className="w-3 h-3 text-gray-500" />
-                                            <span className="text-xs text-gray-500">
-                                                {lastSynced ? 'Saved' : 'Local'}
+                                            <Cloud className={`w-3 h-3 ${hasUnsavedChanges ? 'text-yellow-500' : 'text-gray-500'}`} />
+                                            <span className={`text-xs ${hasUnsavedChanges ? 'text-yellow-500 font-medium' : 'text-gray-500'}`}>
+                                                {hasUnsavedChanges ? 'Unsaved Changes...' : (lastSynced ? 'Saved' : 'Local')}
                                             </span>
                                         </>
                                     )}
