@@ -13,11 +13,11 @@ interface SidebarProps {
 }
 
 const TIER_LABELS: Record<number, { label: string; color: string }> = {
-    1: { label: 'T1', color: 'text-purple-400' },
-    2: { label: 'T2', color: 'text-red-400' },
-    3: { label: 'T3', color: 'text-orange-400' },
-    4: { label: 'T4', color: 'text-yellow-400' },
-    5: { label: 'T5', color: 'text-blue-400' },
+    1: { label: 'T1', color: 'text-white' },
+    2: { label: 'T2', color: 'text-white' },
+    3: { label: 'T3', color: 'text-white' },
+    4: { label: 'T4', color: 'text-gray-300' },
+    5: { label: 'T5', color: 'text-gray-300' },
     6: { label: 'T6', color: 'text-gray-400' },
 };
 
@@ -73,12 +73,12 @@ const HelpTooltip: React.FC<{ text: string }> = ({ text }) => {
 };
 
 const Sidebar: React.FC<SidebarProps> = ({ weights, onWeightChange, isValid, totalWeight, tierDiamonds, onTierDiamondsChange }) => {
-    const criteriaList: { key: keyof CriteriaWeights; label: string; color: string }[] = [
-        { key: 'impact', label: 'Impact', color: 'accent-rose-500' },
-        { key: 'intensity', label: 'Intensity', color: 'accent-orange-500' },
-        { key: 'skill', label: 'Skill', color: 'accent-blue-500' },
-        { key: 'leadership', label: 'Leadership', color: 'accent-purple-500' },
-        { key: 'volume', label: 'Volume', color: 'accent-emerald-500' },
+    const criteriaList: { key: keyof CriteriaWeights; label: string }[] = [
+        { key: 'impact', label: 'Impact' },
+        { key: 'intensity', label: 'Intensity' },
+        { key: 'skill', label: 'Skill' },
+        { key: 'leadership', label: 'Leadership' },
+        { key: 'volume', label: 'Volume' },
     ];
 
     return (
@@ -118,7 +118,7 @@ const Sidebar: React.FC<SidebarProps> = ({ weights, onWeightChange, isValid, tot
                             max="100"
                             value={weights[criteria.key]}
                             onChange={(e) => onWeightChange(criteria.key, parseInt(e.target.value, 10))}
-                            className={`w-full h-1.5 bg-msl-card rounded-lg appearance-none cursor-pointer ${criteria.color}`}
+                            className="w-full h-1.5 bg-msl-card rounded-lg appearance-none cursor-pointer accent-amber-500"
                         />
                     </div>
                 ))}
@@ -127,7 +127,7 @@ const Sidebar: React.FC<SidebarProps> = ({ weights, onWeightChange, isValid, tot
             {/* Tier Diamonds Section */}
             <div className="px-4 py-3 border-b border-white/10">
                 <div className="flex items-center gap-2 mb-3">
-                    <Gem className="w-3 h-3 text-cyan-400" />
+                    <Gem className="w-3 h-3 text-msl-gold" />
                     <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">💎/Month</h3>
                 </div>
                 <div className="space-y-2">
@@ -142,7 +142,7 @@ const Sidebar: React.FC<SidebarProps> = ({ weights, onWeightChange, isValid, tot
                                 step="100"
                                 value={tierDiamonds[tier] || 0}
                                 onChange={(e) => onTierDiamondsChange(tier, parseInt(e.target.value, 10) || 0)}
-                                className="w-20 h-6 text-right bg-msl-card border border-white/10 rounded text-cyan-400 focus:border-cyan-400 text-xs font-mono px-2"
+                                className="w-20 h-6 text-right bg-msl-card border border-white/10 rounded text-white focus:border-msl-gold text-xs font-mono px-2"
                             />
                         </div>
                     ))}

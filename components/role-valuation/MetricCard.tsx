@@ -34,7 +34,7 @@ const MetricCard: React.FC<MetricCardProps> = ({ rank, roleName, score, tier, we
                     <span className="text-2xl font-mono font-bold">{score.toFixed(2)}</span>
                 </div>
                 <div className="flex flex-col items-end gap-1">
-                    <div className="flex items-center gap-1 text-cyan-400">
+                    <div className="flex items-center gap-1 text-msl-gold">
                         <Gem className="w-3 h-3" />
                         <span className="text-sm font-bold font-mono">{weeklyDiamonds.toLocaleString()}</span>
                     </div>

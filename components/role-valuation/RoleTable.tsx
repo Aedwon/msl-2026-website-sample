@@ -210,7 +210,7 @@ const RoleTable: React.FC<RoleTableProps> = ({ roles, onRoleUpdate, onRoleNameUp
                                     </span>
                                 </td>
                                 <td className="px-4 py-3 text-right">
-                                    <div className="flex items-center justify-end gap-1 text-cyan-400">
+                                    <div className="flex items-center justify-end gap-1 text-msl-gold">
                                         <Gem className="w-3 h-3" />
                                         <span className="font-bold font-mono text-sm">{role.weeklyDiamonds.toLocaleString()}</span>
                                     </div>
