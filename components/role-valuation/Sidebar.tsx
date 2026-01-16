@@ -20,6 +20,15 @@ const TIER_LABELS: Record<number, { label: string; color: string }> = {
     6: { label: 'T6', color: 'text-gray-400' },
 };
 
+// Descriptions for each weight criteria
+const WEIGHT_DESCRIPTIONS: Record<string, string> = {
+    impact: "How much does this role affect the org if something goes wrong? Consider financial risk, reputation damage, and decision-making authority.",
+    intensity: "How stressful is the work? Live events and real-time decisions score higher than async, flexible-deadline work.",
+    skill: "What specialized skills are required? Programming, video engineering, and accounting score higher than general soft skills.",
+    leadership: "How many people does this role manage? Department heads score higher than individual contributors.",
+    volume: "How many hours per week does this role require? 'Always on' roles score higher than occasional 5hr/week roles."
+};
+
 const Sidebar: React.FC<SidebarProps> = ({ weights, onWeightChange, isValid, totalWeight, tierDiamonds, onTierDiamondsChange }) => {
     const criteriaList: { key: keyof CriteriaWeights; label: string; color: string }[] = [
         { key: 'impact', label: 'Impact', color: 'accent-rose-500' },
@@ -50,9 +59,17 @@ const Sidebar: React.FC<SidebarProps> = ({ weights, onWeightChange, isValid, tot
                 {criteriaList.map((criteria) => (
                     <div key={criteria.key} className="space-y-1">
                         <div className="flex justify-between items-center">
-                            <label className="text-xs font-medium text-gray-300">
-                                {criteria.label}
-                            </label>
+                            <div className="flex items-center gap-1">
+                                <label className="text-xs font-medium text-gray-300">
+                                    {criteria.label}
+                                </label>
+                                <span
+                                    className="text-[10px] text-gray-500 cursor-help hover:text-gray-300 transition-colors"
+                                    title={WEIGHT_DESCRIPTIONS[criteria.key]}
+                                >
+                                    ?
+                                </span>
+                            </div>
                             <span className="text-xs font-mono text-gray-400">
                                 {weights[criteria.key]}%
                             </span>
