@@ -9,18 +9,48 @@ export const INITIAL_WEIGHTS: CriteriaWeights = {
 };
 
 export const INITIAL_ROLES: RawRoleScores[] = [
-    { id: '1', name: 'Head of Partnerships', impact: 10, intensity: 8, skill: 7, leadership: 10, volume: 6 },
-    { id: '2', name: 'Head of Campus Dept', impact: 9, intensity: 8, skill: 6, leadership: 10, volume: 7 },
-    { id: '3', name: 'Head of Finance', impact: 10, intensity: 6, skill: 9, leadership: 5, volume: 5 },
-    { id: '4', name: 'Head of Product', impact: 8, intensity: 5, skill: 10, leadership: 6, volume: 4 },
-    { id: '5', name: 'Exec Producer', impact: 8, intensity: 10, skill: 8, leadership: 4, volume: 3 },
-    { id: '6', name: 'Regional Admins', impact: 7, intensity: 9, skill: 5, leadership: 7, volume: 8 },
-    { id: '7', name: 'Head of Network Dev', impact: 8, intensity: 8, skill: 6, leadership: 6, volume: 7 },
-    { id: '8', name: 'Socials Lead', impact: 6, intensity: 7, skill: 6, leadership: 5, volume: 10 },
-    { id: '9', name: 'Backend Developer', impact: 5, intensity: 3, skill: 10, leadership: 1, volume: 4 },
-    { id: '10', name: 'Campus MSL', impact: 5, intensity: 5, skill: 3, leadership: 2, volume: 6 },
-    { id: '11', name: 'General Affairs Head', impact: 5, intensity: 3, skill: 5, leadership: 4, volume: 5 },
-    { id: '12', name: 'Sponsorship Officer', impact: 4, intensity: 3, skill: 4, leadership: 1, volume: 6 },
+    // === PARTNERSHIPS DEPARTMENT ===
+    { id: '1', name: 'Partnerships Dept Head', impact: 10, intensity: 7, skill: 8, leadership: 10, volume: 7 },
+    { id: '2', name: 'Head of Finance & Treasury', impact: 10, intensity: 5, skill: 9, leadership: 5, volume: 5 },
+    { id: '3', name: 'Head of Product', impact: 8, intensity: 5, skill: 9, leadership: 7, volume: 5 },
+    { id: '4', name: 'Head of Network Dev', impact: 8, intensity: 7, skill: 6, leadership: 7, volume: 7 },
+    { id: '5', name: 'Head of Sponsorships', impact: 7, intensity: 6, skill: 6, leadership: 5, volume: 6 },
+    { id: '6', name: 'Head of Activations', impact: 7, intensity: 8, skill: 6, leadership: 4, volume: 5 },
+    { id: '7', name: 'Head of Analytics', impact: 6, intensity: 4, skill: 8, leadership: 3, volume: 4 },
+    { id: '8', name: 'Regional Officer (NetDev)', impact: 5, intensity: 6, skill: 5, leadership: 3, volume: 7 },
+    { id: '9', name: 'Sponsorship Officer', impact: 4, intensity: 4, skill: 4, leadership: 1, volume: 6 },
+    { id: '10', name: 'Backend Developer', impact: 6, intensity: 4, skill: 10, leadership: 1, volume: 4 },
+    { id: '11', name: 'Frontend Developer', impact: 5, intensity: 4, skill: 9, leadership: 1, volume: 4 },
+    { id: '12', name: 'UI/UX Developer', impact: 5, intensity: 3, skill: 8, leadership: 1, volume: 3 },
+    { id: '13', name: 'Discord Bot Developer', impact: 4, intensity: 3, skill: 9, leadership: 1, volume: 3 },
+    { id: '14', name: 'Financial Officer', impact: 6, intensity: 3, skill: 6, leadership: 1, volume: 5 },
+    { id: '15', name: 'Digital Treasury Manager', impact: 7, intensity: 4, skill: 6, leadership: 1, volume: 5 },
+
+    // === CAMPUS DEPARTMENT ===
+    { id: '16', name: 'Campus Dept Head', impact: 9, intensity: 8, skill: 6, leadership: 10, volume: 8 },
+    { id: '17', name: 'Regional Admin', impact: 7, intensity: 8, skill: 5, leadership: 7, volume: 8 },
+    { id: '18', name: 'Campus MSL', impact: 4, intensity: 5, skill: 3, leadership: 3, volume: 5 },
+
+    // === CONTENTS & SOCIAL MEDIA DEPARTMENT ===
+    { id: '19', name: 'Contents Dept Head', impact: 5, intensity: 4, skill: 5, leadership: 6, volume: 4 },
+    { id: '20', name: 'Exec. Producer', impact: 7, intensity: 9, skill: 7, leadership: 5, volume: 4 },
+    { id: '21', name: 'Creative Head', impact: 6, intensity: 6, skill: 7, leadership: 5, volume: 7 },
+    { id: '22', name: 'Socials Lead', impact: 6, intensity: 6, skill: 5, leadership: 4, volume: 9 },
+    { id: '23', name: 'Head Moderator', impact: 5, intensity: 7, skill: 4, leadership: 5, volume: 8 },
+    { id: '24', name: 'Editor-in-Chief', impact: 5, intensity: 5, skill: 6, leadership: 4, volume: 6 },
+    { id: '25', name: 'Internal Head', impact: 4, intensity: 4, skill: 4, leadership: 4, volume: 5 },
+    { id: '26', name: 'Key Creative', impact: 4, intensity: 5, skill: 7, leadership: 1, volume: 7 },
+    { id: '27', name: 'Associate Creative', impact: 3, intensity: 4, skill: 6, leadership: 1, volume: 4 },
+    { id: '28', name: 'Writer', impact: 3, intensity: 4, skill: 5, leadership: 1, volume: 5 },
+    { id: '29', name: 'Page Moderator', impact: 3, intensity: 5, skill: 3, leadership: 1, volume: 6 },
+    { id: '30', name: 'Production Assistant', impact: 4, intensity: 8, skill: 5, leadership: 1, volume: 3 },
+    { id: '31', name: 'Regional Moderator (Internal)', impact: 3, intensity: 4, skill: 3, leadership: 2, volume: 5 },
+    { id: '32', name: 'Winner Picker', impact: 2, intensity: 3, skill: 2, leadership: 1, volume: 4 },
+    { id: '33', name: 'Coordinator Assistant', impact: 3, intensity: 4, skill: 3, leadership: 1, volume: 5 },
+
+    // === GENERAL AFFAIRS DEPARTMENT ===
+    { id: '34', name: 'General Affairs Head', impact: 5, intensity: 4, skill: 5, leadership: 4, volume: 5 },
+    { id: '35', name: 'Dispute Manager', impact: 4, intensity: 3, skill: 4, leadership: 2, volume: 3 },
 ];
 
 export const TIER_COLORS = {

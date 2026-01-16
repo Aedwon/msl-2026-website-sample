@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { LayoutDashboard, Info, BookOpen, ArrowLeft } from 'lucide-react';
 import Sidebar from './role-valuation/Sidebar';
 import MetricCard from './role-valuation/MetricCard';
@@ -6,7 +6,22 @@ import RoleChart from './role-valuation/RoleChart';
 import RoleTable from './role-valuation/RoleTable';
 import RubricModal from './role-valuation/RubricModal';
 import { INITIAL_ROLES, INITIAL_WEIGHTS, TIER_DIAMONDS } from './role-valuation/constants';
-import { RawRoleScores, CriteriaWeights, CalculatedRole } from './role-valuation/types';
+import { RawRoleScores, CriteriaWeights, CalculatedRole, TierDiamonds } from './role-valuation/types';
+
+const STORAGE_KEY = 'msl-role-valuation-tier-diamonds';
+
+// Load tier diamonds from localStorage or use defaults
+const loadTierDiamonds = (): TierDiamonds => {
+    try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+            return JSON.parse(stored);
+        }
+    } catch {
+        // Ignore parse errors
+    }
+    return { ...TIER_DIAMONDS };
+};
 
 interface RoleValuationProps {
     onNavigate: (page: string) => void;
@@ -16,6 +31,16 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
     const [weights, setWeights] = useState<CriteriaWeights>(INITIAL_WEIGHTS);
     const [roles, setRoles] = useState<RawRoleScores[]>(INITIAL_ROLES);
     const [isRubricOpen, setIsRubricOpen] = useState(false);
+    const [tierDiamonds, setTierDiamonds] = useState<TierDiamonds>(loadTierDiamonds);
+
+    // Save tier diamonds to localStorage whenever they change
+    useEffect(() => {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(tierDiamonds));
+        } catch {
+            // Ignore storage errors
+        }
+    }, [tierDiamonds]);
 
     // Calculate Total Weight
     const totalWeight = useMemo(() => {
@@ -27,6 +52,11 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
     // Handler for Weight Updates
     const handleWeightChange = (key: keyof CriteriaWeights, value: number) => {
         setWeights(prev => ({ ...prev, [key]: value }));
+    };
+
+    // Handler for Tier Diamonds Updates
+    const handleTierDiamondsChange = (tier: number, value: number) => {
+        setTierDiamonds(prev => ({ ...prev, [tier]: value }));
     };
 
     // Handler for Role Score Updates
@@ -87,8 +117,8 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
             else if (finalScore >= 5.0) { tier = 4; tierLabel = 'T4 Skilled'; }
             else if (finalScore >= 4.0) { tier = 5; tierLabel = 'T5 Standard'; }
 
-            // Get weekly diamonds based on tier
-            const weeklyDiamonds = TIER_DIAMONDS[tier] || 750;
+            // Get weekly diamonds based on tier (using dynamic state)
+            const weeklyDiamonds = tierDiamonds[tier] || 1000;
 
             return {
                 ...role,
@@ -99,7 +129,7 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
                 weeklyDiamonds
             };
         }).sort((a, b) => b.finalScore - a.finalScore);
-    }, [roles, weights]);
+    }, [roles, weights, tierDiamonds]);
 
     const topThree = calculatedRoles.slice(0, 3);
 
@@ -114,6 +144,8 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
                     onWeightChange={handleWeightChange}
                     isValid={isValid}
                     totalWeight={totalWeight}
+                    tierDiamonds={tierDiamonds}
+                    onTierDiamondsChange={handleTierDiamondsChange}
                 />
 
                 {/* Main Content Area */}

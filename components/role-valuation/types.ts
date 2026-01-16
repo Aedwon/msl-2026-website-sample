@@ -24,6 +24,8 @@ export interface CalculatedRole extends RawRoleScores {
     weeklyDiamonds: number;
 }
 
+export type TierDiamonds = Record<number, number>;
+
 export enum Tier {
     ONE = 1,
     TWO = 2,
