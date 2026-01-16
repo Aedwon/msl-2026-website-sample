@@ -1,5 +1,6 @@
-import React from 'react';
-import { Settings, AlertTriangle, CheckCircle2, Gem } from 'lucide-react';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import { Settings, AlertTriangle, CheckCircle2, Gem, HelpCircle } from 'lucide-react';
 import { CriteriaWeights, TierDiamonds } from './types';
 
 interface SidebarProps {
@@ -27,6 +28,48 @@ const WEIGHT_DESCRIPTIONS: Record<string, string> = {
     skill: "What specialized skills are required? Programming, video engineering, and accounting score higher than general soft skills.",
     leadership: "How many people does this role manage? Department heads score higher than individual contributors.",
     volume: "How many hours per week does this role require? 'Always on' roles score higher than occasional 5hr/week roles."
+};
+
+// Help tooltip component
+const HelpTooltip: React.FC<{ text: string }> = ({ text }) => {
+    const [show, setShow] = useState(false);
+    const [pos, setPos] = useState({ x: 0, y: 0 });
+    const ref = React.useRef<HTMLSpanElement>(null);
+
+    const handleMouseEnter = () => {
+        if (ref.current) {
+            const rect = ref.current.getBoundingClientRect();
+            setPos({ x: rect.right + 8, y: rect.top + rect.height / 2 });
+        }
+        setShow(true);
+    };
+
+    return (
+        <>
+            <span
+                ref={ref}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={() => setShow(false)}
+                className="inline-flex items-center justify-center w-3 h-3 text-gray-500 hover:text-gray-300 cursor-help transition-colors"
+            >
+                <HelpCircle className="w-3 h-3" />
+            </span>
+            {show && ReactDOM.createPortal(
+                <div
+                    className="fixed z-[99999] max-w-[200px] p-2 bg-gray-900 border border-white/20 rounded-lg shadow-xl text-left pointer-events-none"
+                    style={{
+                        left: pos.x,
+                        top: pos.y,
+                        transform: 'translateY(-50%)'
+                    }}
+                >
+                    <div className="absolute right-full top-1/2 -translate-y-1/2 w-0 h-0 border-y-4 border-y-transparent border-r-4 border-r-gray-900" />
+                    <p className="text-[10px] text-gray-300 leading-relaxed">{text}</p>
+                </div>,
+                document.body
+            )}
+        </>
+    );
 };
 
 const Sidebar: React.FC<SidebarProps> = ({ weights, onWeightChange, isValid, totalWeight, tierDiamonds, onTierDiamondsChange }) => {
@@ -63,12 +106,7 @@ const Sidebar: React.FC<SidebarProps> = ({ weights, onWeightChange, isValid, tot
                                 <label className="text-xs font-medium text-gray-300">
                                     {criteria.label}
                                 </label>
-                                <span
-                                    className="text-[10px] text-gray-500 cursor-help hover:text-gray-300 transition-colors"
-                                    title={WEIGHT_DESCRIPTIONS[criteria.key]}
-                                >
-                                    ?
-                                </span>
+                                <HelpTooltip text={WEIGHT_DESCRIPTIONS[criteria.key]} />
                             </div>
                             <span className="text-xs font-mono text-gray-400">
                                 {weights[criteria.key]}%
@@ -131,5 +169,6 @@ const Sidebar: React.FC<SidebarProps> = ({ weights, onWeightChange, isValid, tot
 };
 
 export default Sidebar;
+
 
 
