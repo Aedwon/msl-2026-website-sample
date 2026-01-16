@@ -46,8 +46,9 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
                         if (data.weights) setWeights(data.weights);
                         if (data.roles) setRoles(data.roles);
                         if (data.tierDiamonds) setTierDiamonds(data.tierDiamonds);
-                        setLastSynced(new Date());
                     }
+                    // Mark as synced if we successfully connected, even if data was null (new DB)
+                    setLastSynced(new Date());
                 } else {
                     // If we get HTML (404/SPA fallback) or non-200, assume backend missing
                     throw new Error("Backend not available");
