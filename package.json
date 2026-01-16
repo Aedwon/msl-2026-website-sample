@@ -10,13 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vercel/kv": "^3.0.0",
+    "ioredis": "^5.9.2",
     "lucide-react": "^0.344.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recharts": "^3.6.0"
   },
   "devDependencies": {
+    "@types/node": "^25.0.9",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@vitejs/plugin-react": "^4.2.1",
