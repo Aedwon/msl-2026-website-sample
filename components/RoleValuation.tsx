@@ -1,5 +1,5 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { LayoutDashboard, Info, BookOpen, ArrowLeft } from 'lucide-react';
+import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
+import { LayoutDashboard, Info, BookOpen, ArrowLeft, Cloud, CheckCircle2, Loader2, AlertTriangle } from 'lucide-react';
 import Sidebar from './role-valuation/Sidebar';
 import MetricCard from './role-valuation/MetricCard';
 import RoleChart from './role-valuation/RoleChart';
@@ -8,20 +8,12 @@ import RubricModal from './role-valuation/RubricModal';
 import { INITIAL_ROLES, INITIAL_WEIGHTS, TIER_DIAMONDS } from './role-valuation/constants';
 import { RawRoleScores, CriteriaWeights, CalculatedRole, TierDiamonds } from './role-valuation/types';
 
-const STORAGE_KEY = 'msl-role-valuation-tier-diamonds';
-
-// Load tier diamonds from localStorage or use defaults
-const loadTierDiamonds = (): TierDiamonds => {
-    try {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored) {
-            return JSON.parse(stored);
-        }
-    } catch {
-        // Ignore parse errors
-    }
-    return { ...TIER_DIAMONDS };
-};
+interface ValuationData {
+    weights: CriteriaWeights;
+    roles: RawRoleScores[];
+    tierDiamonds: TierDiamonds;
+    lastUpdated?: number;
+}
 
 interface RoleValuationProps {
     onNavigate: (page: string) => void;
@@ -30,17 +22,77 @@ interface RoleValuationProps {
 const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
     const [weights, setWeights] = useState<CriteriaWeights>(INITIAL_WEIGHTS);
     const [roles, setRoles] = useState<RawRoleScores[]>(INITIAL_ROLES);
+    const [tierDiamonds, setTierDiamonds] = useState<TierDiamonds>(TIER_DIAMONDS);
     const [isRubricOpen, setIsRubricOpen] = useState(false);
-    const [tierDiamonds, setTierDiamonds] = useState<TierDiamonds>(loadTierDiamonds);
 
-    // Save tier diamonds to localStorage whenever they change
+    // Sync States
+    const [isSyncing, setIsSyncing] = useState(false);
+    const [lastSynced, setLastSynced] = useState<Date | null>(null);
+    const [syncError, setSyncError] = useState(false);
+    const [isInitialLoad, setIsInitialLoad] = useState(true);
+
+    const saveTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+
+    // Load data from API on mount
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await fetch('/api/valuation-data');
+                if (res.ok) {
+                    const data: ValuationData | null = await res.json();
+                    if (data) {
+                        if (data.weights) setWeights(data.weights);
+                        if (data.roles) setRoles(data.roles);
+                        if (data.tierDiamonds) setTierDiamonds(data.tierDiamonds);
+                        setLastSynced(new Date());
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load valuation data:', error);
+                setSyncError(true);
+            } finally {
+                setIsInitialLoad(false);
+            }
+        };
+        fetchData();
+    }, []);
+
+    // Debounced Save
+    const saveData = useCallback(async (data: ValuationData) => {
+        setIsSyncing(true);
+        setSyncError(false);
         try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(tierDiamonds));
-        } catch {
-            // Ignore storage errors
+            const res = await fetch('/api/valuation-data', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+            if (!res.ok) throw new Error('Failed to save');
+            setLastSynced(new Date());
+        } catch (error) {
+            console.error('Save failed:', error);
+            setSyncError(true);
+        } finally {
+            setIsSyncing(false);
         }
-    }, [tierDiamonds]);
+    }, []);
+
+    // Trigger save on changes
+    useEffect(() => {
+        if (isInitialLoad) return;
+
+        if (saveTimeoutRef.current) {
+            clearTimeout(saveTimeoutRef.current);
+        }
+
+        saveTimeoutRef.current = setTimeout(() => {
+            saveData({ weights, roles, tierDiamonds });
+        }, 2000); // 2s debounce
+
+        return () => {
+            if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+        };
+    }, [weights, roles, tierDiamonds, saveData, isInitialLoad]);
 
     // Calculate Total Weight
     const totalWeight = useMemo(() => {
@@ -163,9 +215,33 @@ const RoleValuation: React.FC<RoleValuationProps> = ({ onNavigate }) => {
                             <h1 className="text-3xl font-bold bg-gradient-to-r from-msl-gold to-yellow-500 bg-clip-text text-transparent">
                                 MSL Dynamic Role Valuation
                             </h1>
-                            <p className="text-gray-400 mt-1">
-                                Esports Organization Structure & Compensation Calculator
-                            </p>
+                            <div className="flex items-center gap-3 mt-1">
+                                <p className="text-gray-400 text-sm">
+                                    Esports Organization Structure & Compensation Calculator
+                                </p>
+
+                                {/* Sync Status Indicator */}
+                                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-msl-surface border border-white/5">
+                                    {isSyncing ? (
+                                        <>
+                                            <Loader2 className="w-3 h-3 text-msl-gold animate-spin" />
+                                            <span className="text-xs text-msl-gold">Syncing...</span>
+                                        </>
+                                    ) : syncError ? (
+                                        <>
+                                            <AlertTriangle className="w-3 h-3 text-red-400" />
+                                            <span className="text-xs text-red-400">Sync Error</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Cloud className="w-3 h-3 text-gray-500" />
+                                            <span className="text-xs text-gray-500">
+                                                {lastSynced ? 'Saved' : 'Local'}
+                                            </span>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
                         </div>
                         <div className="flex items-center gap-3">
                             <button
